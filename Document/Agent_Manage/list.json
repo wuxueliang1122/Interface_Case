@@ -1,0 +1,24 @@
+{
+  "description": "获取经纪人认证列表，默认单页输出最多14条，start,end",
+  "apiname": "/broker/list",
+  "api": "list",
+  "caseList": [
+	{
+	  "serial": 1,
+	  "instruction": "搜索关键字为空",
+	  "reqParams": {
+        "cellphone": "",
+		"realName": "",
+        "beginTime": "",
+        "endTime": "",
+        "intentionstatus": "",
+        "start": "0",
+        "end": "14"
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "获取成功"
+      }
+    }
+  ]
+}

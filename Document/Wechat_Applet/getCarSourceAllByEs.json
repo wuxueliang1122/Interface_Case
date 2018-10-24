@@ -1,0 +1,25 @@
+{
+  "description": "获取车源搜索纪录列表（需要修改原接口）",
+  "apiname": "/carsrc/getCarSourceAllByEs.json",
+  "api": "getCarSourceAllByEs",
+  "caseList": [
+    {
+      "serial": 1,
+      "instruction": "查询车源列表成功",
+      "reqParams": {
+        "queryInfo": {
+          "publishBrokerStatus":"1",
+          "orderUserId":10001
+        },
+        "currentPage": 0,
+        "orderType": 100,
+        "pageSize": 15
+      },
+      "expectResult": {
+        "code": 10000,
+        "message": "查询车源列表成功",
+        "data": []
+      }
+    }
+  ]
+}

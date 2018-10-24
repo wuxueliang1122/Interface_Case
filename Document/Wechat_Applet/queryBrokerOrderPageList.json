@@ -1,0 +1,144 @@
+{
+  "description": "佣金订单列表，status：订单状态 (0:待车商支付; 1:待经纪人确认; 2:待车商确认; 3:交易成功; 4:交易关闭; )",
+  "apiname": "/usob/cgtrade/queryBrokerOrderPageList.json",
+  "api": "queryBrokerOrderPageList",
+  "caseList": [
+    {
+      "serial": 1,
+      "instruction": "待车商支付订单列表",
+      "sql": {
+        "select": "SELECT * FROM trans.trade_order_broker WHERE order_no='YJD20180918095151000001';",
+        "insert": "INSERT INTO `trans`.`trade_order_broker` (`order_no`, `order_type`, `status`, `refund_status`, `evaluate_status`, `car_source_type`, `car_source_code`, `car_model_code`, `car_base_id`, `car_base_name`, `guide_price`, `car_unit_price`, `transaction_num`, `deal_price`, `broker_amount`, `licence_plate_area_code`, `licence_plate_area_name`, `plan_arrival_date`, `deliver_car_date`, `car_color`, `car_interior_color`, `product_date`, `seller_company_id`, `seller_company_type`, `seller_company_name`, `seller_id`, `seller_name`, `seller_phone_num`, `broker_id`, `broker_name`, `broker_phone_num`, `extra_json`, `remark`, `create_time`, `creator_name`, `modify_time`, `modifier_name`) VALUES ('YJD20180918095151000001', '3', '0', '0', '0', '2', 'CYN20180830000031', '395001004', '106170', '2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口', '145.00', '140.00', '1', '140.00', '5000.00', '330100', '杭州市', '2018-09-18', NULL, '银色', '棕色', '1', '100012', '1', '王二狗开的小超市', '47826', '王二狗', '18867520068', '10001', '吴学梁', '18867520068', '{\"brandLogo\":\"https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg\",\"carSourceId\":6091,\"offlinePrice\":140.00}', '', '2018-09-18 09:51:51', '吴学梁', '2018-09-18 09:51:51', '吴学梁');",
+        "delete": "DELETE FROM trans.trade_order_broker WHERE order_no='YJD20180918095151000001';"
+      },
+      "reqParams": {
+        "queryRequest": {
+          "status": 0,
+          "brokerId": 10001,
+          "currentpage":0,
+          "pagesize":15
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "data": {
+          "dataList": [{
+            "status": 0
+          }]
+	    },
+	    "message": ""
+      }
+    },
+    {
+      "serial": 2,
+      "instruction": "待经纪人确认订单列表",
+      "sql": {
+        "select": "SELECT order_no='YJD20180918112341000002' FROM trans.trade_order_broker",
+        "insert": "INSERT INTO `trans`.`trade_order_broker` (`order_no`, `order_type`, `status`, `refund_status`, `evaluate_status`, `car_source_type`, `car_source_code`, `car_model_code`, `car_base_id`, `car_base_name`, `guide_price`, `car_unit_price`, `transaction_num`, `deal_price`, `broker_amount`, `licence_plate_area_code`, `licence_plate_area_name`, `plan_arrival_date`, `deliver_car_date`, `car_color`, `car_interior_color`, `product_date`, `seller_company_id`, `seller_company_type`, `seller_company_name`, `seller_id`, `seller_name`, `seller_phone_num`, `broker_id`, `broker_name`, `broker_phone_num`, `extra_json`, `remark`, `create_time`, `creator_name`, `modify_time`, `modifier_name`) VALUES ('YJD20180918112341000002', '3', '1', '0', '0', '2', 'CYN20180830000032', '382001004', '61823', '2015款 阿斯顿马丁Vanquish-6.0-A/MT-Coupe', '498.80', '493.80', '1', '493.80', '600.00', '330100', '杭州市', '2018-09-18', NULL, '黑色', '棕色', '1', '100012', '1', '王二狗开的小超市', '47826', '王二狗', '18867520068', '10001', '吴学梁', '18867520068', '{\"brandLogo\":\"https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg\",\"carSourceId\":6092,\"offlinePrice\":493.80}', '', '2018-09-18 11:23:41', '吴学梁', '2018-09-18 11:23:57', '吴学梁');",
+        "delete": "DELETE FROM trans.trade_order_broker WHERE order_no='YJD20180918112341000002'"
+      },
+      "reqParams": {
+        "queryRequest": {
+          "brokerId":10001,
+          "currentpage":0,
+          "pagesize":15,
+          "status":1
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "data": {
+          "dataList": [{
+            "status": 1
+          }]
+	    },
+	    "message": ""
+      }
+    },
+    {
+      "serial": 3,
+      "instruction": "待车商确认订单列表",
+      "sql": {
+        "select": "SELECT order_no='YJD20180918112341000003' FROM trans.trade_order_broker",
+        "insert": "INSERT INTO `trans`.`trade_order_broker` (`order_no`, `order_type`, `status`, `refund_status`, `evaluate_status`, `car_source_type`, `car_source_code`, `car_model_code`, `car_base_id`, `car_base_name`, `guide_price`, `car_unit_price`, `transaction_num`, `deal_price`, `broker_amount`, `licence_plate_area_code`, `licence_plate_area_name`, `plan_arrival_date`, `deliver_car_date`, `car_color`, `car_interior_color`, `product_date`, `seller_company_id`, `seller_company_type`, `seller_company_name`, `seller_id`, `seller_name`, `seller_phone_num`, `broker_id`, `broker_name`, `broker_phone_num`, `extra_json`, `remark`, `create_time`, `creator_name`, `modify_time`, `modifier_name`) VALUES ('YJD20180918112341000003', '3', '2', '0', '0', '2', 'CYN20180830000032', '382001004', '61823', '2015款 阿斯顿马丁Vanquish-6.0-A/MT-Coupe', '498.80', '493.80', '1', '493.80', '800.00', '330100', '杭州市', '2018-09-18', '2018-09-18', '黑色', '棕色', '1', '100012', '1', '王二狗开的小超市', '47826', '王二狗', '18867520068', '10001', '吴学梁', '18867520068', '{\"brandLogo\":\"https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg\",\"carSourceId\":6092,\"offlinePrice\":493.80}', '', '2018-09-18 11:23:41', '吴学梁', '2018-09-18 11:37:28', '吴学梁');",
+        "delete": "DELETE FROM trans.trade_order_broker WHERE order_no='YJD20180918112341000003'"
+      },
+      "reqParams": {
+        "queryRequest": {
+          "brokerId":10001,
+          "currentpage":0,
+          "pagesize":15,
+          "status":2
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "data": {
+          "dataList": [{
+            "status": 2
+          }]
+	    },
+	    "message": ""
+      }
+    },
+    {
+      "serial": 4,
+      "instruction": "交易成功订单列表",
+      "reqParams": {
+        "queryRequest": {
+          "brokerId":10001,
+          "currentpage":0,
+          "pagesize":15,
+          "status":3
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+	    "message": "",
+        "data": {
+          "dataList": [{
+            "status": 3
+          }]
+        }
+      }
+    },
+    {
+      "serial": 5,
+      "instruction": "交易失败订单列表",
+      "reqParams": {
+        "queryRequest": {
+          "brokerId":10001,
+          "currentpage":0,
+          "pagesize":15,
+          "status":4
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "data": {
+          "dataList": [{
+            "status": 4
+          }]
+	    },
+	    "message": ""
+      }
+    },
+    {
+      "serial": 6,
+      "instruction": "全部订单列表",
+      "reqParams": {
+        "queryRequest": {
+          "brokerId":10001,
+          "currentpage":0,
+          "pagesize":15,
+          "status":-1
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "data": {},
+	    "message": ""
+      }
+    }
+  ]
+}

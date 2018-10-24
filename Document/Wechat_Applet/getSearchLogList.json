@@ -1,0 +1,24 @@
+{
+  "description": "获取车源搜索纪录列表（需要修改原接口）",
+  "apiname": "/carsrc/getSearchLogList.json",
+  "api": "getSearchLogList",
+  "caseList": [
+	{
+	  "serial": 1,
+	  "instruction": "获取车源搜索记录",
+      "sql": {
+        "select": "SELECT query_value FROM carsrc.search_log WHERE userid=10001 AND user_type='2' AND status=0;",
+        "update": "UPDATE carsrc.search_log SET `status`=0 WHERE query_value='宝马';UPDATE carsrc.search_log SET `status`=0 WHERE query_value='奥迪';"
+      },
+	  "reqParams": {
+        "userid": 10001,
+        "userType": "2"
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "查询搜索记录成功",
+	  "data": "从数据库查询数据用于做校验，所以这里就不写校验标准了"
+      }
+    }
+  ]
+}

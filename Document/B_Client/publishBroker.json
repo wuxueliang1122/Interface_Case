@@ -1,0 +1,55 @@
+{
+  "description": "车源发布到经纪人;type// 1: 发布到经纪人, 2: 取消发布, 3: 修改佣金",
+  "apiname": "/usob/carsrc/publishBroker.json",
+  "api": "publishBroker",
+  "caseList": [
+    {
+      "serial": 1,
+      "instruction": "发布成功",
+      "reqParams":{
+        "requestParam":{
+          "type":"1",
+            "carSourceId":1,
+            "brokerage":500
+          }
+      },
+      "expectResult":{
+        "code": 10000,
+        "data": "成功",
+        "message": ""
+      }
+    },
+    {
+      "serial": 2,
+      "instruction": "修改佣金成功",
+      "reqParams":{
+        "requestParam":{
+          "type":"3",
+          "carSourceId":1,
+          "brokerage":600
+        }
+      },
+      "expectResult":{
+        "code": 10000,
+        "data": "成功",
+        "message": ""
+      }
+    },
+    {
+      "serial": 3,
+      "instruction": "取消发布成功",
+      "reqParams":{
+        "requestParam":{
+          "type":"2",
+          "carSourceId":1,
+          "brokerage":500
+        }
+      },
+      "expectResult":{
+        "code": 10000,
+        "data": "成功",
+        "message": ""
+      }
+    }
+  ]
+}

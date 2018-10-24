@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>车国接口测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">车国接口测试报告</h1>
+<p class='attribute'><strong>测试人员 : </strong> 最棒QA</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-09-12 16:39:14</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:05:01.082000</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 9，通过 1，失败 2，错误 6，通过率= 11.11%</p>
+
+<p class='description'>测试用例运行情况</p>
+</div>
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 11.11% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 2 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 1 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 9 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>Wechat_Applet.brokerGetCarSourceDetail.BrokerGetCarSourceDetail</td>
+    <td class="text-center">4</td>
+    <td class="text-center">1</td>
+    <td class="text-center">2</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',4)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_api</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse in">
+    <pre>
+    
+pt1_1: apiname: /usob/carsrc/brokerGetCarSourceDetail.json
+api: brokerGetCarSourceDetail
+TestCase 1:
+instruction: carSourceId存在，查询成功
+the 0 reqParams is: {'requestParam': {'carSourceId': '吴学梁'}}.
+url: http://10.10.13.75:8080/usob/carsrc/brokerGetCarSourceDetail.json?requestParam={'carSourceId': '吴学梁'}&amp;signature=a293eefd9e5460756d0eddfcc5018294&amp;source=123456
+response content:  {'request': '/usob/carsrc/brokerGetCarSourceDetail.json', 'code': '10003', 'message': 'signature verification failed.'}
+the 0 expectResult is: {'code': 10000, 'message': '', 'data': {'companyCarSourceOrder': {'areaCode': '820100', 'areaName': '澳门', 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/本田.jpg', 'carCode': '331001001', 'carColor': '棕色', 'carId': 100023, 'carName': '2016款 思域1.0T-MT舒适版180TURBO(国Ⅴ)', 'carSourceCode': 'CYN20180625000002', 'carSourceId': 221, 'carTrimColor': '黑色', 'cars': '本田', 'companyId': 2495, 'companyName': '营山金典车业有限公司', 'companyType': 5, 'gmtCreate': '2018-06-25 14:19:50', 'gmtModify': '2018-06-25 14:19:50', 'imgInfo': [{'gmtCreate': '2017-08-24 15:14:40', 'gmtModify': '2017-08-24 15:14:40', 'picAddr': 'https://cheguo-image.cheguo.com/files/2017-08-24/201708241514260136948.jpeg@334w_250h_1e_1o', 'picId': 21114, 'picName': '左前45度', 'picType': 2, 'sourceOrderId': 221}, {'gmtCreate': '2017-08-24 15:14:40', 'gmtModify': '2017-08-24 15:14:40', 'picAddr': 'https://cheguo-image.cheguo.com/files/2017-08-24/201708241514356992078.jpeg@334w_250h_1e_1o', 'picId': 21115, 'picName': '右后45度', 'picType': 3, 'sourceOrderId': 221}], 'msrp': 11.59, 'offlineOverMsrp': 0, 'offlinePrice': 9.59, 'offlinePriceType': 1, 'offlinePriceValue': '2', 'offlineSale': 'yes', 'onlineSale': 'yes', 'orderUserId': 13005, 'overMsrp': 0, 'picFlag': 0, 'plateLimit': 0, 'priceType': 1, 'priceValue': '2', 'productDate': 2, 'publishBrokerStatus': '0', 'repertory': 2, 'salePrice': 9.59, 'salesRegion': '北京市', 'score': 0, 'sourceKind': 1, 'sourceStatus': 1, 'sourceType': 4, 'status': 2, 'transport': 1, 'versionNumber': 0}, 'salesName': '18188733301', 'salesPhone': '18188733301', 'type': 5}}.
+The 0 th is already success.
+TestCase 2:
+instruction: carSourceId不存在，查询结构为 车源不存在
+the 1 reqParams is: {'requestParam': {'carSourceId': 405}}.
+url: http://10.10.13.75:8080/usob/carsrc/brokerGetCarSourceDetail.json?requestParam={'carSourceId': 405}&amp;signature=00a1d8f9528cd94e86addf78686f032a&amp;source=123456
+response content:  {'code': 20000, 'message': '车源不存在'}
+the 1 expectResult is: {'code': 20000, 'message': '车源不存在'}.
+The 1 th is already success.
+TestCase 3:
+instruction: 当请求参数为空
+the 2 reqParams is: {}.
+url: http://10.10.13.75:8080/usob/carsrc/brokerGetCarSourceDetail.json?signature=d6a4597f1def3e12fac8891adce67abc&amp;source=123456
+response content:  {'request': '/usob/carsrc/brokerGetCarSourceDetail.json', 'code': '10001', 'message': 'requestParam  paramter is missing.'}
+the 2 expectResult is: {'code': 10001, 'message': 'requestParam  paramter is missing.'}.
+The 2 th is already success.
+TestCase 4:
+instruction: 当请求参数为不支持的字符
+the 3 reqParams is: {'carSourceId': 'aa'}.
+url: http://10.10.13.75:8080/usob/carsrc/brokerGetCarSourceDetail.json?carSourceId=aa&amp;signature=70f16c4b7b67aa37806986355551b976&amp;source=123456
+response content:  {'request': '/usob/carsrc/brokerGetCarSourceDetail.json', 'code': '10001', 'message': 'requestParam  paramter is missing.'}
+the 3 expectResult is: {'code': 10001, 'message': 'requestParam  paramter is missing.'}.
+The 3 th is already success.
+TestCase 5:
+instruction: 当请求参数为不支持的字符类型
+the 4 reqParams is: {'carSourceId': '11'}.
+url: http://10.10.13.75:8080/usob/carsrc/brokerGetCarSourceDetail.json?carSourceId=11&amp;signature=051085d99a61c6fcd83c4cca92c6a188&amp;source=123456
+response content:  {'request': '/usob/carsrc/brokerGetCarSourceDetail.json', 'code': '10001', 'message': 'requestParam  paramter is missing.'}
+the 4 expectResult is: {'code': 10001, 'message': 'requestParam  paramter is missing.'}.
+The 4 th is already success.
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_2' class='none'>
+    <td class='failCase'><div class='testcase'>test_code</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
+    <div id='div_ft1_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
+    <div id='div_ft1_2' class="collapse in">
+    <pre>
+    
+ft1_2: apiname: /usob/carsrc/brokerGetCarSourceDetail.json
+api: brokerGetCarSourceDetail
+TestCase 1:
+instruction: carSourceId存在，查询成功
+the 0 reqParams is: {'requestParam': {'carSourceId': '吴学梁'}}.
+url: http://10.10.13.75:8080/usob/carsrc/brokerGetCarSourceDetail.json?requestParam={'carSourceId': '吴学梁'}&amp;signature=a293eefd9e5460756d0eddfcc5018294&amp;source=123456
+response content:  {'request': '/usob/carsrc/brokerGetCarSourceDetail.json', 'code': '10003', 'message': 'signature verification failed.'}
+the 0 expectResult is: {'code': 10000, 'message': '', 'data': {'companyCarSourceOrder': {'areaCode': '820100', 'areaName': '澳门', 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/本田.jpg', 'carCode': '331001001', 'carColor': '棕色', 'carId': 100023, 'carName': '2016款 思域1.0T-MT舒适版180TURBO(国Ⅴ)', 'carSourceCode': 'CYN20180625000002', 'carSourceId': 221, 'carTrimColor': '黑色', 'cars': '本田', 'companyId': 2495, 'companyName': '营山金典车业有限公司', 'companyType': 5, 'gmtCreate': '2018-06-25 14:19:50', 'gmtModify': '2018-06-25 14:19:50', 'imgInfo': [{'gmtCreate': '2017-08-24 15:14:40', 'gmtModify': '2017-08-24 15:14:40', 'picAddr': 'https://cheguo-image.cheguo.com/files/2017-08-24/201708241514260136948.jpeg@334w_250h_1e_1o', 'picId': 21114, 'picName': '左前45度', 'picType': 2, 'sourceOrderId': 221}, {'gmtCreate': '2017-08-24 15:14:40', 'gmtModify': '2017-08-24 15:14:40', 'picAddr': 'https://cheguo-image.cheguo.com/files/2017-08-24/201708241514356992078.jpeg@334w_250h_1e_1o', 'picId': 21115, 'picName': '右后45度', 'picType': 3, 'sourceOrderId': 221}], 'msrp': 11.59, 'offlineOverMsrp': 0, 'offlinePrice': 9.59, 'offlinePriceType': 1, 'offlinePriceValue': '2', 'offlineSale': 'yes', 'onlineSale': 'yes', 'orderUserId': 13005, 'overMsrp': 0, 'picFlag': 0, 'plateLimit': 0, 'priceType': 1, 'priceValue': '2', 'productDate': 2, 'publishBrokerStatus': '0', 'repertory': 2, 'salePrice': 9.59, 'salesRegion': '北京市', 'score': 0, 'sourceKind': 1, 'sourceStatus': 1, 'sourceType': 4, 'status': 2, 'transport': 1, 'versionNumber': 0}, 'salesName': '18188733301', 'salesPhone': '18188733301', 'type': 5}}.
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerGetCarSourceDetail.py", line 90, in test_code
+    self.verify.verify_code(expectresult=expectresult, result=json_result)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\Verify.py", line 44, in verify_code
+    msg="verify_code: The response code is %s." % result['code'])
+AssertionError: 10000 != 10003 : verify_code: The response code is 10003.
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_data</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_3'>错误</button>
+    <div id='div_ft1_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_3'>错误</button>
+    <div id='div_ft1_3' class="collapse in">
+    <pre>
+    
+ft1_3: apiname: /usob/carsrc/brokerGetCarSourceDetail.json
+api: brokerGetCarSourceDetail
+TestCase 1:
+instruction: carSourceId存在，查询成功
+the 0 reqParams is: {'requestParam': {'carSourceId': '吴学梁'}}.
+url: http://10.10.13.75:8080/usob/carsrc/brokerGetCarSourceDetail.json?requestParam={'carSourceId': '吴学梁'}&amp;signature=a293eefd9e5460756d0eddfcc5018294&amp;source=123456
+response content:  {'request': '/usob/carsrc/brokerGetCarSourceDetail.json', 'code': '10003', 'message': 'signature verification failed.'}
+the 0 expectResult is: {'code': 10000, 'message': '', 'data': {'companyCarSourceOrder': {'areaCode': '820100', 'areaName': '澳门', 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/本田.jpg', 'carCode': '331001001', 'carColor': '棕色', 'carId': 100023, 'carName': '2016款 思域1.0T-MT舒适版180TURBO(国Ⅴ)', 'carSourceCode': 'CYN20180625000002', 'carSourceId': 221, 'carTrimColor': '黑色', 'cars': '本田', 'companyId': 2495, 'companyName': '营山金典车业有限公司', 'companyType': 5, 'gmtCreate': '2018-06-25 14:19:50', 'gmtModify': '2018-06-25 14:19:50', 'imgInfo': [{'gmtCreate': '2017-08-24 15:14:40', 'gmtModify': '2017-08-24 15:14:40', 'picAddr': 'https://cheguo-image.cheguo.com/files/2017-08-24/201708241514260136948.jpeg@334w_250h_1e_1o', 'picId': 21114, 'picName': '左前45度', 'picType': 2, 'sourceOrderId': 221}, {'gmtCreate': '2017-08-24 15:14:40', 'gmtModify': '2017-08-24 15:14:40', 'picAddr': 'https://cheguo-image.cheguo.com/files/2017-08-24/201708241514356992078.jpeg@334w_250h_1e_1o', 'picId': 21115, 'picName': '右后45度', 'picType': 3, 'sourceOrderId': 221}], 'msrp': 11.59, 'offlineOverMsrp': 0, 'offlinePrice': 9.59, 'offlinePriceType': 1, 'offlinePriceValue': '2', 'offlineSale': 'yes', 'onlineSale': 'yes', 'orderUserId': 13005, 'overMsrp': 0, 'picFlag': 0, 'plateLimit': 0, 'priceType': 1, 'priceValue': '2', 'productDate': 2, 'publishBrokerStatus': '0', 'repertory': 2, 'salePrice': 9.59, 'salesRegion': '北京市', 'score': 0, 'sourceKind': 1, 'sourceStatus': 1, 'sourceType': 4, 'status': 2, 'transport': 1, 'versionNumber': 0}, 'salesName': '18188733301', 'salesPhone': '18188733301', 'type': 5}}.
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerGetCarSourceDetail.py", line 124, in test_data
+    self.verify.verify_data(expectresult=expectresult, result=json_result)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\Verify.py", line 68, in verify_data
+    self.assertEqual(len(expectresult['data']), len(result['data']))
+KeyError: 'data'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_4' class='none'>
+    <td class='failCase'><div class='testcase'>test_message</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_4'>失败</button>
+    <div id='div_ft1_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_4'>失败</button>
+    <div id='div_ft1_4' class="collapse in">
+    <pre>
+    
+ft1_4: apiname: /usob/carsrc/brokerGetCarSourceDetail.json
+api: brokerGetCarSourceDetail
+TestCase 1:
+instruction: carSourceId存在，查询成功
+the 0 reqParams is: {'requestParam': {'carSourceId': '吴学梁'}}.
+url: http://10.10.13.75:8080/usob/carsrc/brokerGetCarSourceDetail.json?requestParam={'carSourceId': '吴学梁'}&amp;signature=a293eefd9e5460756d0eddfcc5018294&amp;source=123456
+response content:  {'request': '/usob/carsrc/brokerGetCarSourceDetail.json', 'code': '10003', 'message': 'signature verification failed.'}
+the 0 expectResult is: {'code': 10000, 'message': '', 'data': {'companyCarSourceOrder': {'areaCode': '820100', 'areaName': '澳门', 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/本田.jpg', 'carCode': '331001001', 'carColor': '棕色', 'carId': 100023, 'carName': '2016款 思域1.0T-MT舒适版180TURBO(国Ⅴ)', 'carSourceCode': 'CYN20180625000002', 'carSourceId': 221, 'carTrimColor': '黑色', 'cars': '本田', 'companyId': 2495, 'companyName': '营山金典车业有限公司', 'companyType': 5, 'gmtCreate': '2018-06-25 14:19:50', 'gmtModify': '2018-06-25 14:19:50', 'imgInfo': [{'gmtCreate': '2017-08-24 15:14:40', 'gmtModify': '2017-08-24 15:14:40', 'picAddr': 'https://cheguo-image.cheguo.com/files/2017-08-24/201708241514260136948.jpeg@334w_250h_1e_1o', 'picId': 21114, 'picName': '左前45度', 'picType': 2, 'sourceOrderId': 221}, {'gmtCreate': '2017-08-24 15:14:40', 'gmtModify': '2017-08-24 15:14:40', 'picAddr': 'https://cheguo-image.cheguo.com/files/2017-08-24/201708241514356992078.jpeg@334w_250h_1e_1o', 'picId': 21115, 'picName': '右后45度', 'picType': 3, 'sourceOrderId': 221}], 'msrp': 11.59, 'offlineOverMsrp': 0, 'offlinePrice': 9.59, 'offlinePriceType': 1, 'offlinePriceValue': '2', 'offlineSale': 'yes', 'onlineSale': 'yes', 'orderUserId': 13005, 'overMsrp': 0, 'picFlag': 0, 'plateLimit': 0, 'priceType': 1, 'priceValue': '2', 'productDate': 2, 'publishBrokerStatus': '0', 'repertory': 2, 'salePrice': 9.59, 'salesRegion': '北京市', 'score': 0, 'sourceKind': 1, 'sourceStatus': 1, 'sourceType': 4, 'status': 2, 'transport': 1, 'versionNumber': 0}, 'salesName': '18188733301', 'salesPhone': '18188733301', 'type': 5}}.
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerGetCarSourceDetail.py", line 107, in test_message
+    self.verify.verify_message(expectresult=expectresult, result=json_result)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\Verify.py", line 57, in verify_message
+    msg="verify_message: The response message is %s." % result['message'])
+AssertionError: '' != 'signature verification failed.'
++ signature verification failed. : verify_message: The response message is signature verification failed..
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>Wechat_Applet.brokerVerifyCodeLogin.BrokerVerifyCodeLogin</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">5</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',5)" class="detail" id='c2'>详细</a></td>
+</tr>
+
+<tr id='ft2_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_api</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft2_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_1'>错误</button>
+    <div id='div_ft2_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft2_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft2_1'>错误</button>
+    <div id='div_ft2_1' class="collapse in">
+    <pre>
+    
+ft2_1: apiname: /dealer/brokerVerifyCodeLogin.json
+api: brokerVerifyCodeLogin
+sendValidataCode response is  {'code': 20000, 'message': '操作过于频繁，稍后再试'}
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 143, in test_api
+    self.login_success(serial=num)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 101, in login_success
+    json_result = self.get_success_response().json()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 54, in get_success_response
+    "verifyCode": self.get_verify_code(),
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 88, in get_verify_code
+    self.sendvaliddatacode()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 84, in sendvaliddatacode
+    raise ConnectionError("The api sendValidataCode response is error. %s" % r.json())
+ConnectionError: The api sendValidataCode response is error. {'code': 20000, 'message': '操作过于频繁，稍后再试'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft2_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_code</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft2_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_2'>错误</button>
+    <div id='div_ft2_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft2_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft2_2'>错误</button>
+    <div id='div_ft2_2' class="collapse in">
+    <pre>
+    
+ft2_2: apiname: /dealer/brokerVerifyCodeLogin.json
+api: brokerVerifyCodeLogin
+sendValidataCode response is  {'code': 20000, 'message': '操作过于频繁，稍后再试'}
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 162, in test_code
+    self.login_success(serial=num)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 101, in login_success
+    json_result = self.get_success_response().json()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 54, in get_success_response
+    "verifyCode": self.get_verify_code(),
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 88, in get_verify_code
+    self.sendvaliddatacode()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 84, in sendvaliddatacode
+    raise ConnectionError("The api sendValidataCode response is error. %s" % r.json())
+ConnectionError: The api sendValidataCode response is error. {'code': 20000, 'message': '操作过于频繁，稍后再试'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft2_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_data</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft2_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_3'>错误</button>
+    <div id='div_ft2_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft2_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft2_3'>错误</button>
+    <div id='div_ft2_3' class="collapse in">
+    <pre>
+    
+ft2_3: apiname: /dealer/brokerVerifyCodeLogin.json
+api: brokerVerifyCodeLogin
+sendValidataCode response is  {'code': 20000, 'message': '操作过于频繁，稍后再试'}
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 199, in test_data
+    self.login_success(serial=num)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 101, in login_success
+    json_result = self.get_success_response().json()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 54, in get_success_response
+    "verifyCode": self.get_verify_code(),
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 88, in get_verify_code
+    self.sendvaliddatacode()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 84, in sendvaliddatacode
+    raise ConnectionError("The api sendValidataCode response is error. %s" % r.json())
+ConnectionError: The api sendValidataCode response is error. {'code': 20000, 'message': '操作过于频繁，稍后再试'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft2_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_datalist</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft2_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_4'>错误</button>
+    <div id='div_ft2_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft2_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft2_4'>错误</button>
+    <div id='div_ft2_4' class="collapse in">
+    <pre>
+    
+ft2_4: apiname: /dealer/brokerVerifyCodeLogin.json
+api: brokerVerifyCodeLogin
+sendValidataCode response is  {'code': 20000, 'message': '操作过于频繁，稍后再试'}
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 217, in test_datalist
+    self.login_success(serial=num)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 101, in login_success
+    json_result = self.get_success_response().json()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 54, in get_success_response
+    "verifyCode": self.get_verify_code(),
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 88, in get_verify_code
+    self.sendvaliddatacode()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 84, in sendvaliddatacode
+    raise ConnectionError("The api sendValidataCode response is error. %s" % r.json())
+ConnectionError: The api sendValidataCode response is error. {'code': 20000, 'message': '操作过于频繁，稍后再试'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft2_5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_message</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft2_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_5'>错误</button>
+    <div id='div_ft2_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft2_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft2_5'>错误</button>
+    <div id='div_ft2_5' class="collapse in">
+    <pre>
+    
+ft2_5: apiname: /dealer/brokerVerifyCodeLogin.json
+api: brokerVerifyCodeLogin
+sendValidataCode response is  {'code': 20000, 'message': '操作过于频繁，稍后再试'}
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 181, in test_message
+    self.login_success(serial=num)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 101, in login_success
+    json_result = self.get_success_response().json()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 54, in get_success_response
+    "verifyCode": self.get_verify_code(),
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 88, in get_verify_code
+    self.sendvaliddatacode()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\brokerVerifyCodeLogin.py", line 84, in sendvaliddatacode
+    raise ConnectionError("The api sendValidataCode response is error. %s" % r.json())
+ConnectionError: The api sendValidataCode response is error. {'code': 20000, 'message': '操作过于频繁，稍后再试'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>9</td>
+    <td>1</td>
+    <td>2</td>
+    <td>6</td>
+    <td>通过率：11.11%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+</body>
+</html>

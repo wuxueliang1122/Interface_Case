@@ -1,0 +1,23 @@
+{
+  "description": "小程序表单提交--保存form_id",
+  "apiname": "/dealer/saveBrokerUserFormId.json",
+  "api": "saveBrokerUserFormId",
+  "caseList": [
+	{
+	  "serial": 1,
+	  "instruction": "form_id保存成功",
+      "sql": {
+        "select": "SELECT form_id FROM auto.wx_broker_user_form WHERE form_id='3c55795a3ab1701e1aab54a188e1e111';",
+        "delete": "DELETE FROM auto.wx_broker_user_form WHERE form_id='3c55795a3ab1701e1aab54a188e1e111';"
+      },
+	  "reqParams": {
+        "brokerId": 10001,
+        "formId": "3c55795a3ab1701e1aab54a188e1e111"
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "success"
+      }
+    }
+  ]
+}

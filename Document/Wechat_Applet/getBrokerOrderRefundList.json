@@ -1,0 +1,94 @@
+{
+  "description": "查看退款详情",
+  "apiname": "/usob/cgtrade/getBrokerOrderRefundList.json",
+  "api": "getBrokerOrderRefundList",
+  "caseList": [
+	{
+	  "serial": 1,
+	  "instruction": "车商申请退款，经纪人未确认（定时任务执行退款）",
+	  "reqParams": {
+        "queryRequest": {
+          "brokerId":10001,
+          "orderNo":"YJD20180821102045000001",
+          "sellerId":"47826"
+        }
+	  },
+	  "expectResult": {
+        "code": 10000,
+        "message": "",
+        "data": [{
+          "applyDesc": "哥哥更好",
+          "createTime": "2018-08-23 09:46:54",
+          "operName": "王二狗开的小超市",
+          "operStepDesc": "车商申请退款",
+          "photoProof": ["http://cdn-file.cheguo.com/files/2018-08-23/201808230946493643757.jpg"],
+          "status": 1
+	    }]
+      }
+    },
+    {
+      "serial": 2,
+      "instruction": "车商申请退款，经纪人同意退款",
+      "reqParams": {
+        "queryRequest": {
+          "brokerId":10001,
+          "orderNo":"YJD20180913103251000001",
+          "sellerId":"47826"
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "message": "",
+        "data": [{
+		"applyDesc": "刚刚好",
+		"createTime": "2018-09-13 10:33:53",
+		"operName": "王二狗开的小超市",
+		"operStepDesc": "车商申请退款",
+		"photoProof": ["http://cdn-file.cheguo.com/files/2018-09-13/201809131033508399081.jpg"],
+		"status": 2
+	    }, {
+		"createTime": "2018-09-13 10:34:05",
+		"handleDesc": "经纪人同意退款",
+		"handleResult": "经纪人同意退款",
+		"operName": "吴学梁",
+		"operStepDesc": "经纪人同意退款"
+	    }]
+      }
+    },
+    {
+      "serial": 3,
+      "instruction": "车商申请退款，客服申述将佣金转给经纪人",
+      "reqParams": {
+        "queryRequest": {
+          "brokerId":10001,
+          "orderNo":"YJD20180913103655000002",
+          "sellerId":"47826"
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "message": "",
+        "data": [{
+		"applyDesc": "刚刚更换",
+		"createTime": "2018-09-13 10:39:22",
+		"operName": "王二狗开的小超市",
+		"operStepDesc": "车商申请退款",
+		"photoProof": ["http://cdn-file.cheguo.com/files/2018-09-13/201809131039029471706.jpg", "http://cdn-file.cheguo.com/files/2018-09-13/201809131039029436391.jpg"],
+		"status": 5
+	    }, {
+		"applyDesc": "滚滚滚",
+		"createTime": "2018-09-13 10:39:57",
+		"operName": "吴学梁",
+		"operStepDesc": "经纪人申请申诉",
+		"photoProof": ["https://cdn-file.cheguo.com/files/2018-09-13/201809131039561138834.jpg", "https://cdn-file.cheguo.com/files/2018-09-13/201809131039527535457.jpg"]
+	    }, {
+		"createTime": "2018-09-13 10:40:45",
+		"handleDesc": "佣金转给经纪人",
+		"handleResult": "客服处理(佣金转给经纪人)",
+		"operName": "车国客服",
+		"operStepDesc": "客服处理(佣金转给经纪人)"
+	    }]
+      }
+    }
+  ]
+}

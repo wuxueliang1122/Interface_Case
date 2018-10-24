@@ -1,0 +1,81 @@
+{
+  "description": "获取报价详情, 报价状态：1-报价中，2-已过期，3-已撤回，4-已失效；其实报价状态不同还是对于经纪人端报价显示有影响",
+  "apiname": "/dealer/carmodel/getQuoteDetail.json",
+  "api": "getQuoteDetail",
+  "caseList":[
+    {
+      "serial": 1,
+      "instruction": "报价中状态查询成功",
+      "sql": {
+        "insert_car": "INSERT INTO `auto`.`company_search_car` (`id`, `searchcarno`, `brandpic`, `brandcode`, `brandname`, `cars`, `carid`, `carname`, `msrp`, `expireddate`, `mtime`, `create_time`, `interiorcolors`, `exteriorcolors`, `sellcity`, `expirydate`, `pickcardate`, `remark`, `dealerarecode`, `dealerprovince`, `dealercity`, `companyid`, `companyname`, `userid`, `tel`, `clickno`, `status`, `regist_city`, `realname`, `special_require`, `made_city`, `search_status`, `is_valid`, `regist_city_code`, `transaction_type`) VALUES ('99999999', 'XC201809201658063872', '/carlogo/标致.jpg', '372001004', '标致', '标致408', '109647', '2018款 标致408-1.6T-A/MT改款350THP至尊版(国Ⅴ)', '18.97', '2018-09-23 16:58:06', '2018-09-20 16:58:06', '2018-09-20 16:58:06', '色全', '色全', '全国', '3', NULL, NULL, NULL, NULL, NULL, NULL, '吴学梁', '10001', '18867520068', '0', '1', '杭州市', '吴学梁', '', '', '1', 'valid', '330100', '1');",
+        "insert_quote": "INSERT INTO `auto`.`company_quote` (`id`, `search_car_id`, `company_id`, `company_name`, `user_id`, `user_name`, `sale_price`, `quote_way`, `quote_value`, `area_code`, `area_name`, `valid_days`, `invalid_time`, `remark`, `status`, `create_time`, `modify_time`, `is_valid`, `commission`) VALUES ('88888888', '99999999', '100012', '王二狗开的小超市', '47826', '王二狗', '16.97', 'downMoney', '2', 'south', '南区', '5', '2018-09-25 16:59:20', NULL, '1', '2018-09-20 16:59:20', '2018-09-20 16:59:20', 'valid', '500');",
+        "update": [
+          "UPDATE `auto`.`company_search_car` SET `search_status`=1, `is_valid`='valid' WHERE `id`=99999999;",
+          "UPDATE `auto`.`company_quote` SET `status`=1, `is_valid`='valid' WHERE `id`=1;"
+        ]
+      },
+      "reqParams":{
+        "quoteId": 1
+    },
+      "expectResult":{
+        "code": 10000,
+        "message": "查询成功",
+        "status": 1
+      }
+    },
+    {
+      "serial": 2,
+      "instruction": "报价已过期状态查询成功",
+      "sql": {
+         "update": [
+          "UPDATE `auto`.`company_search_car` SET `search_status`=1, `is_valid`='valid' WHERE `id`=99999999;",
+          "UPDATE `auto`.`company_quote` SET `status`=2, `is_valid`='valid' WHERE `id`=1;"
+        ]
+      },
+      "reqParams":{
+        "quoteId": 1
+    },
+      "expectResult":{
+        "code": 10000,
+        "message": "查询成功",
+        "status": 2
+      }
+    },
+    {
+      "serial": 3,
+      "instruction": "报价已撤回状态查询成功",
+      "sql": {
+         "update": [
+          "UPDATE `auto`.`company_search_car` SET `search_status`=1, `is_valid`='valid' WHERE `id`=99999999;",
+          "UPDATE `auto`.`company_quote` SET `status`=3, `is_valid`='valid' WHERE `id`=1;"
+        ]
+      },
+      "reqParams":{
+        "quoteId": 1
+    },
+      "expectResult":{
+        "code": 10000,
+        "message": "查询成功",
+        "status": 3
+      }
+    },
+    {
+      "serial": 4,
+      "instruction": "报价已失效状态查询成功",
+      "sql": {
+         "update": [
+          "UPDATE `auto`.`company_search_car` SET `search_status`=1, `is_valid`='valid' WHERE `id`=99999999;",
+          "UPDATE `auto`.`company_quote` SET `status`=4, `is_valid`='valid' WHERE `id`=1;"
+        ]
+      },
+      "reqParams":{
+        "quoteId": 1
+    },
+      "expectResult":{
+        "code": 10000,
+        "message": "查询成功",
+        "status": 4
+      }
+    }
+  ]
+}

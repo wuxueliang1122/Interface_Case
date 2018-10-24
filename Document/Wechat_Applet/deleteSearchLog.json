@@ -1,0 +1,27 @@
+{
+  "description": "删除车源搜索纪录（需要修改原来接口）",
+  "apiname": "/carsrc/deleteSearchLog.json",
+  "api": "deleteSearchLog",
+  "caseList": [
+	{
+	  "serial": 1,
+	  "instruction": "删除搜索记录成功",
+      "sql": {
+        "select": "SELECT STATUS FROM carsrc.search_log WHERE query_value='320';",
+        "insert": "INSERT INTO `carsrc`.`search_log` (`query_value`, `status`, `log_type`, `companyid`, `userid`, `log_count`, `gmt_create`, `user_type`) VALUES ('320', '0', '0', NULL, '10001', '2', '2018-09-18 17:39:41', '2');",
+        "update": "UPDATE carsrc.search_log SET STATUS=0 WHERE query_value='320';"
+      },
+	  "reqParams": {
+        "searchLogInfo": {
+          "queryValues":"320",
+          "userid":10001,
+          "userType":"2"
+        }
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "删除搜索日志成功"
+      }
+    }
+  ]
+}

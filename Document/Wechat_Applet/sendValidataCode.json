@@ -1,0 +1,31 @@
+{
+  "description": "",
+  "apiname": "/dealer/sendvalidatecode.json",
+  "api": "sendValidateCode",
+  "caseList": [
+    {
+      "serial": 1,
+      "instruction": "验证码已发送，成功发送验证码",
+      "reqParams": {
+        "phone": "18867520068",
+        "invokeType": "20"
+      },
+      "expectResult":{
+        "code":10000,
+        "message":"验证码已发送"
+      }
+    },
+    {
+      "serial": 2,
+      "instruction": "60s内仅能获取一次验证码",
+      "reqParams": {
+        "phone": "18867520068",
+        "invokeType": 20
+      },
+      "expectResult": {
+        "code":20000,
+        "message":"60s内仅能获取一次验证码，请稍后再试"
+      }
+    }
+  ]
+}

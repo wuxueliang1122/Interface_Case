@@ -1,0 +1,21 @@
+{
+  "description": "选择支行列表",
+  "apiname": "/usob/cgpay/getDepositBankList.json",
+  "api": "getDepositBankList",
+  "caseList": [
+	{
+	  "serial": 0,
+	  "instruction": "",
+	  "reqParams": {
+
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "",
+	  "data": {
+
+	    }
+      }
+    }
+  ]
+}

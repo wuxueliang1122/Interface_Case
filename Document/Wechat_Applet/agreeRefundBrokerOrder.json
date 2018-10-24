@@ -1,0 +1,25 @@
+{
+  "description": "经纪人同意退款",
+  "apiname": "/usob/cgtrade/agreeRefundBrokerOrder.json",
+  "api": "agreeRefundBrokerOrder",
+  "caseList": [
+	{
+	  "serial": 1,
+	  "instruction": "车商支付成功后申请退款，经纪人同意退款",
+      "sql":  {
+        "insert": "INSERT INTO `trans`.`trade_order_broker` (`order_no`, `order_type`, `status`, `refund_status`, `evaluate_status`, `car_source_type`, `car_source_code`, `car_model_code`, `car_base_id`, `car_base_name`, `guide_price`, `car_unit_price`, `transaction_num`, `deal_price`, `broker_amount`, `licence_plate_area_code`, `licence_plate_area_name`, `plan_arrival_date`, `deliver_car_date`, `car_color`, `car_interior_color`, `product_date`, `seller_company_id`, `seller_company_type`, `seller_company_name`, `seller_id`, `seller_name`, `seller_phone_num`, `broker_id`, `broker_name`, `broker_phone_num`, `create_time`, `creator_name`, `modify_time`, `modifier_name`) VALUES ('{}', '3', '1', '1', '0', '2', 'CYN20180726000002', '301001005', '90195', '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', '29.28', '22.28', '1', '22.28', '500.00', '330100', '杭州市', '2018-09-19', NULL, '色全', '色全', '1', '100012', '1', '王二狗开的小超市', '47826', '王二狗', '18867520068', '10001', '吴学梁', '18867520068', '2018-09-19 18:00:20', '吴学梁', '2018-09-19 18:01:05', '王二狗');"
+      },
+	  "reqParams": {
+        "agreeInfo": {
+          "brokerId":10001,
+          "orderNo":"{}"
+        }
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "",
+      "data": true
+      }
+    }
+  ]
+}

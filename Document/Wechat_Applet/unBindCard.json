@@ -1,0 +1,25 @@
+{
+  "description": "解绑银行卡",
+  "apiname": "/usob/cgpay/unBindCard.json",
+  "api": "unBindCard",
+  "caseList": [
+	{
+	  "serial": 0,
+	  "instruction": "解绑银行卡,不管银行卡在数据库中是否存在，接口没做匹配，因为肯定是从list列表做的操作",
+      "sql": {
+        "select": "",
+        "insert": ""
+      },
+	  "reqParams": {
+		  "userId": 10001,
+		  "cardNo": "6217920270055177",
+		  "from": "J"
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "银行卡解绑成功",
+	  "data": true,
+      }
+    }
+  ]
+}

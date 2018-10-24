@@ -1,0 +1,81 @@
+{
+  "description": "绑定银行卡",
+  "apiname": "/usob/cgpay/bindCard.json",
+  "api": "bindCard",
+  "caseList": [
+    {
+	  "serial": 1,
+	  "instruction": "四要素认证不通过：绑定银行卡,四要素不一致，绑卡失败",
+	  "reqParams": {
+        "cardInfo": {
+          "bankCode":"310331000244",
+          "cardNo":"6217920270055176",
+          "from":"J",
+          "idNumber":"330127199011222710",
+          "name":"111",
+          "phone":"18867520068",
+          "type":"5",
+          "userId":10001
+        }
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "绑卡成功",
+	  "data": {
+        "code": 9,
+        "reason": "四要素信息不一致，请核实后重试",
+        "success":false
+	    }
+      }
+    },
+	{
+	  "serial": 2,
+	  "instruction": "绑卡成功:前提条件-我的银行卡没有银行卡，四要素认证成功",
+      "sql": {
+        "select": "SELECT * FROM trans.pay_user_bank_card WHERE card_no='EV6E6AnlHHmsdXQJ2Bc8CoQ6A77mq1gmMy6Rv5qNzns='",
+        "delete": "DELETE * FROM trans.pay_user_bank_card WHERE card_no='EV6E6AnlHHmsdXQJ2Bc8CoQ6A77mq1gmMy6Rv5qNzns='"
+      },
+	  "reqParams": {
+        "cardInfo": {
+          "bankCode":"310331000244",
+          "cardNo":"6217920270055176",
+          "from":"J",
+          "idNumber":"330127199011222710",
+          "name":"吴学梁",
+          "phone":"18867520068",
+          "type":"5",
+          "userId":10001
+        }
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "绑卡成功",
+	  "data": {
+        "code": 10000,
+		"reason": "绑卡成功",
+		"success": true
+	    }
+      }
+    },
+    {
+	  "serial": 3,
+	  "instruction": "重复绑卡：前提条件-我的银行卡列表已经绑定了银行卡",
+	  "reqParams": {
+        "cardInfo": {
+          "bankCode":"310331000244",
+          "cardNo":"6217920270055176",
+          "from":"J",
+          "idNumber":"330127199011222710",
+          "name":"111",
+          "phone":"18867520068",
+          "type":"5",
+          "userId":10001
+        }
+	  },
+	  "expectResult": {
+	  "code": 20000,
+	  "message": "每个账户只能绑定一张卡"
+      }
+    }
+  ]
+}

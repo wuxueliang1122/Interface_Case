@@ -1,0 +1,32 @@
+{
+  "description": "B端经纪人订单评价，小程序佣金订单评价",
+  "apiname": "/usob/cgtrade/orderEvaluate.json",
+  "api": "orderEvaluate",
+  "caseList": [
+	{
+	  "serial": 1,
+	  "instruction": "小程序端经纪人佣金订单评价成功",
+      "sql": {
+        "update": "UPDATE trans.trade_order_broker SET evaluate_status = 0 WHERE (order_no = 'YJD20180913103655000002');",
+        "select": "SELECT evaluate_status FROM trans.trade_order_broker WHERE (order_no = 'YJD20180913103655000002');"
+      },
+	  "reqParams": {
+        "orderInfo": {
+          "companyId":"47826",
+          "companyName":"王二狗开的小超市",
+          "creatorName":"吴学梁",
+          "evaluateDesc":"哈哈哈哈",
+          "orderNo":"YJD20180913103655000002",
+          "orderType":3,
+          "starLevel":4,
+          "userId":10001,
+          "whoEvaluate":0
+        }
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "success"
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "description": "经纪人登陆",
+  "apiname": "/dealer/brokerVerifyCodeLogin.json",
+  "api": "brokerVerifyCodeLogin",
+  "caseList": [
+    {
+      "serial": 1,
+      "instruction": "登陆成功,登录信息放在代码里",
+      "reqParams": {},
+      "expectResult": {
+        "api": "brokerVerifyCodeLogin",
+        "code": 10000,
+        "message": "成功",
+        "data": {
+          "brokerId": 10001
+        }
+      }
+    },
+    {
+      "serial": 2,
+      "instruction": "登陆失败，验证码过期/错误",
+      "reqParams": {
+        "requestParam": {
+          "cellphone":"18867520068",
+          "verifyCode":"223311",
+          "code":""
+        }
+      },
+      "expectResult": {
+        "code": 20000,
+        "message": "验证码已过期",
+        "data": {}
+      }
+    }
+  ]
+}

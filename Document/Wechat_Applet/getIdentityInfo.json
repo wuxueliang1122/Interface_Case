@@ -1,0 +1,95 @@
+{
+  "description": "获取个人认证信息,authStatus//认证状态(0：未认证，1: 成功, 2: 失败，3：认证中)",
+  "apiname": "/dealer/getIdentityInfo.json",
+  "api": "getIdentityInfo",
+  "caseList": [
+	{
+	  "serial": 1,
+	  "instruction": "未认证状态",
+      "sql": {
+        "select": "SELECT * FROM auto.broker_user WHERE id=10015 AND cellphone='18767520082';",
+        "insert": "INSERT INTO `auto`.`broker_user` (`id`,`cellphone`,`register_time`, `register_source`,`last_login_time`,`status`,`auth_status`,`create_time`, `modify_time`, `last_auth_type`) VALUES ('10015','18767520082','2018-07-19 16:32:44','1','2018-07-19 16:32:44','1','0','2018-07-19 16:32:44', '2018-07-19 16:32:44', '0');"
+      },
+	  "reqParams": {
+        "userId": 10015
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "获取认证信息成功",
+	  "data": {
+        "authStatus":"0"
+	    }
+      }
+    },
+    {
+	  "serial": 2,
+	  "instruction": "认证成功状态",
+      "sql": {
+        "select": "SELECT * FROM auto.broker_user WHERE id=10001 AND cellphone='18867520068';",
+        "insert": "INSERT INTO `auto`.`broker_user` (`id`, `cellphone`, `real_name`,`register_time`, `register_source`, `status`, `apply_auth_time`, `id_card_no`, `id_card_front_pic_url`, `id_card_back_pic_url`, `auth_time`, `auth_status`, `id_card_result`,`create_time`, `modify_time`, `last_auth_type`)VALUES ('10001','18867520068', '吴学梁', '2018-07-18 13:57:22', '1', '1', '2018-09-13 15:07:07', '330127199011222710', 'http://cdn-file.cheguo.com/files/2018-07-23/201807231645359960895.jpg', 'http://cdn-file.cheguo.com/files/2018-07-23/201807231645317050347.jpg', '2018-09-17 15:37:46', '1', '上传照,检测人脸失败', '2018-07-18 13:57:22', '2018-07-18 13:57:22', '0');"
+      },
+	  "reqParams": {
+        "userId": 10001
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "获取认证信息成功",
+	  "data": {
+        "realName": "吴学梁",
+		"idCardFrontPicUrl": "http://cdn-file.cheguo.com/files/2018-07-23/201807231645359960895.jpg",
+		"idCardBackPicUrl": "http://cdn-file.cheguo.com/files/2018-07-23/201807231645317050347.jpg",
+		"authFailReason": "上传照,检测人脸失败",
+		"authStatus": "1",
+		"idCardNo": "330127199011222710"
+	    }
+      }
+    },
+    {
+	  "serial": 3,
+	  "instruction": "认证失败状态",
+      "sql": {
+        "select": "SELECT * FROM auto.broker_user WHERE id=10024 AND cellphone='18099999999';",
+        "insert": "INSERT INTO `auto`.`broker_user` (`id`,`cellphone`,`real_name`, `register_time`, `register_source`, `last_login_time`,`status`, `apply_auth_time`, `id_card_no`, `id_card_front_pic_url`, `id_card_back_pic_url`, `auth_time`, `auth_status`, `id_card_result`, `auth_fail_reason`, `create_time`, `modify_time`, `last_auth_type`) VALUES ('10024', '18099999999', '啦啦啦', '2018-07-23 16:56:48', '1', '2018-07-23 17:15:36', '1', '2018-07-23 17:17:27', '110101198001010010', 'http://cdn-file.cheguo.com/files/2018-07-23/201807231657049387695.jpg', 'http://cdn-file.cheguo.com/files/2018-07-23/201807231657018143293.jpg', '2018-07-23 17:17:27', '2', '库中无此号，请核实', '的方式地方都', '2018-07-23 16:56:48', '2018-07-23 16:56:48', '0');"
+      },
+	  "reqParams": {
+        "userId": 10024
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "获取认证信息成功",
+	  "data": {
+        "realName": "啦啦啦",
+        "idCardFrontPicUrl": "http://cdn-file.cheguo.com/files/2018-07-23/201807231657049387695.jpg",
+        "idCardBackPicUrl": "http://cdn-file.cheguo.com/files/2018-07-23/201807231657018143293.jpg",
+        "authFailReason": "认证失败：库中无此号，请核实",
+        "authStatus": "2",
+        "idCardNo": "110101198001010010"
+	    }
+      }
+    },
+    {
+	  "serial": 4,
+	  "instruction": "认证中状态",
+      "sql": {
+        "select": "SELECT * FROM auto.broker_user WHERE id=10031 AND cellphone='18867516008';"
+        "aaa",
+        "insert": "INSERT INTO `auto`.`broker_user` (`id`,`cellphone`,`real_name`,`register_time`, `register_source`,`last_login_time`, `last_login_ip`, `status`, `apply_auth_time`, `id_card_no`, `id_card_front_pic_url`, `id_card_back_pic_url`, `auth_time`, `auth_status`, `id_card_result`, `create_time`, `modify_time`, `last_auth_type`) VALUES ('10031', '18867516008', '宝马', '2018-08-17 14:50:26', '1', '2018-08-17 14:50:26', '1', '2018-09-11 19:08:05', '330128198767896432', 'http://cdn-file.cheguo.com/files/2018-08-17/201808171454087985264.jpg', 'http://cdn-file.cheguo.com/files/2018-08-17/201808171454051676733.jpg', '2018-09-11 19:08:05', '3', '身份证格式不正确', '2018-08-17 14:50:26', '2018-08-17 14:50:26', '1');"
+      },
+	  "reqParams": {
+        "userId": 10031
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "获取认证信息成功",
+	  "data": {
+        "realName": "宝马",
+        "idCardFrontPicUrl": "http://cdn-file.cheguo.com/files/2018-08-17/201808171454087985264.jpg",
+        "idCardBackPicUrl": "http://cdn-file.cheguo.com/files/2018-08-17/201808171454051676733.jpg",
+        "authFailReason": "身份证格式不正确",
+        "authStatus": "3",
+        "idCardNo": "330128198767896432"
+	    }
+      }
+    }
+  ]
+}

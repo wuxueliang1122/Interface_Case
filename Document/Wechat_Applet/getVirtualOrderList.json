@@ -1,0 +1,112 @@
+{
+  "description": "虚拟订单",
+  "apiname": "/usob/carsrc/getVirtualOrderList.json",
+  "api": "getVirtualOrderList",
+  "caseList": [
+    {
+      "serial": 1,
+      "instruction": "当虚拟订单池为空，即虚拟订单数据库为空",
+      "reqParams": {
+
+      },
+      "expectResult": {
+        "api":"getVirtualOrderList",
+        "code":10000,
+        "data": {
+          "currentpage": 1,
+          "dataList": [],
+          "end": 0,
+          "pagesize": 0,
+          "start": 0,
+          "totalItem": 0,
+          "totalPages": 0
+        },
+        "message": "数据为空"
+      }
+    },
+    {
+      "serial": 2,
+      "instruction": "当虚拟订单池中有数据，获取虚拟订单信息",
+      "sql": [
+		{
+			"id": 1,
+			"order_no": null,
+			"broker_name": "王二狗",
+			"create_time": "2018-07-20",
+			"modify_time": "2018-07-23",
+			"commission_amount": 500,
+			"source": "1"
+		},
+		{
+			"id": 2,
+			"order_no": null,
+			"broker_name": "张三狗",
+			"create_time": "2018-07-20",
+			"modify_time": "2018-07-23",
+			"commission_amount": 506,
+			"source": "1"
+		},
+		{
+			"id": 3,
+			"order_no": null,
+			"broker_name": "吴大狗",
+			"create_time": "2018-07-20",
+			"modify_time": "2018-07-23",
+			"commission_amount": 800,
+			"source": "1"
+		},
+		{
+			"id": 4,
+			"order_no": null,
+			"broker_name": "须五狗",
+			"create_time": "2018-07-20",
+			"modify_time": "2018-07-23",
+			"commission_amount": 2000,
+			"source": "1"
+		}
+	  ],
+      "reqParams": {
+
+      },
+      "expectResult": {
+        "api":"getVirtualOrderList",
+        "code":10000,
+        "data":[
+          {
+            "brokeName": "王二狗",
+            "commissionAmount": "500.00",
+            "createTime": "2018-07-20",
+            "id": 1,
+            "modifyTime": "2018-07-23",
+            "orderNo": "None"
+          },
+          {
+            "brokeName": "张三狗",
+            "commissionAmount": "506.00",
+            "createTime": "2018-07-20",
+            "id": 2,
+            "modifyTime": "2018-07-23",
+            "orderNo": "None"
+          },
+          {
+            "brokeName": "吴大狗",
+            "commissionAmount": "800.00",
+            "createTime": "2018-07-20",
+            "id": 3,
+            "modifyTime": "2018-07-23",
+            "orderNo": "None"
+          },
+          {
+            "brokeName": "须五狗",
+            "commissionAmount": "2000.00",
+            "createTime": "2018-07-20",
+            "id": 4,
+            "modifyTime": "2018-07-23",
+            "orderNo": "None"
+          }
+        ],
+        "message": ""
+      }
+    }
+  ]
+}

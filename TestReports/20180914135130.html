@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>车国接口测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">车国接口测试报告</h1>
+<p class='attribute'><strong>测试人员 : </strong> 最棒QA</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-09-14 13:51:30</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:01.419000</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 8，通过 4，失败 1，错误 3，通过率= 50.00%</p>
+
+<p class='description'>测试用例运行情况</p>
+</div>
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 50.00% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 1 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 4 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 8 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>B_Client.B_canPublishBrokerCarsrcList.CanPublishBrokerCarsrcList</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',1)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='ft1_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_all_cases</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_1'>失败</button>
+    <div id='div_ft1_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_1'>失败</button>
+    <div id='div_ft1_1' class="collapse in">
+    <pre>
+    
+ft1_1: apiname: /usob/carsrc/canPublishBrokerCarsrcList.json
+api: canPublishBrokerCarsrcList
+the 0 reqParams is: {'requestParam': {'companyId': 14054, 'currentPage': 0, 'pageSize': '1', 'publishBrokerStatus': '2', 'userId': 13104}}.
+url: http://10.10.13.75:8080/usob/carsrc/canPublishBrokerCarsrcList.json?requestParam={'companyId': 14054, 'currentPage': 0, 'pageSize': '1', 'publishBrokerStatus': '2', 'userId': 13104}&amp;signature=ac49e9f4f90596eb9a229a0d99592af0&amp;source=123456
+response content:  {'api': 'canPublishBrokerCarsrcList', 'code': 10000, 'data': {'currentpage': 0, 'dataList': [{'areaName': '澳门', 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/宝龙.jpg', 'carColor': '黑色', 'carName': '2003款 菱骏2.4-MT标准型(国Ⅱ)', 'carSourceCode': 'CYN20180203000023', 'carSourceId': 22, 'carTrimColor': '棕色', 'gmtModify': '2018-09-04 19:27:45', 'hasPic': False, 'msrp': 16.58, 'offlinePrice': 15.75, 'offlinePriceType': 2, 'offlinePriceValue': '5', 'offlineSale': 'yes', 'picFlag': 0, 'publishBrokerStatus': '0', 'salePrice': 16.25, 'sourceStatus': 1, 'sourceType': 2}], 'pagesize': 1, 'totalItem': 11, 'totalPages': 11}, 'message': ''}
+the 0 expectResult is: {'api': 'canPublishBrokerCarsrcList', 'code': 10000, 'data': {'currentpage': 0, 'dataList': [{'areaName': '北区', 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'carColor': '白色', 'carName': '1992款 奥迪100-2.0-MT(化)', 'carSourceCode': 'CYN20180204000004', 'carSourceId': 26, 'carTrimColor': '色全', 'gmtModify': '2018-07-24 12:02:54', 'msrp': 32.0, 'offlinePrice': 30.0, 'offlinePriceType': 1, 'offlinePriceValue': '2', 'offlineSale': 'yes', 'picFlag': 0, 'publishBrokerStatus': '0', 'salePrice': 31.36, 'sourceStatus': 1, 'sourceType': 1}], 'pagesize': 1, 'totalItem': 9, 'totalPages': 9}, 'message': ''}.
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\B_Client\B_canPublishBrokerCarsrcList.py", line 48, in test_all_cases
+    self.verify.verify_data(expectresult=expectresult, result=json_result)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\Verify.py", line 82, in verify_data
+    self.assertEqual(expectresult['data'], result['data'])
+AssertionError: {'cur[36 chars]e': '北区', 'brandLogo': 'https://cheguo.oss.ali[445 chars]': 9} != {'cur[36 chars]e': '澳门', 'brandLogo': 'https://cheguo.oss.ali[466 chars]: 11}
+Diff is 2801 characters long. Set self.maxDiff to None to see it.
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>B_Client.B_getQuoteDetail.GetQuoteDetail</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',1)" class="detail" id='c2'>详细</a></td>
+</tr>
+
+<tr id='ft2_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_all_cases</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft2_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_1'>错误</button>
+    <div id='div_ft2_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft2_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft2_1'>错误</button>
+    <div id='div_ft2_1' class="collapse in">
+    <pre>
+    
+ft2_1: The fileD:\Python-workplace\cheguo_auto\Document\B_Client\getQuoteDetail.json is not exist.
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\B_Client\B_getQuoteDetail.py", line 19, in setUp
+    self.apiname = self.filecontent.get_apiname()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 56, in get_apiname
+    print("apiname:", self._global_dic['apiname'])
+KeyError: 'apiname'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>B_Client.B_publishBroker.MyTestCase</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c3',1)" class="detail" id='c3'>详细</a></td>
+</tr>
+
+<tr id='ft3_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_all_cases</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft3_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft3_1'>错误</button>
+    <div id='div_ft3_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft3_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft3_1'>错误</button>
+    <div id='div_ft3_1' class="collapse in">
+    <pre>
+    
+ft3_1: apiname: /usob/carsrc/publishBroker.json
+api: publishBroker
+the 0 reqParams is: {'requestParam': {'type': '1', 'carSourceId': 26, 'brokerage': 500}}.
+url: http://10.10.13.75:8080/usob/carsrc/publishBroker.json?requestParam={'type': '1', 'carSourceId': 26, 'brokerage': 500}&amp;signature=a965494a11d2bd945a1e882b2edfe0a0&amp;source=123456
+response content:  {'api': 'carsrcPublishBroker', 'code': 10000, 'data': '成功', 'message': ''}
+the 0 expectResult is: {'api': 'carsrcPublishBroker', 'code': 10000, 'data': '成功', 'message': ''}.
+The 0 th is already success.
+the 1 reqParams is: {'requestParam': {'type': '1', 'carSourceId': 153, 'brokerage': 500}}.
+url: http://10.10.13.75:8080/usob/carsrc/publishBroker.json?requestParam={'type': '1', 'carSourceId': 153, 'brokerage': 500}&amp;signature=724d7951de8a41b562ff01d76717c52b&amp;source=123456
+response content:  {'api': 'carsrcPublishBroker', 'code': 10000, 'data': '成功', 'message': ''}
+the 1 expectResult is: {'api': 'carsrcPublishBroker', 'code': 10000, 'data': '成功', 'message': ''}.
+The 1 th is already success.
+the 2 reqParams is: {'requestParam': {'type': '3', 'carSourceId': 153, 'brokerage': 600}}.
+url: http://10.10.13.75:8080/usob/carsrc/publishBroker.json?requestParam={'type': '3', 'carSourceId': 153, 'brokerage': 600}&amp;signature=3a496443cc1df305afce109931348ab5&amp;source=123456
+response content:  {'api': 'carsrcPublishBroker', 'code': 10000, 'data': '成功', 'message': ''}
+the 2 expectResult is: {'api': 'carsrcPublishBroker', 'code': 10000, 'data': '成功', 'message': ''}.
+The 2 th is already success.
+the 3 reqParams is: {'requestParam': {'type': '3', 'carSourceId': 153, 'brokerage': 600}}.
+url: http://10.10.13.75:8080/usob/carsrc/publishBroker.json?requestParam={'type': '3', 'carSourceId': 153, 'brokerage': 600}&amp;signature=3a496443cc1df305afce109931348ab5&amp;source=123456
+response content:  {'api': 'carsrcPublishBroker', 'code': 10000, 'data': '成功', 'message': ''}
+the 3 expectResult is: {'api': 'carsrcPublishBroker', 'code': 10000, 'data': '成功', 'message': ''}.
+The 3 th is already success.
+the 4 reqParams is: {'requestParam': {'type': '3', 'carSourceId': 153, 'brokerage': 'aa'}}.
+url: http://10.10.13.75:8080/usob/carsrc/publishBroker.json?requestParam={'type': '3', 'carSourceId': 153, 'brokerage': 'aa'}&amp;signature=df145178b1756ed55b0a9a347e6b1efb&amp;source=123456
+response content:  {'code': 20000}
+the 4 expectResult is: {'code': 20000}.
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\B_Client\B_publishBroker.py", line 52, in test_all_cases
+    self.verify.verify_data(expectresult=expectresult, result=json_result)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\Verify.py", line 82, in verify_data
+    self.assertEqual(expectresult['data'], result['data'])
+KeyError: 'data'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Public_Api.P_getAllBank.BrokerGetCarSourceDetail</td>
+    <td class="text-center">4</td>
+    <td class="text-center">4</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c4',4)" class="detail" id='c4'>详细</a></td>
+</tr>
+
+<tr id='pt4_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_api</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_1'>通过</button>
+    <div id='div_pt4_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_1'>通过</button>
+    <div id='div_pt4_1' class="collapse in">
+    <pre>
+    
+pt4_1: apiname: /usob/cgpay/getAllBank.json
+api: getAllBank
+TestCase 1:
+the 0 reqParams is: {}.
+url: http://10.10.13.75:8080/usob/cgpay/getAllBank.json?signature=d6a4597f1def3e12fac8891adce67abc&amp;source=123456
+response content:  {'api': 'getAllBank', 'code': 10000, 'data': [{'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ICBC.jpg', 'bankName': '工商银行', 'bankType': 'ICB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ABC.jpg', 'bankName': '农业银行', 'bankType': 'ABC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/BOC.jpg', 'bankName': '中国银行', 'bankType': 'BOC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CCB.jpg', 'bankName': '建设银行', 'bankType': 'CCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/HXB.jpg', 'bankName': '华夏银行', 'bankType': 'HXB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PSBC.jpg', 'bankName': '储蓄银行', 'bankType': 'PSBC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CIB.jpg', 'bankName': '兴业银行', 'bankType': 'CIB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg', 'bankName': '浦发银行', 'bankType': 'PFCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMBC.jpg', 'bankName': '民生银行', 'bankType': 'CMC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CITIC.jpg', 'bankName': '中信银行', 'bankType': 'CCT'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PAB.jpg', 'bankName': '平安银行', 'bankType': 'PDB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMB.jpg', 'bankName': '招商银行', 'bankType': 'CMB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CEB.jpg', 'bankName': '光大银行', 'bankType': 'CEB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CZB.jpg', 'bankName': '浙商银行', 'bankType': 'CZB'}], 'message': '获取数据成功'}
+the 0 expectResult is: {'code': 10000, 'message': '获取数据成功', 'data': [{'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ICBC.jpg', 'bankName': '工商银行', 'bankType': 'ICB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ABC.jpg', 'bankName': '农业银行', 'bankType': 'ABC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/BOC.jpg', 'bankName': '中国银行', 'bankType': 'BOC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CCB.jpg', 'bankName': '建设银行', 'bankType': 'CCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/HXB.jpg', 'bankName': '华夏银行', 'bankType': 'HXB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PSBC.jpg', 'bankName': '储蓄银行', 'bankType': 'PSBC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CIB.jpg', 'bankName': '兴业银行', 'bankType': 'CIB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg', 'bankName': '浦发银行', 'bankType': 'PFCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMBC.jpg', 'bankName': '民生银行', 'bankType': 'CMC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CITIC.jpg', 'bankName': '中信银行', 'bankType': 'CCT'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PAB.jpg', 'bankName': '平安银行', 'bankType': 'PDB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMB.jpg', 'bankName': '招商银行', 'bankType': 'CMB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CEB.jpg', 'bankName': '光大银行', 'bankType': 'CEB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CZB.jpg', 'bankName': '浙商银行', 'bankType': 'CZB'}]}.
+api END!!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_code</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_2'>通过</button>
+    <div id='div_pt4_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_2'>通过</button>
+    <div id='div_pt4_2' class="collapse in">
+    <pre>
+    
+pt4_2: apiname: /usob/cgpay/getAllBank.json
+api: getAllBank
+TestCase 1:
+the 0 reqParams is: {}.
+url: http://10.10.13.75:8080/usob/cgpay/getAllBank.json?signature=d6a4597f1def3e12fac8891adce67abc&amp;source=123456
+response content:  {'api': 'getAllBank', 'code': 10000, 'data': [{'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ICBC.jpg', 'bankName': '工商银行', 'bankType': 'ICB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ABC.jpg', 'bankName': '农业银行', 'bankType': 'ABC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/BOC.jpg', 'bankName': '中国银行', 'bankType': 'BOC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CCB.jpg', 'bankName': '建设银行', 'bankType': 'CCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/HXB.jpg', 'bankName': '华夏银行', 'bankType': 'HXB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PSBC.jpg', 'bankName': '储蓄银行', 'bankType': 'PSBC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CIB.jpg', 'bankName': '兴业银行', 'bankType': 'CIB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg', 'bankName': '浦发银行', 'bankType': 'PFCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMBC.jpg', 'bankName': '民生银行', 'bankType': 'CMC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CITIC.jpg', 'bankName': '中信银行', 'bankType': 'CCT'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PAB.jpg', 'bankName': '平安银行', 'bankType': 'PDB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMB.jpg', 'bankName': '招商银行', 'bankType': 'CMB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CEB.jpg', 'bankName': '光大银行', 'bankType': 'CEB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CZB.jpg', 'bankName': '浙商银行', 'bankType': 'CZB'}], 'message': '获取数据成功'}
+the 0 expectResult is: {'code': 10000, 'message': '获取数据成功', 'data': [{'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ICBC.jpg', 'bankName': '工商银行', 'bankType': 'ICB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ABC.jpg', 'bankName': '农业银行', 'bankType': 'ABC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/BOC.jpg', 'bankName': '中国银行', 'bankType': 'BOC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CCB.jpg', 'bankName': '建设银行', 'bankType': 'CCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/HXB.jpg', 'bankName': '华夏银行', 'bankType': 'HXB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PSBC.jpg', 'bankName': '储蓄银行', 'bankType': 'PSBC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CIB.jpg', 'bankName': '兴业银行', 'bankType': 'CIB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg', 'bankName': '浦发银行', 'bankType': 'PFCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMBC.jpg', 'bankName': '民生银行', 'bankType': 'CMC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CITIC.jpg', 'bankName': '中信银行', 'bankType': 'CCT'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PAB.jpg', 'bankName': '平安银行', 'bankType': 'PDB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMB.jpg', 'bankName': '招商银行', 'bankType': 'CMB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CEB.jpg', 'bankName': '光大银行', 'bankType': 'CEB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CZB.jpg', 'bankName': '浙商银行', 'bankType': 'CZB'}]}.
+code END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_data</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_3'>通过</button>
+    <div id='div_pt4_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_3'>通过</button>
+    <div id='div_pt4_3' class="collapse in">
+    <pre>
+    
+pt4_3: apiname: /usob/cgpay/getAllBank.json
+api: getAllBank
+TestCase 1:
+the 0 reqParams is: {}.
+url: http://10.10.13.75:8080/usob/cgpay/getAllBank.json?signature=d6a4597f1def3e12fac8891adce67abc&amp;source=123456
+response content:  {'api': 'getAllBank', 'code': 10000, 'data': [{'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ICBC.jpg', 'bankName': '工商银行', 'bankType': 'ICB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ABC.jpg', 'bankName': '农业银行', 'bankType': 'ABC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/BOC.jpg', 'bankName': '中国银行', 'bankType': 'BOC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CCB.jpg', 'bankName': '建设银行', 'bankType': 'CCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/HXB.jpg', 'bankName': '华夏银行', 'bankType': 'HXB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PSBC.jpg', 'bankName': '储蓄银行', 'bankType': 'PSBC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CIB.jpg', 'bankName': '兴业银行', 'bankType': 'CIB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg', 'bankName': '浦发银行', 'bankType': 'PFCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMBC.jpg', 'bankName': '民生银行', 'bankType': 'CMC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CITIC.jpg', 'bankName': '中信银行', 'bankType': 'CCT'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PAB.jpg', 'bankName': '平安银行', 'bankType': 'PDB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMB.jpg', 'bankName': '招商银行', 'bankType': 'CMB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CEB.jpg', 'bankName': '光大银行', 'bankType': 'CEB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CZB.jpg', 'bankName': '浙商银行', 'bankType': 'CZB'}], 'message': '获取数据成功'}
+the 0 expectResult is: {'code': 10000, 'message': '获取数据成功', 'data': [{'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ICBC.jpg', 'bankName': '工商银行', 'bankType': 'ICB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ABC.jpg', 'bankName': '农业银行', 'bankType': 'ABC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/BOC.jpg', 'bankName': '中国银行', 'bankType': 'BOC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CCB.jpg', 'bankName': '建设银行', 'bankType': 'CCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/HXB.jpg', 'bankName': '华夏银行', 'bankType': 'HXB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PSBC.jpg', 'bankName': '储蓄银行', 'bankType': 'PSBC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CIB.jpg', 'bankName': '兴业银行', 'bankType': 'CIB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg', 'bankName': '浦发银行', 'bankType': 'PFCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMBC.jpg', 'bankName': '民生银行', 'bankType': 'CMC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CITIC.jpg', 'bankName': '中信银行', 'bankType': 'CCT'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PAB.jpg', 'bankName': '平安银行', 'bankType': 'PDB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMB.jpg', 'bankName': '招商银行', 'bankType': 'CMB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CEB.jpg', 'bankName': '光大银行', 'bankType': 'CEB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CZB.jpg', 'bankName': '浙商银行', 'bankType': 'CZB'}]}.
+data END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_message</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_4'>通过</button>
+    <div id='div_pt4_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_4'>通过</button>
+    <div id='div_pt4_4' class="collapse in">
+    <pre>
+    
+pt4_4: apiname: /usob/cgpay/getAllBank.json
+api: getAllBank
+TestCase 1:
+the 0 reqParams is: {}.
+url: http://10.10.13.75:8080/usob/cgpay/getAllBank.json?signature=d6a4597f1def3e12fac8891adce67abc&amp;source=123456
+response content:  {'api': 'getAllBank', 'code': 10000, 'data': [{'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ICBC.jpg', 'bankName': '工商银行', 'bankType': 'ICB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ABC.jpg', 'bankName': '农业银行', 'bankType': 'ABC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/BOC.jpg', 'bankName': '中国银行', 'bankType': 'BOC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CCB.jpg', 'bankName': '建设银行', 'bankType': 'CCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/HXB.jpg', 'bankName': '华夏银行', 'bankType': 'HXB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PSBC.jpg', 'bankName': '储蓄银行', 'bankType': 'PSBC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CIB.jpg', 'bankName': '兴业银行', 'bankType': 'CIB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg', 'bankName': '浦发银行', 'bankType': 'PFCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMBC.jpg', 'bankName': '民生银行', 'bankType': 'CMC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CITIC.jpg', 'bankName': '中信银行', 'bankType': 'CCT'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PAB.jpg', 'bankName': '平安银行', 'bankType': 'PDB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMB.jpg', 'bankName': '招商银行', 'bankType': 'CMB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CEB.jpg', 'bankName': '光大银行', 'bankType': 'CEB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CZB.jpg', 'bankName': '浙商银行', 'bankType': 'CZB'}], 'message': '获取数据成功'}
+the 0 expectResult is: {'code': 10000, 'message': '获取数据成功', 'data': [{'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ICBC.jpg', 'bankName': '工商银行', 'bankType': 'ICB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ABC.jpg', 'bankName': '农业银行', 'bankType': 'ABC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/BOC.jpg', 'bankName': '中国银行', 'bankType': 'BOC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CCB.jpg', 'bankName': '建设银行', 'bankType': 'CCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/HXB.jpg', 'bankName': '华夏银行', 'bankType': 'HXB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PSBC.jpg', 'bankName': '储蓄银行', 'bankType': 'PSBC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CIB.jpg', 'bankName': '兴业银行', 'bankType': 'CIB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg', 'bankName': '浦发银行', 'bankType': 'PFCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMBC.jpg', 'bankName': '民生银行', 'bankType': 'CMC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CITIC.jpg', 'bankName': '中信银行', 'bankType': 'CCT'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PAB.jpg', 'bankName': '平安银行', 'bankType': 'PDB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMB.jpg', 'bankName': '招商银行', 'bankType': 'CMB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CEB.jpg', 'bankName': '光大银行', 'bankType': 'CEB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CZB.jpg', 'bankName': '浙商银行', 'bankType': 'CZB'}]}.
+message End!!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>Public_Api.P_updateQuote.UpdateQuote</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c5',1)" class="detail" id='c5'>详细</a></td>
+</tr>
+
+<tr id='ft5_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_all_cases</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_1'>错误</button>
+    <div id='div_ft5_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_1'>错误</button>
+    <div id='div_ft5_1' class="collapse in">
+    <pre>
+    
+ft5_1: The fileD:\Python-workplace\cheguo_auto\Document\Public_Api\updateQuote.json is not exist.
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Public_Api\P_updateQuote.py", line 19, in setUp
+    self.apiname = self.filecontent.get_apiname()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 56, in get_apiname
+    print("apiname:", self._global_dic['apiname'])
+KeyError: 'apiname'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>8</td>
+    <td>4</td>
+    <td>1</td>
+    <td>3</td>
+    <td>通过率：50.00%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+</body>
+</html>

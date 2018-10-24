@@ -1,0 +1,308 @@
+{
+  "description": "获取订单详情",
+  "apiname": "/usob/cgtrade/queryBrokerOrderDetail.json",
+  "api": "queryBrokerOrderDetail",
+  "caseList": [
+    {
+      "serial": 1,
+      "instruction": "订单详情--经纪人发起交易",
+      "sql": {
+        "select": "SELECT * FROM trans.trade_order_broker WHERE order_no='YJD20180917165629000001';",
+        "insert": "INSERT INTO `trans`.`trade_order_broker` (`order_no`, `order_type`, `status`, `refund_status`, `evaluate_status`, `car_source_type`, `car_source_code`, `car_model_code`, `car_base_id`, `car_base_name`, `guide_price`, `car_unit_price`, `transaction_num`, `deal_price`, `broker_amount`, `licence_plate_area_code`, `licence_plate_area_name`, `plan_arrival_date`, `deliver_car_date`, `car_color`, `car_interior_color`, `product_date`, `seller_company_id`, `seller_company_type`, `seller_company_name`, `seller_id`, `seller_name`, `seller_phone_num`, `broker_id`, `broker_name`, `broker_phone_num`, `extra_json`, `remark`, `create_time`, `creator_name`, `modify_time`, `modifier_name`) VALUES ('YJD20180917165629000001', '3', '0', '0', '0', '2', 'CYN20180830000031', '395001004', '106170', '2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口', '145.00', '140.00', '1', '140.00', '5000.00', '110100', '北京市', '2018-09-17', NULL, '银色', '棕色', '1', '100012', '1', '王二狗开的小超市', '47826', '王二狗', '18867520068', '10001', '吴学梁', '18867520068', '{\"brandLogo\":\"https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg\",\"carSourceId\":6091,\"offlinePrice\":140.00}', '', '2018-09-17 16:56:29', '吴学梁', '2018-09-17 16:56:29', '吴学梁');",
+        "delete": "DELETE trans.trade_order_oper_log,trans.trade_order_broker FROM trans.trade_order_oper_log, trans.trade_order_broker WHERE trans.trade_order_oper_log.order_no='YJD20180917165629000001' AND trans.trade_order_broker.order_no='YJD20180917165629000001';"
+      },
+      "reqParams": {
+        "queryRequest": {
+          "brokerId":10001,
+          "orderNo":"YJD20180917165629000001"
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "data": {
+            "brandLogo": "https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg",
+            "brokerAmount": 5000.00,
+            "brokerId": 10001,
+            "brokerName": "吴学梁",
+            "brokerPhoneNum": "18867520068",
+            "carBaseId": 106170,
+            "carBaseName": "2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口",
+            "carColor": "银色",
+            "carInteriorColor": "棕色",
+            "carModelCode": "395001004",
+            "carSourceCode": "CYN20180830000031",
+            "carSourceType": 2,
+            "carUnitPrice": 140.00,
+            "creatorName": "吴学梁",
+            "dealPrice": 140.00,
+            "evaluateStatus": 0,
+            "guidePrice": 145.00,
+            "id": 262,
+            "licencePlateAreaCode": "110100",
+            "licencePlateAreaName": "北京市",
+            "modifierName": "吴学梁",
+            "offlinePrice": 140.00,
+            "orderNo": "YJD20180917165629000001",
+            "orderType": 3,
+            "planArrivalDate": "2018-09-17",
+            "productDate": "3个月内",
+            "refundStatus": 0,
+            "remark": "",
+            "sellerCompanyId": 100012,
+            "sellerCompanyName": "王二狗开的小超市",
+            "sellerCompanyType": "1",
+            "sellerId": 47826,
+            "sellerName": "王二狗",
+            "sellerPhoneNum": "18867520068",
+            "status": 0,
+            "tradeOrderOperLogResponses": [{
+                "createTime": "2018-09-17 16:56:29",
+                "creatorName": "吴学梁",
+                "id": 1664,
+                "operStepDesc": "发起交易",
+                "orderNo": "YJD20180917165629000001"
+            }],
+            "transactionNum": "1"
+        },
+        "message": ""
+      }
+    },
+    {
+      "serial": 2,
+      "instruction": "订单详情--交易到时关闭（车商未支付）",
+      "sql": {
+        "select": "SELECT * FROM trans.trade_order_broker WHERE order_no='YJD20180917165629000002';",
+        "insert": "INSERT INTO `trans`.`trade_order_broker` (`id`, `order_no`, `order_type`, `status`, `refund_status`, `evaluate_status`, `car_source_type`, `car_source_code`, `car_model_code`, `car_base_id`, `car_base_name`, `guide_price`, `car_unit_price`, `transaction_num`, `deal_price`, `broker_amount`, `licence_plate_area_code`, `licence_plate_area_name`, `plan_arrival_date`, `deliver_car_date`, `car_color`, `car_interior_color`, `product_date`, `seller_company_id`, `seller_company_type`, `seller_company_name`, `seller_id`, `seller_name`, `seller_phone_num`, `broker_id`, `broker_name`, `broker_phone_num`, `extra_json`, `remark`, `create_time`, `creator_name`, `modify_time`, `modifier_name`) VALUES ('262', 'YJD20180917165629000002', '3', '1', '0', '0', '2', 'CYN20180830000031', '395001004', '106170', '2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口', '145.00', '140.00', '1', '140.00', '500.00', '110100', '北京市', '2018-09-17', NULL, '银色', '棕色', '1', '100012', '1', '王二狗开的小超市', '47826', '王二狗', '18867520068', '10001', '吴学梁', '18867520068', '{\"brandLogo\":\"https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg\",\"carSourceId\":6091,\"offlinePrice\":140.00}', '', '2018-09-17 16:56:29', '吴学梁', '2018-09-17 17:32:11', '吴学梁');",
+        "delete": "DELETE FROM trans.trade_order_broker WHERE order_no='YJD20180917165629000002';"
+      },
+      "reqParams": {
+        "queryRequest": {
+          "brokerId":10001,
+          "orderNo":"YJD20180917165629000002"
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "data": {
+            "brandLogo": "https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg",
+            "brokerAmount": 500.00,
+            "brokerId": 10001,
+            "brokerName": "吴学梁",
+            "brokerPhoneNum": "18867520068",
+            "carBaseId": 106170,
+            "carBaseName": "2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口",
+            "carColor": "银色",
+            "carInteriorColor": "棕色",
+            "carModelCode": "395001004",
+            "carSourceCode": "CYN20180830000031",
+            "carSourceType": 2,
+            "carUnitPrice": 140.00,
+            "creatorName": "吴学梁",
+            "dealPrice": 140.00,
+            "evaluateStatus": 0,
+            "guidePrice": 145.00,
+            "id": 262,
+            "licencePlateAreaCode": "110100",
+            "licencePlateAreaName": "北京市",
+            "modifierName": "吴学梁",
+            "offlinePrice": 140.00,
+            "orderNo": "YJD20180917165629000001",
+            "orderType": 3,
+            "planArrivalDate": "2018-09-17",
+            "productDate": "3个月内",
+            "refundStatus": 0,
+            "remark": "",
+            "sellerCompanyId": 100012,
+            "sellerCompanyName": "王二狗开的小超市",
+            "sellerCompanyType": "1",
+            "sellerId": 47826,
+            "sellerName": "王二狗",
+            "sellerPhoneNum": "18867520068",
+            "status": 1,
+            "tradeOrderOperLogResponses": [{
+                "createTime": "2018-09-17 16:56:29",
+                "creatorName": "吴学梁",
+                "id": 1664,
+                "operStepDesc": "发起交易",
+                "orderNo": "YJD20180917165629000001"
+            }, {
+			"createTime": "2018-09-17 17:32:11",
+			"creatorName": "吴学梁",
+			"id": 1665,
+			"operStepDesc": "车商支付",
+			"orderNo": "YJD20180917165629000001"
+		    }],
+            "transactionNum": "1"
+        },
+        "message": ""
+      }
+    },
+    {
+      "serial": 1,
+      "instruction": "订单详情--申请退款，经纪人未响应，定时任务退款成功",
+      "reqParams": {
+        "queryRequest": {
+          "brokerId": 10001,
+          "orderNo": "YJD20180821102045000001"
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "message": "",
+        "data": {
+          "brandLogo": "https://cheguo.oss.aliyuncs.com/carlogo/宝马.jpg",
+          "brokerAmount": 500.00,
+          "brokerId": 10001,
+          "brokerName": "吴学梁",
+          "brokerPhoneNum": "18867520068",
+          "carBaseId": 90299,
+          "carBaseName": "2018款 宝马318i-1.5T-A/MT(国Ⅴ)",
+          "carColor": "色全",
+          "carInteriorColor": "色全",
+          "carModelCode": "376001001",
+          "carSourceCode": "CYN20180814000013",
+          "carSourceType": 2,
+          "carUnitPrice": 25.20,
+          "creatorName": "吴学梁",
+          "dealPrice": 25.20,
+          "evaluateStatus": 0,
+          "guidePrice": 28.80,
+          "id": 240,
+          "licencePlateAreaCode": "340600",
+          "licencePlateAreaName": "淮北市",
+          "modifierName": "系统定时",
+          "offlinePrice": 25.20,
+          "orderNo": "YJD20180821102045000001",
+          "orderType": 3,
+          "planArrivalDate": "2018-08-21",
+          "productDate": "3个月内",
+          "refundStatus": 1,
+          "remark": "",
+          "sellerCompanyId": 100012,
+          "sellerCompanyName": "王二狗开的小超市",
+          "sellerCompanyType": "1",
+          "sellerId": 47826,
+          "sellerName": "王二狗",
+          "sellerPhoneNum": "18867520068",
+          "status": 4,
+          "tradeOrderOperLogResponses": [{
+              "createTime": "2018-08-21 10:20:45",
+              "creatorName": "吴学梁",
+              "id": 1465,
+              "operStepDesc": "发起交易",
+              "orderNo": "YJD20180821102045000001"
+          }, {
+              "createTime": "2018-08-21 14:21:41",
+              "creatorName": "吴学梁",
+              "id": 1475,
+              "operStepDesc": "车商支付",
+              "orderNo": "YJD20180821102045000001"
+          }, {
+              "createTime": "2018-08-23 09:46:54",
+              "creatorName": "王二狗",
+              "id": 1485,
+              "operStepDesc": "车商申请退款",
+              "orderNo": "YJD20180821102045000001"
+          }, {
+              "createTime": "2018-08-25 00:00:05",
+              "creatorName": "系统定时",
+              "id": 1497,
+              "operStepDesc": "交易到时关闭(经纪人未确认)",
+              "orderNo": "YJD20180821102045000001"
+          }],
+          "transactionNum": "1"
+        }
+      }
+    },
+    {
+      "serial": 2,
+      "instruction": "订单详情--申请退款，经纪人申述，客服处理转给经纪人",
+      "reqParams": {
+        "queryRequest": {
+          "brokerId": 10001,
+          "orderNo": "YJD20180913103655000002"
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "message": "",
+        "data": {
+          "brandLogo": "https://cheguo.oss.aliyuncs.com/carlogo/宝马.jpg",
+		"brokerAmount": 500.00,
+		"brokerId": 10001,
+		"brokerName": "吴学梁",
+		"brokerPhoneNum": "18867520068",
+		"carBaseId": 90299,
+		"carBaseName": "2018款 宝马318i-1.5T-A/MT(国Ⅴ)",
+		"carColor": "色全",
+		"carInteriorColor": "色全",
+		"carModelCode": "376001001",
+		"carSourceCode": "CYN20180814000013",
+		"carSourceType": 2,
+		"carUnitPrice": 25.20,
+		"creatorName": "吴学梁",
+		"dealPrice": 25.20,
+		"deliverCarDate": "2018-09-13",
+		"evaluateStatus": 0,
+		"guidePrice": 28.80,
+		"id": 261,
+		"licencePlateAreaCode": "330100",
+		"licencePlateAreaName": "杭州市",
+		"modifierName": "吴学梁",
+		"offlinePrice": 25.20,
+		"orderNo": "YJD20180913103655000002",
+		"orderType": 3,
+		"planArrivalDate": "2018-09-13",
+		"productDate": "3个月内",
+		"refundStatus": 5,
+		"remark": "",
+		"sellerCompanyId": 100012,
+		"sellerCompanyName": "王二狗开的小超市",
+		"sellerCompanyType": "1",
+		"sellerId": 47826,
+		"sellerName": "王二狗",
+		"sellerPhoneNum": "18867520068",
+		"status": 3,
+		"tradeOrderOperLogResponses": [{
+			"createTime": "2018-09-13 10:36:55",
+			"creatorName": "吴学梁",
+			"id": 1637,
+			"operStepDesc": "发起交易",
+			"orderNo": "YJD20180913103655000002"
+		    }, {
+			"createTime": "2018-09-13 10:37:12",
+			"creatorName": "吴学梁",
+			"id": 1638,
+			"operStepDesc": "车商支付",
+			"orderNo": "YJD20180913103655000002"
+		    }, {
+			"createTime": "2018-09-13 10:37:43",
+			"creatorName": "吴学梁",
+			"id": 1639,
+			"operStepDesc": "经纪人确认",
+			"orderNo": "YJD20180913103655000002"
+		    }, {
+			"createTime": "2018-09-13 10:39:21",
+			"creatorName": "王二狗",
+			"id": 1640,
+			"operStepDesc": "车商申请退款",
+			"orderNo": "YJD20180913103655000002"
+		    }, {
+			"createTime": "2018-09-13 10:39:57",
+			"creatorName": "吴学梁",
+			"id": 1641,
+			"operStepDesc": "经纪人申请申诉",
+			"orderNo": "YJD20180913103655000002"
+		    }, {
+			"createTime": "2018-09-13 10:40:45",
+			"creatorName": "吴学梁",
+			"id": 1642,
+			"operStepDesc": "客服处理(佣金转给经纪人)",
+			"orderNo": "YJD20180913103655000002"
+		    }],
+          "transactionNum": "1"
+        }
+      }
+    }
+  ]
+}

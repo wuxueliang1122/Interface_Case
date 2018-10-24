@@ -1,0 +1,21 @@
+{
+  "description": "发起或修改佣金订单(存在id为修改)",
+  "apiname": "/usob/cgtrade/submitBrokerOrder.json",
+  "api": "submitBrokerOrder",
+  "caseList": [
+	{
+	  "serial": 1,
+	  "instruction": "发起佣金订单",
+	  "reqParams": {
+
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "",
+	  "data": {
+
+	    }
+      }
+    }
+  ]
+}

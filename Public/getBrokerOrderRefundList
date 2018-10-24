@@ -1,0 +1,59 @@
+{
+  "description": "查看退款信息",
+  "apiname": "/usob/cgtrade/getBrokerOrderRefundList.json",
+  "api": "getBrokerOrderRefundList",
+  "caseList": [
+    {
+      "serial": 0,
+      "instruction": "车商申请退款,定时任务（经纪人未确认）",
+      "reqParams": {
+        "queryRequest": {
+          "brokerId":10001,
+          "orderNo":"YJD20180821102045000001",
+          "sellerId":"47826"
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "message": "",
+        "data": [{
+          "applyDesc": "哥哥更好",
+          "createTime": "2018-08-23 09:46:54",
+          "operName": "王二狗开的小超市",
+          "operStepDesc": "车商申请退款",
+          "photoProof": ["http://cdn-file.cheguo.com/files/2018-08-23/201808230946493643757.jpg"],
+          "status": 1
+        }]
+      }
+    },
+    {
+      "serial": "1",
+      "instruction": "车商申请退款，经纪人同意退款",
+      "reqParams": {
+        "queryRequest": {
+          "brokerId":10001,
+          "orderNo":"YJD20180809144138000003",
+          "sellerId":"14033"
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "message": "",
+        "data": [{
+          "applyDesc": "啦啦",
+          "createTime": "2018-08-09 14:53:09",
+          "operName": "杭州直营1(勿动)",
+          "operStepDesc": "车商申请退款",
+          "photoProof": ["http://cdn-file.cheguo.com/files/2018-08-09/201808091453064575852.jpg", "http://cdn-file.cheguo.com/files/2018-08-09/201808091453064436457.jpg"],
+          "status": 2
+          }, {
+          "createTime": "2018-08-09 14:53:18",
+          "handleDesc": "经纪人同意退款",
+          "handleResult": "经纪人同意退款",
+          "operName": "吴学梁",
+          "operStepDesc": "经纪人同意退款"
+        }]
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "description": "查看经纪人确认详情",
+  "apiname": "/usob/cgtrade/queryBrokerOrderVoucher.json",
+  "api": "getOrderVoucherInfoByOrderNo",
+  "caseList": [
+      {
+        "serial": 1,
+        "instruction": "确认成交详情",
+        "reqParams": {
+          "queryRequest": {
+            "brokerId":"10001",
+            "orderNo":"YJD20180821102229000003"
+          }
+        },
+        "expectResult": {
+          "code": 10000,
+          "message": "",
+          "data": {
+              "arrivalVoucher": [],
+              "brokerAmount": 10801.00,
+              "brokerId": 10001,
+              "buyCarVoucher": ["http://cdn-file.cheguo.com/files/2018-08-21/201808211023172063086.jpg"],
+              "carBaseName": "2018款 奔驰C180L-1.6T-A/MT动感型运动版(国Ⅴ)",
+              "dealPrice": 24.88,
+              "deliverCarDate": "2018-08-21",
+              "orderNo": "YJD20180821102229000003",
+              "orderType": 3,
+              "sellerId": 47826
+          }
+        }
+      }
+  ]
+}

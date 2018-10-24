@@ -1,0 +1,58 @@
+{
+  "description": "我的银行卡",
+  "apiname": "/usob/cgpay/getBankCardList.json",
+  "api": "getBankCardList",
+  "caseList": [
+	{
+	  "serial": 1,
+	  "instruction": "小程序端--我的银行卡，已绑定银行卡,我的银行卡有数据",
+	  "reqParams": {
+        "userId": "10001",
+        "from": "J"
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "获取数据成功",
+	  "data": [{
+		"bankCode": "SPDB",
+		"bankMobile": "95528",
+		"bankName": "浦发银行",
+		"bankType": "借记卡",
+		"cardHolder": "吴学梁",
+		"cardNo": "6217920270055176",
+		"idNumber": "330127199011222710",
+		"imageUrl": "https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg",
+		"reservedPhone": "18867520068",
+		"shortCardNo": "5176",
+		"userMobile": "18867520068"
+	    }]
+      }
+    },
+    {
+	  "serial": 2,
+	  "instruction": "小程序端--我的银行卡，未绑定银行卡，我的银行卡无数据",
+	  "reqParams": {
+        "userId": "10011",
+        "from": "J"
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "获取数据成功",
+	  "data": []
+      }
+    },
+  	{
+	  "serial": 3,
+	  "instruction": "小程序端--我的银行卡，资金账户尚未初始化",
+	  "reqParams": {
+        "userId": "1001100",
+        "from": "J"
+	  },
+	  "expectResult": {
+	  "code": 40000,
+	  "message": "资金账户尚未初始化",
+	  "data": []
+      }
+    }
+  ]
+}

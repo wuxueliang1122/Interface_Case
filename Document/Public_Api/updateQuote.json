@@ -1,0 +1,68 @@
+{
+  "description": "经纪人寻车详情--重新报价成功",
+  "apiname": "/dealer/carmodel/updateQuote.json",
+  "api": "updateQuote",
+  "caseList":[
+    {
+      "serial": 1,
+      "instruction": "重新报价成功，不修改报价详情",
+      "reqParams":{
+        "request":{"areaCode":"south",
+          "areaName":"南区",
+          "commission":"500",
+          "quoteId":1,
+          "quoteValue":"2",
+          "quoteWay":"downMoney",
+          "remark":"auto_test.getQuoteDetail，勿动",
+          "salePrice":"16.97",
+          "validDays":5
+        }
+      },
+      "expectResult":{
+        "code": 10000,
+        "message": "报价成功"
+      }
+    },
+    {
+      "serial": 2,
+      "instruction": "重新报价成功，修改佣金金额",
+      "reqParams": {
+        "request": {
+          "areaCode":"south",
+          "areaName":"aa",
+          "commission":"600",
+          "quoteId":287,
+          "quoteValue":"5",
+          "quoteWay":"downMoney",
+          "salePrice":"13.97",
+          "validDays":3
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "message": "报价成功"
+      }
+    },
+    {
+      "serial": 3,
+      "instruction": "重新报价成功，修改其他信息",
+      "reqParams": {
+        "request": {
+          "areaCode":"north",
+          "areaName":"bb",
+          "commission":"600",
+          "quoteId":287,
+          "quoteValue":"8",
+          "quoteWay":"downMoney",
+          "salePrice":"10.97",
+          "validDays": 7,
+          "remark": "fine"
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "message": "报价成功"
+      }
+    }
+  ]
+}

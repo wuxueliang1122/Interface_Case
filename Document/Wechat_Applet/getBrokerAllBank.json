@@ -1,0 +1,81 @@
+{
+  "description": "小程序端支持的银行卡列表",
+  "apiname": "/usob/cgpay/getBrokerAllBank.json",
+  "api": "getBrokerAllBank",
+  "caseList": [
+	{
+	  "serial": 1,
+	  "instruction": "获取支持的银行列表",
+	  "reqParams": {},
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "获取数据成功",
+	  "data": [{
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/ICBC.jpg",
+		"bankName": "工商银行",
+		"bankType": "ICBC"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/ABC.jpg",
+		"bankName": "农业银行",
+		"bankType": "ABC"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/BOC.jpg",
+		"bankName": "中国银行",
+		"bankType": "BOC"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/CCB.jpg",
+		"bankName": "建设银行",
+		"bankType": "CCB"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg",
+		"bankName": "交通银行",
+		"bankType": "COMM"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/HXB.jpg",
+		"bankName": "华夏银行",
+		"bankType": "HXB"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/PSBC.jpg",
+		"bankName": "储蓄银行",
+		"bankType": "PSBC"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/CIB.jpg",
+		"bankName": "兴业银行",
+		"bankType": "CIB"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg",
+		"bankName": "浦发银行",
+		"bankType": "SPDB"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/CMBC.jpg",
+		"bankName": "民生银行",
+		"bankType": "CMBC"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/CITIC.jpg",
+		"bankName": "中信银行",
+		"bankType": "CITIC"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/PAB.jpg",
+		"bankName": "平安银行",
+		"bankType": "PAB"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg",
+		"bankName": "交通银行",
+		"bankType": "COMM"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/CMB.jpg",
+		"bankName": "招商银行",
+		"bankType": "CMB"
+        }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/CEB.jpg",
+		"bankName": "光大银行",
+		"bankType": "CEB"
+	    }, {
+		"bankLogo": "https://cheguo.oss.aliyuncs.com/banklogo/app/CZB.jpg",
+		"bankName": "浙商银行",
+		"bankType": "CZB"
+        }]
+      }
+    }
+  ]
+}

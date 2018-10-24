@@ -1,0 +1,103 @@
+{
+  "description": "获取车源详情",
+  "apiname": "/usob/carsrc/brokerGetCarSourceDetail.json",
+  "api": "brokerGetCarSourceDetail",
+  "caseList": [
+    {
+      "serial": 1,
+      "instruction": "carSourceId存在，查询成功",
+      "reqParams": {
+        "requestParam": {
+          "carSourceId": "221"
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "message": "",
+        "data":
+        {
+          "companyCarSourceOrder":
+          {
+            "areaCode":"820100",
+            "areaName":"澳门",
+            "brandLogo":"https://cheguo.oss.aliyuncs.com/carlogo/本田.jpg",
+            "carCode":"331001001",
+            "carColor":"棕色",
+            "carId":100023,
+            "carName":"2016款 思域1.0T-MT舒适版180TURBO(国Ⅴ)",
+            "carSourceCode":"CYN20180625000002",
+            "carSourceId":221,
+            "carTrimColor":"黑色",
+            "cars":"本田",
+            "companyId":2495,
+            "companyName":"营山金典车业有限公司",
+            "companyType":5,
+            "gmtCreate":"2018-06-25 14:19:50",
+            "gmtModify":"2018-06-25 14:19:50",
+            "hasPic": false,
+            "imgInfo": [
+              {
+                "gmtCreate":"2017-08-24 15:14:40",
+                "gmtModify":"2017-08-24 15:14:40",
+                "picAddr":"https://cheguo-image.cheguo.com/files/2017-08-24/201708241514260136948.jpeg@334w_250h_1e_1o",
+                "picId":21114,
+                "picName":"左前45度",
+                "picType":2,
+                "sourceOrderId":221
+              },
+              {
+                "gmtCreate":"2017-08-24 15:14:40",
+                "gmtModify":"2017-08-24 15:14:40",
+                "picAddr":"https://cheguo-image.cheguo.com/files/2017-08-24/201708241514356992078.jpeg@334w_250h_1e_1o",
+                "picId":21115,
+                "picName":"右后45度",
+                "picType":3,
+                "sourceOrderId":221
+              }
+            ],
+            "msrp":11.59,
+            "offlineOverMsrp":0,
+            "offlinePrice":9.59,
+            "offlinePriceType":1,
+            "offlinePriceValue":"2",
+            "offlineSale":"yes",
+            "onlineSale":"yes",
+            "orderUserId":13005,
+            "overMsrp":0,
+            "picFlag":0,
+            "plateLimit":0,
+            "priceType":1,
+            "priceValue":"2",
+            "productDate":2,
+            "publishBrokerStatus":"0",
+            "repertory":2,
+            "salePrice":9.59,
+            "salesRegion":"北京市",
+            "score":0,
+            "sourceKind":1,
+            "sourceStatus":1,
+            "sourceType":4,
+            "status":2,
+            "transport":1,
+            "versionNumber":0
+          },
+          "salesName":"18188733301",
+          "salesPhone":"18188733301",
+          "type":5}
+      }
+    },
+    {
+      "serial": 2,
+      "instruction": "carSourceId不存在，查询结果为车源不存在",
+      "reqParams":{
+        "requestParam": {
+          "carSourceId": 405
+        }
+      },
+      "expectResult":{
+        "code": 20000,
+        "message":"车源不存在"
+      }
+    }
+  ]
+}

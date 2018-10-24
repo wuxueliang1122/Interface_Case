@@ -1,0 +1,58 @@
+{
+  "description": "车源列表 (可以发布到经纪人的车源，即经纪人带客)，其中publishBrokerStatus//2.未发布,1.已发布; current//当前页",
+  "apiname": "/usob/carsrc/canPublishBrokerCarsrcList.json",
+  "api": "canPublishBrokerCarsrcList",
+  "caseList": [
+    {
+      "serial": 1,
+      "instruction": "未发布",
+      "sql": {
+
+      },
+      "reqParams": {
+        "requestParam": {
+        "companyId": 100012,
+        "currentPage": 0,
+        "pageSize": "15",
+        "publishBrokerStatus": "2",
+        "userId": 47826
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "data": {
+          "dataList": [{
+            "publishBrokerStatus": "0"
+          },
+          {
+            "publishBrokerStatus": "2"
+          }],
+          "pagesize": 15
+        },
+        "message": ""}
+    },
+    {
+      "serial": 2,
+      "instruction": "已发布",
+      "reqParams": {
+        "requestParam": {
+        "companyId": 100012,
+        "currentPage": 0,
+        "pageSize": "15",
+        "publishBrokerStatus": "1",
+        "userId": 13104
+        }
+      },
+      "expectResult": {
+        "code": 10000,
+        "data": {
+          "dataList": [{
+             "publishBrokerStatus": "1"
+          }],
+          "pagesize": 15
+        },
+        "message": ""
+      }
+    }
+  ]
+}

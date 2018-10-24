@@ -1,0 +1,55 @@
+{
+  "description": "",
+  "apiname": "",
+  "api": "",
+  "caseList": [
+	{
+	  "serial": 1,
+	  "instruction": "",
+	  "reqParams": {
+
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "",
+	  "data": {
+
+	    }
+      }
+    }
+  ]
+}
+
+
+    def test_all_cases(self):
+        for num in range(len(self.caselist)):
+            print("TestCase {}: {}".format((num + 1), self.filecontent.get_instruction(serial=num)))
+            try:
+                operator.eq(self.caselist[num]['serial'], num+1)
+            except IOError:
+                print("TestCase Number: {} Document is ERROR!".format(num+1))
+            finally:
+                self.filecontent.get_instruction(serial=num)
+                response = self.get_response(serial=num)
+                json_result = response.json()
+                print("response content: ", json_result)
+                expectresult = self.filecontent.get_expectresult(serial=num)
+                self.verify.verify_code_200(response=response)
+
+                print("api verify is beginning...")
+                self.verify.verify_api(expectresult=expectresult, result=json_result)
+                print("api verify is success.")
+
+                print("code verify is beginning...")
+                self.verify.verify_code(expectresult=expectresult, result=json_result)
+                print("code verify is success.")
+
+                print("message verify is beginning...")
+                self.verify.verify_message(expectresult=expectresult, result=json_result)
+                print("message verify is success.")
+
+                print("data verify is beginning...")
+                self.verify.verify_data(expectresult=expectresult, result=json_result)
+                print("data verify is success.")
+
+                print("ALL END!!")

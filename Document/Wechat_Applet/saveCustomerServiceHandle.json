@@ -1,0 +1,32 @@
+{
+  "description": "经纪人客服申诉",
+  "apiname": "/usob/cgtrade/saveCustomerServiceHandle.json",
+  "api": "saveCustomerServiceHandle",
+  "caseList": [
+	{
+	  "serial": 1,
+	  "instruction": "经纪人客服申诉成功",
+      "sql": {
+        "select_broker": "SELECT * FROM trans.trade_order_broker WHERE order_no='YJD20180918112341000003' AND refund_status=1;",
+        "select_oper": "SELECT * FROM trans.trade_order_oper_log WHERE order_no='YJD20180918112341000003' AND oper_step_desc='经纪人申请申诉';",
+        "insert": "INSERT INTO `trans`.`trade_order_broker` (`order_no`, `order_type`, `status`, `refund_status`, `evaluate_status`, `car_source_type`, `car_source_code`, `car_model_code`, `car_base_id`, `car_base_name`, `guide_price`, `car_unit_price`, `transaction_num`, `deal_price`, `broker_amount`, `licence_plate_area_code`, `licence_plate_area_name`, `plan_arrival_date`,`deliver_car_date`, `car_color`, `car_interior_color`, `product_date`, `seller_company_id`, `seller_company_type`, `seller_company_name`, `seller_id`, `seller_name`, `seller_phone_num`, `broker_id`, `broker_name`, `broker_phone_num`, `extra_json`, `remark`, `create_time`, `creator_name`, `modify_time`, `modifier_name`) VALUES ('YJD20180918112341000003', '3', '2', '1', '0', '2', 'CYN20180830000032', '382001004', '61823', '2015款 阿斯顿马丁Vanquish-6.0-A/MT-Coupe', '498.80', '493.80', '1', '493.80', '600.00', '330100', '杭州市', '2018-09-18', '2018-09-18', '黑色', '棕色', '1', '100012', '1', '王二狗开的小超市', '47826', '王二狗', '18867520068', '10001', '吴学梁', '18867520068', '{\"brandLogo\":\"https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg\",\"carSourceId\":6092,\"offlinePrice\":493.80}', '', '2018-09-18 11:23:41', '吴学梁', '2018-09-19 16:27:26', '王二狗');",
+        "delete_broker": "DELETE FROM trans.trade_order_broker WHERE order_no='YJD20180918112341000003';",
+        "delete_oper": "DELETE FROM trans.trade_order_oper_log WHERE order_no='YJD20180918112341000003' AND oper_step_desc='经纪人申请申诉';DELETE FROM trans.trade_order_oper_log WHERE order_no='YJD20180918112341000002' AND oper_step_desc='交易到时关闭(申请退款经纪人未确认)';"
+      },
+	  "reqParams": {
+        "orderInfo": {
+          "appealType":"agent",
+          "applyDesc":"good",
+          "orderNo":"YJD20180918112341000003",
+          "orderType":3,
+          "photoProof":"http://cdn-file.cheguo.com/files/2018-09-19/201809191619445685497.jpg",
+          "whoApply":1
+        }
+	  },
+	  "expectResult": {
+	  "code": 10000,
+	  "message": "success"
+      }
+    }
+  ]
+}
