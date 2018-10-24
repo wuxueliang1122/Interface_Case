@@ -5,7 +5,8 @@ import time
 import HTMLTestRunner
 import os
 
-base_dir = "D:\\Python-workplace\\cheguo_auto\\"
+base_dir = os.getcwd()
+listcase = base_dir + "Interface_case\\autoTest"
 
 
 class RunTestCase:
@@ -16,7 +17,6 @@ class RunTestCase:
         构造测试集
         :return: 
         """
-        listcase = base_dir + "cheguo_auto\\autoTest"
         testunits = unittest.TestSuite()
         patterns = ["W_*.py", "B_*.py", "P_*.py"]
 
@@ -34,12 +34,12 @@ if __name__ == '__main__':
 
     now_time = time.strftime("%Y%m%d%H%M%S", time.localtime(time.time()))
 
-    filename = base_dir + "cheguo_auto\\TestReports\\" + now_time + ".html"
+    filename = listcase + now_time + ".html"
     with open(filename, 'wb') as fp:
 
         runner = HTMLTestRunner.HTMLTestRunner(
             stream=fp,
-            title="车国接口测试报告",
+            title="接口测试报告",
             description="测试用例运行情况")
         testunit = RunTestCase().testsuite()
         runner.run(testunit)

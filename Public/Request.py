@@ -3,25 +3,26 @@
 from Public.MapUtil import MapUtil as maputil
 from Public.MD5 import MD5
 from Public.FileContent import FileContent
+import os
 
 
 class Request:
 
     @ staticmethod
-    def get_source(source='123456'):
-        return source       # 默认为123456，可传参source='',string格式
+    def get_source(source=''):
+        return source
 
     @ staticmethod
-    def get_app_secret(app_secret='1234567890'):
-        return app_secret      # 默认为1234567890，可传参app_secret='',string格式
+    def get_app_secret(app_secret=''):
+        return app_secret
 
     @ staticmethod
-    def get_host(host="http://10.10.13.75:8080"):
+    def get_host(host=""):
         """app的host地址"""
         return host
 
     @ staticmethod
-    def get_manage_host(host="http://10.10.13.75:8081"):
+    def get_manage_host(host=""):
         """管理后台的host地址"""
         return host
 
@@ -31,7 +32,7 @@ class Request:
 
     @ staticmethod
     def dirname():
-        return "D:\Python-workplace\cheguo_auto\cheguo_auto"
+        return os.getcwd()
 
     def __init__(self):
         self.source = self.get_source()
