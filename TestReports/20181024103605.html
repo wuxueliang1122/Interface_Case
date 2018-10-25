@@ -1,0 +1,2199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>接口测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">接口测试报告</h1>
+<p class='attribute'><strong>测试人员 : </strong> 最棒QA</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-10-24 10:36:05</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:03:15.354059</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 59，通过 40，失败 9，错误 10，通过率= 67.80%</p>
+
+<p class='description'>测试用例运行情况</p>
+</div>
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 67.80% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 9 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 40 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 59 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>Agent_Manage.MyTestCase</td>
+    <td class="text-center">3</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">3</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',3)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='ft1_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_get_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_1'>错误</button>
+    <div id='div_ft1_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_1'>错误</button>
+    <div id='div_ft1_1' class="collapse in">
+    <pre>
+    
+ft1_1: Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Agent_Manage\__init__.py", line 16, in setUp
+    self.apiname = self.filecontent.get_apiname()  # 获取apiname用于获得url
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 58, in get_apiname
+    self.get_json_contents()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 22, in get_json_contents
+    with open(self.filename, 'r', encoding='utf-8', errors='ignore') as fp_object:
+OSError: [Errno 22] Invalid argument: 'D:\\Python-workplace\\cheguo_auto\\cheguo_auto/Document/Wechat_Applet/**'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_get_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>错误</button>
+    <div id='div_ft1_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>错误</button>
+    <div id='div_ft1_2' class="collapse in">
+    <pre>
+    
+ft1_2: Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Agent_Manage\__init__.py", line 16, in setUp
+    self.apiname = self.filecontent.get_apiname()  # 获取apiname用于获得url
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 58, in get_apiname
+    self.get_json_contents()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 22, in get_json_contents
+    with open(self.filename, 'r', encoding='utf-8', errors='ignore') as fp_object:
+OSError: [Errno 22] Invalid argument: 'D:\\Python-workplace\\cheguo_auto\\cheguo_auto/Document/Wechat_Applet/**'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_get_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_3'>错误</button>
+    <div id='div_ft1_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_3'>错误</button>
+    <div id='div_ft1_3' class="collapse in">
+    <pre>
+    
+ft1_3: Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Agent_Manage\__init__.py", line 16, in setUp
+    self.apiname = self.filecontent.get_apiname()  # 获取apiname用于获得url
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 58, in get_apiname
+    self.get_json_contents()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 22, in get_json_contents
+    with open(self.filename, 'r', encoding='utf-8', errors='ignore') as fp_object:
+OSError: [Errno 22] Invalid argument: 'D:\\Python-workplace\\cheguo_auto\\cheguo_auto/Document/Wechat_Applet/**'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>Wechat_Applet.W_agreeRefundBrokerOrder.AgreeRefundBrokerOrder</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',1)" class="detail" id='c2'>详细</a></td>
+</tr>
+
+<tr id='ft2_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_agree_refund</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft2_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_1'>失败</button>
+    <div id='div_ft2_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft2_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft2_1'>失败</button>
+    <div id='div_ft2_1' class="collapse in">
+    <pre>
+    
+ft2_1: TestCase 1: 车商支付成功后申请退款，经纪人同意退款
+YJD20181024103605888888
+INSERT INTO `trans`.`trade_order_broker` (`order_no`, `order_type`, `status`, `refund_status`, `evaluate_status`, `car_source_type`, `car_source_code`, `car_model_code`, `car_base_id`, `car_base_name`, `guide_price`, `car_unit_price`, `transaction_num`, `deal_price`, `broker_amount`, `licence_plate_area_code`, `licence_plate_area_name`, `plan_arrival_date`, `deliver_car_date`, `car_color`, `car_interior_color`, `product_date`, `seller_company_id`, `seller_company_type`, `seller_company_name`, `seller_id`, `seller_name`, `seller_phone_num`, `broker_id`, `broker_name`, `broker_phone_num`, `create_time`, `creator_name`, `modify_time`, `modifier_name`) VALUES ('YJD20181024103605888888', '3', '1', '1', '0', '2', 'CYN20180726000002', '301001005', '90195', '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', '29.28', '22.28', '1', '22.28', '500.00', '330100', '杭州市', '2018-09-19', NULL, '色全', '色全', '1', '100012', '1', '王二狗开的小超市', '47826', '王二狗', '18867520068', '10001', '吴学梁', '18867520068', '2018-09-19 18:00:20', '吴学梁', '2018-09-19 18:01:05', '王二狗');
+数据插入成功
+YJD20181024103606888888
+YJD20181024103606888888
+order_no:  YJD20181024103606888888
+url: http://10.10.13.75:8080/usob/cgtrade/agreeRefundBrokerOrder.json?agreeInfo={'brokerId': 10001, 'orderNo': 'YJD20181024103606888888'}&amp;signature=85d5198faafbc2c79b028ad0094b362b&amp;source=123456
+response content:  {'code': 20000}
+code verify is beginning...
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_agreeRefundBrokerOrder.py", line 96, in test_agree_refund
+    self.verify.verify_code(expectresult=expectresult, result=json_result)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\Verify.py", line 44, in verify_code
+    msg="verify_code: The response code is {}.".format(result['code']))
+AssertionError: 10000 != 20000 : verify_code: The response code is 20000.
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>Wechat_Applet.W_bindCard.BindCard</td>
+    <td class="text-center">3</td>
+    <td class="text-center">1</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c3',3)" class="detail" id='c3'>详细</a></td>
+</tr>
+
+<tr id='ft3_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_cert_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft3_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft3_1'>失败</button>
+    <div id='div_ft3_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft3_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft3_1'>失败</button>
+    <div id='div_ft3_1' class="collapse in">
+    <pre>
+    
+ft3_1: 绑卡成功:前提条件-我的银行卡没有银行卡，四要素认证成功 绑卡成功:前提条件-我的银行卡没有银行卡，四要素认证成功
+TestCase 2: 绑卡成功:前提条件-我的银行卡没有银行卡，四要素认证成功
+数据查询成功
+url: http://10.10.13.75:8080/usob/cgpay/bindCard.json?cardInfo={'bankCode': '310331000244', 'cardNo': '6217920270055176', 'from': 'J', 'idNumber': '330127199011222710', 'name': '吴学梁', 'phone': '18867520068', 'type': '5', 'userId': 10001}&amp;signature=f5f52469d45dfb8079e52f920ed89fe0&amp;source=123456
+response content:  {'request': '/usob/cgpay/bindCard.json', 'code': '10003', 'message': 'signature verification failed.'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_bindCard.py", line 143, in test_cert_success
+    self.verify.verify_code(expectresult=expectresult, result=json_result)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\Verify.py", line 44, in verify_code
+    msg="verify_code: The response code is {}.".format(result['code']))
+AssertionError: 10000 != 10003 : verify_code: The response code is 10003.
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft3_2' class='none'>
+    <td class='failCase'><div class='testcase'>test_four_elem_cert_false</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft3_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft3_2'>失败</button>
+    <div id='div_ft3_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft3_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft3_2'>失败</button>
+    <div id='div_ft3_2' class="collapse in">
+    <pre>
+    
+ft3_2: 四要素认证不通过：绑定银行卡,四要素不一致，绑卡失败 四要素认证不通过：绑定银行卡,四要素不一致，绑卡失败
+TestCase 1: 四要素认证不通过：绑定银行卡,四要素不一致，绑卡失败
+url: http://10.10.13.75:8080/usob/cgpay/bindCard.json?cardInfo={'bankCode': '310331000244', 'cardNo': '6217920270055176', 'from': 'J', 'idNumber': '330127199011222710', 'name': '111', 'phone': '18867520068', 'type': '5', 'userId': 10001}&amp;signature=f2da4f973ca87c1acec341c80d0daacb&amp;source=123456
+response content:  {'code': 20000, 'message': '每个账户只能绑定一张卡'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_bindCard.py", line 88, in test_four_elem_cert_false
+    self.verify.verify_code(expectresult=expectresult, result=json_result)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\Verify.py", line 44, in verify_code
+    msg="verify_code: The response code is {}.".format(result['code']))
+AssertionError: 10000 != 20000 : verify_code: The response code is 20000.
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_repeat_card</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_3'>通过</button>
+    <div id='div_pt3_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_3'>通过</button>
+    <div id='div_pt3_3' class="collapse in">
+    <pre>
+    
+pt3_3: 重复绑卡：前提条件-我的银行卡列表已经绑定了银行卡 重复绑卡：前提条件-我的银行卡列表已经绑定了银行卡
+TestCase 3: 重复绑卡：前提条件-我的银行卡列表已经绑定了银行卡
+url: http://10.10.13.75:8080/usob/cgpay/bindCard.json?cardInfo={'bankCode': '310331000244', 'cardNo': '6217920270055176', 'from': 'J', 'idNumber': '330127199011222710', 'name': '111', 'phone': '18867520068', 'type': '5', 'userId': 10001}&amp;signature=f2da4f973ca87c1acec341c80d0daacb&amp;source=123456
+response content:  {'code': 20000, 'message': '每个账户只能绑定一张卡'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Wechat_Applet.W_brokerGetCarSourceDetail.BrokerGetCarSourceDetail</td>
+    <td class="text-center">2</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c4',2)" class="detail" id='c4'>详细</a></td>
+</tr>
+
+<tr id='pt4_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_get_fail</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_1'>通过</button>
+    <div id='div_pt4_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_1'>通过</button>
+    <div id='div_pt4_1' class="collapse in">
+    <pre>
+    
+pt4_1: carSourceId不存在，查询结果为车源不存在 carSourceId不存在，查询结果为车源不存在
+TestCase 2: carSourceId不存在，查询结果为车源不存在
+url: http://10.10.13.75:8080/usob/carsrc/brokerGetCarSourceDetail.json?requestParam={'carSourceId': 405}&amp;signature=00a1d8f9528cd94e86addf78686f032a&amp;source=123456
+response content:  {'code': 20000, 'message': '车源不存在'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_get_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_2'>通过</button>
+    <div id='div_pt4_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_2'>通过</button>
+    <div id='div_pt4_2' class="collapse in">
+    <pre>
+    
+pt4_2: carSourceId存在，查询成功 carSourceId存在，查询成功
+TestCase 1: carSourceId存在，查询成功
+url: http://10.10.13.75:8080/usob/carsrc/brokerGetCarSourceDetail.json?requestParam={'carSourceId': '221'}&amp;signature=873b1f1127cf17716ce9a60844285a61&amp;source=123456
+response content:  {'api': 'brokerGetCarSourceDetail', 'code': 10000, 'data': {'companyCarSourceOrder': {'areaCode': '820100', 'areaName': '澳门', 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/本田.jpg', 'carCode': '331001001', 'carColor': '棕色', 'carId': 100023, 'carName': '2016款 思域1.0T-MT舒适版180TURBO(国Ⅴ)', 'carSourceCode': 'CYN20180625000002', 'carSourceId': 221, 'carTrimColor': '黑色', 'cars': '本田', 'companyId': 2495, 'companyName': '营山金典车业有限公司', 'companyType': 5, 'gmtCreate': '2018-06-25 14:19:50', 'gmtModify': '2018-06-25 14:19:50', 'hasPic': False, 'imgInfo': [{'gmtCreate': '2017-08-24 15:14:40', 'gmtModify': '2017-08-24 15:14:40', 'picAddr': 'https://cheguo-image.cheguo.com/files/2017-08-24/201708241514260136948.jpeg@334w_250h_1e_1o', 'picId': 21114, 'picName': '左前45度', 'picType': 2, 'sourceOrderId': 221}, {'gmtCreate': '2017-08-24 15:14:40', 'gmtModify': '2017-08-24 15:14:40', 'picAddr': 'https://cheguo-image.cheguo.com/files/2017-08-24/201708241514356992078.jpeg@334w_250h_1e_1o', 'picId': 21115, 'picName': '右后45度', 'picType': 3, 'sourceOrderId': 221}], 'msrp': 11.59, 'offlineOverMsrp': 0, 'offlinePrice': 9.59, 'offlinePriceType': 1, 'offlinePriceValue': '2', 'offlineSale': 'yes', 'onlineSale': 'yes', 'orderUserId': 13005, 'overMsrp': 0, 'picFlag': 0, 'plateLimit': 0, 'priceType': 1, 'priceValue': '2', 'productDate': 2, 'publishBrokerStatus': '0', 'repertory': 2, 'salePrice': 9.59, 'salesRegion': '北京市', 'score': 0, 'sourceKind': 1, 'sourceStatus': 1, 'sourceType': 4, 'status': 2, 'transport': 1, 'versionNumber': 0}, 'salesName': '18188733301', 'salesPhone': '18188733301', 'type': 5}, 'message': ''}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+data verify is beginning...
+data verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>Wechat_Applet.W_brokerVerifyCodeLogin.BrokerVerifyCodeLogin</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c5',2)" class="detail" id='c5'>详细</a></td>
+</tr>
+
+<tr id='ft5_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_login_fail</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_1'>错误</button>
+    <div id='div_ft5_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_1'>错误</button>
+    <div id='div_ft5_1' class="collapse in">
+    <pre>
+    
+ft5_1: 登陆失败，验证码过期/错误 登陆失败，验证码过期/错误
+TestCase 2: 登陆失败，验证码过期/错误
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_brokerVerifyCodeLogin.py", line 132, in test_login_fail
+    """.format(self.filecontent.get_reqparams(serial=key - 1)['phone'])
+KeyError: 'phone'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft5_2' class='none'>
+    <td class='failCase'><div class='testcase'>test_login_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_2'>失败</button>
+    <div id='div_ft5_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_2'>失败</button>
+    <div id='div_ft5_2' class="collapse in">
+    <pre>
+    
+ft5_2: TestCase 1:
+验证码已发送
+数据查询成功
+get verify code is  041798
+url:  http://10.10.13.75:8080/dealer/brokerVerifyCodeLogin.json?requestParam={'cellphone': '18867520068', 'verifyCode': '041798', 'code': ''}&amp;signature=25356f20d3fd4cb99a6d2240d427d65d&amp;source=123456
+result:  {'code': 20000, 'message': '验证码错误'}
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_brokerVerifyCodeLogin.py", line 109, in test_login_success
+    % json_result)
+AssertionError: 10000 != 20000 : Code is Error, result = {'code': 20000, 'message': '验证码错误'}.
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Wechat_Applet.W_confirmBrokerOrder.ConfirmBrokerOrder</td>
+    <td class="text-center">3</td>
+    <td class="text-center">3</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c6',3)" class="detail" id='c6'>详细</a></td>
+</tr>
+
+<tr id='pt6_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_confirm_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_1'>通过</button>
+    <div id='div_pt6_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_1'>通过</button>
+    <div id='div_pt6_1' class="collapse in">
+    <pre>
+    
+pt6_1: 确认成交成功，购车证明和到店证明都上传图片 确认成交成功，购车证明和到店证明都上传图片
+TestCase 1: 确认成交成功，购车证明和到店证明都上传图片
+数据查询成功
+数据删除成功.
+数据查询成功
+数据删除成功.
+数据插入成功
+url: http://10.10.13.75:8080/usob/cgtrade/confirmBrokerOrder.json?brokerOrderInfo={'arrivalVoucher': ['http://cdn-file.cheguo.com/files/2018-09-18/201809181609353477369.jpg'], 'brokerId': '10001', 'buyCarVoucher': ['http://cdn-file.cheguo.com/files/2018-09-18/201809181609325753031.jpg'], 'deliverCarDate': '2018-09-18', 'orderNo': 'YJD20180918161509000003', 'sellerId': '47826'}&amp;signature=845afa871d0d8c3437182599dc590404&amp;source=123456
+response content:  {'api': 'confirmBrokerOrder', 'code': 10000, 'data': True, 'message': ''}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+data verify is beginning...
+data verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_confirm_success_nopic</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_2'>通过</button>
+    <div id='div_pt6_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_2'>通过</button>
+    <div id='div_pt6_2' class="collapse in">
+    <pre>
+    
+pt6_2: 确认成交成功，不上传图片 确认成交成功，不上传图片
+TestCase 2: 确认成交成功，不上传图片
+数据查询成功
+数据删除成功.
+数据查询成功
+数据删除成功.
+数据插入成功
+url: http://10.10.13.75:8080/usob/cgtrade/confirmBrokerOrder.json?brokerOrderInfo={'arrivalVoucher': [], 'brokerId': '10001', 'buyCarVoucher': [], 'deliverCarDate': '2018-09-18', 'orderNo': 'YJD20180918161509000003', 'sellerId': '47826'}&amp;signature=e393d14c3098bc88ee7ac9a519274c7a&amp;source=123456
+{'code': 20000, 'message': '没有附件信息,请重新上传'}
+response content:  {'code': 20000, 'message': '没有附件信息,请重新上传'}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_order_status_changed</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_3'>通过</button>
+    <div id='div_pt6_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_3'>通过</button>
+    <div id='div_pt6_3' class="collapse in">
+    <pre>
+    
+pt6_3: 订单状态发生变更，提示信息 订单状态发生变更，提示信息
+TestCase 3: 订单状态发生变更，提示信息
+数据修改成功
+url: http://10.10.13.75:8080/usob/cgtrade/confirmBrokerOrder.json?brokerOrderInfo={'arrivalVoucher': ['http://cdn-file.cheguo.com/files/2018-09-18/201809181609353477369.jpg'], 'brokerId': '10001', 'buyCarVoucher': ['http://cdn-file.cheguo.com/files/2018-09-18/201809181609325753031.jpg'], 'deliverCarDate': '2018-09-18', 'orderNo': 'YJD20180918161509000003', 'sellerId': '47826'}&amp;signature=845afa871d0d8c3437182599dc590404&amp;source=123456
+response content:  {'code': 20000, 'message': '订单状态已变更,请刷新后重试'}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Wechat_Applet.W_deleteSearchLog.DeleteSearchLog</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c7',1)" class="detail" id='c7'>详细</a></td>
+</tr>
+
+<tr id='pt7_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_delete_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt7_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt7_1'>通过</button>
+    <div id='div_pt7_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt7_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt7_1'>通过</button>
+    <div id='div_pt7_1' class="collapse in">
+    <pre>
+    
+pt7_1: 删除搜索记录成功 删除搜索记录成功
+TestCase 1: 删除搜索记录成功
+数据查询成功
+数据插入失败 (1062, "Duplicate entry '320-0-10001-2' for key 'PRIMARY'")
+url: http://10.10.13.75:8080/carsrc/deleteSearchLog.json?searchLogInfo={'queryValues': '320', 'userid': 10001, 'userType': '2'}&amp;signature=626320130be362daca713d0335492915&amp;source=123456
+response content:  {'message': '删除搜索日志成功', 'api': 'deleteSearchLog', 'code': 10000}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+data verify is beginning...
+data verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>Wechat_Applet.W_getBankCardList.GetBankCardList</td>
+    <td class="text-center">3</td>
+    <td class="text-center">2</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c8',3)" class="detail" id='c8'>详细</a></td>
+</tr>
+
+<tr id='ft8_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_account_not_initial</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft8_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft8_1'>失败</button>
+    <div id='div_ft8_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft8_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft8_1'>失败</button>
+    <div id='div_ft8_1' class="collapse in">
+    <pre>
+    
+ft8_1: 小程序端--我的银行卡，资金账户尚未初始化 小程序端--我的银行卡，资金账户尚未初始化
+TestCase 3: 小程序端--我的银行卡，资金账户尚未初始化
+url: http://10.10.13.75:8080/usob/cgpay/getBankCardList.json?from=J&amp;signature=449d444726c43b68204dc26860bcb762&amp;source=123456&amp;userId=1001100
+b'{"code":40000,"message":"\xe8\xb5\x84\xe9\x87\x91\xe8\xb4\xa6\xe6\x88\xb7\xe5\xb0\x9a\xe6\x9c\xaa\xe5\x88\x9d\xe5\x80\xbc\xe5\x8c\x96"}'
+response content:  {'code': 40000, 'message': '资金账户尚未初值化'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_getBankCardList.py", line 138, in test_account_not_initial
+    self.verify.verify_message(expectresult=expectresult, result=json_result)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\Verify.py", line 57, in verify_message
+    msg="verify_message: The response message is {}.".format(result['message']))
+AssertionError: '资金账户尚未初始化' != '资金账户尚未初值化'
+- 资金账户尚未初始化
+?        ^
++ 资金账户尚未初值化
+?        ^
+ : verify_message: The response message is 资金账户尚未初值化.
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_bankcard_isNull</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_2'>通过</button>
+    <div id='div_pt8_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_2'>通过</button>
+    <div id='div_pt8_2' class="collapse in">
+    <pre>
+    
+pt8_2: 小程序端--我的银行卡，未绑定银行卡，我的银行卡无数据 小程序端--我的银行卡，未绑定银行卡，我的银行卡无数据
+TestCase 2: 小程序端--我的银行卡，未绑定银行卡，我的银行卡无数据
+url: http://10.10.13.75:8080/usob/cgpay/getBankCardList.json?from=J&amp;signature=7df63f296f10b3d5be386084fa5c687d&amp;source=123456&amp;userId=10011
+b'{"api":"getBankCardList","code":10000,"data":[],"message":"\xe8\x8e\xb7\xe5\x8f\x96\xe6\x95\xb0\xe6\x8d\xae\xe6\x88\x90\xe5\x8a\x9f"}'
+response content:  {'api': 'getBankCardList', 'code': 10000, 'data': [], 'message': '获取数据成功'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_get_bankcard</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_3'>通过</button>
+    <div id='div_pt8_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_3'>通过</button>
+    <div id='div_pt8_3' class="collapse in">
+    <pre>
+    
+pt8_3: 小程序端--我的银行卡，已绑定银行卡,我的银行卡有数据 小程序端--我的银行卡，已绑定银行卡,我的银行卡有数据
+TestCase 1: 小程序端--我的银行卡，已绑定银行卡,我的银行卡有数据
+url: http://10.10.13.75:8080/usob/cgpay/getBankCardList.json?from=J&amp;signature=c80d5106fa6225183cbc2c5d85f4e9b5&amp;source=123456&amp;userId=10001
+b'{"api":"getBankCardList","code":10000,"data":[{"bankCode":"SPDB","bankMobile":"95528","bankName":"\xe6\xb5\xa6\xe5\x8f\x91\xe9\x93\xb6\xe8\xa1\x8c","bankType":"\xe5\x80\x9f\xe8\xae\xb0\xe5\x8d\xa1","cardHolder":"\xe5\x90\xb4\xe5\xad\xa6\xe6\xa2\x81","cardNo":"6217920270055176","idNumber":"330127199011222710","imageUrl":"https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg","reservedPhone":"18867520068","shortCardNo":"5176","userMobile":"18867520068"}],"message":"\xe8\x8e\xb7\xe5\x8f\x96\xe6\x95\xb0\xe6\x8d\xae\xe6\x88\x90\xe5\x8a\x9f"}'
+response content:  {'api': 'getBankCardList', 'code': 10000, 'data': [{'bankCode': 'SPDB', 'bankMobile': '95528', 'bankName': '浦发银行', 'bankType': '借记卡', 'cardHolder': '吴学梁', 'cardNo': '6217920270055176', 'idNumber': '330127199011222710', 'imageUrl': 'https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg', 'reservedPhone': '18867520068', 'shortCardNo': '5176', 'userMobile': '18867520068'}], 'message': '获取数据成功'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Wechat_Applet.W_getBrokerAllBank.GetBrokerAllBank</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c9',1)" class="detail" id='c9'>详细</a></td>
+</tr>
+
+<tr id='pt9_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_get_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt9_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt9_1'>通过</button>
+    <div id='div_pt9_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt9_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt9_1'>通过</button>
+    <div id='div_pt9_1' class="collapse in">
+    <pre>
+    
+pt9_1: 获取支持的银行列表 获取支持的银行列表
+TestCase 1: 获取支持的银行列表
+url: http://10.10.13.75:8080/usob/cgpay/getBrokerAllBank.json?signature=d6a4597f1def3e12fac8891adce67abc&amp;source=123456
+b'{"api":"getAllBank","code":10000,"data":[{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/ICBC.jpg","bankName":"\xe5\xb7\xa5\xe5\x95\x86\xe9\x93\xb6\xe8\xa1\x8c","bankType":"ICBC"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/ABC.jpg","bankName":"\xe5\x86\x9c\xe4\xb8\x9a\xe9\x93\xb6\xe8\xa1\x8c","bankType":"ABC"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/BOC.jpg","bankName":"\xe4\xb8\xad\xe5\x9b\xbd\xe9\x93\xb6\xe8\xa1\x8c","bankType":"BOC"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/CCB.jpg","bankName":"\xe5\xbb\xba\xe8\xae\xbe\xe9\x93\xb6\xe8\xa1\x8c","bankType":"CCB"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg","bankName":"\xe4\xba\xa4\xe9\x80\x9a\xe9\x93\xb6\xe8\xa1\x8c","bankType":"COMM"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/HXB.jpg","bankName":"\xe5\x8d\x8e\xe5\xa4\x8f\xe9\x93\xb6\xe8\xa1\x8c","bankType":"HXB"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/PSBC.jpg","bankName":"\xe5\x82\xa8\xe8\x93\x84\xe9\x93\xb6\xe8\xa1\x8c","bankType":"PSBC"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/CIB.jpg","bankName":"\xe5\x85\xb4\xe4\xb8\x9a\xe9\x93\xb6\xe8\xa1\x8c","bankType":"CIB"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg","bankName":"\xe6\xb5\xa6\xe5\x8f\x91\xe9\x93\xb6\xe8\xa1\x8c","bankType":"SPDB"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/CMBC.jpg","bankName":"\xe6\xb0\x91\xe7\x94\x9f\xe9\x93\xb6\xe8\xa1\x8c","bankType":"CMBC"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/CITIC.jpg","bankName":"\xe4\xb8\xad\xe4\xbf\xa1\xe9\x93\xb6\xe8\xa1\x8c","bankType":"CITIC"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/PAB.jpg","bankName":"\xe5\xb9\xb3\xe5\xae\x89\xe9\x93\xb6\xe8\xa1\x8c","bankType":"PAB"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg","bankName":"\xe4\xba\xa4\xe9\x80\x9a\xe9\x93\xb6\xe8\xa1\x8c","bankType":"COMM"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/CMB.jpg","bankName":"\xe6\x8b\x9b\xe5\x95\x86\xe9\x93\xb6\xe8\xa1\x8c","bankType":"CMB"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/CEB.jpg","bankName":"\xe5\x85\x89\xe5\xa4\xa7\xe9\x93\xb6\xe8\xa1\x8c","bankType":"CEB"},{"bankLogo":"https://cheguo.oss.aliyuncs.com/banklogo/app/CZB.jpg","bankName":"\xe6\xb5\x99\xe5\x95\x86\xe9\x93\xb6\xe8\xa1\x8c","bankType":"CZB"}],"message":"\xe8\x8e\xb7\xe5\x8f\x96\xe6\x95\xb0\xe6\x8d\xae\xe6\x88\x90\xe5\x8a\x9f"}'
+response content:  {'api': 'getAllBank', 'code': 10000, 'data': [{'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ICBC.jpg', 'bankName': '工商银行', 'bankType': 'ICBC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ABC.jpg', 'bankName': '农业银行', 'bankType': 'ABC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/BOC.jpg', 'bankName': '中国银行', 'bankType': 'BOC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CCB.jpg', 'bankName': '建设银行', 'bankType': 'CCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'COMM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/HXB.jpg', 'bankName': '华夏银行', 'bankType': 'HXB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PSBC.jpg', 'bankName': '储蓄银行', 'bankType': 'PSBC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CIB.jpg', 'bankName': '兴业银行', 'bankType': 'CIB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg', 'bankName': '浦发银行', 'bankType': 'SPDB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMBC.jpg', 'bankName': '民生银行', 'bankType': 'CMBC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CITIC.jpg', 'bankName': '中信银行', 'bankType': 'CITIC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PAB.jpg', 'bankName': '平安银行', 'bankType': 'PAB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'COMM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMB.jpg', 'bankName': '招商银行', 'bankType': 'CMB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CEB.jpg', 'bankName': '光大银行', 'bankType': 'CEB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CZB.jpg', 'bankName': '浙商银行', 'bankType': 'CZB'}], 'message': '获取数据成功'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+data verify is beginning...
+data verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Wechat_Applet.W_getBrokerOrderRefundList.GetBrokerOrderRefundList</td>
+    <td class="text-center">4</td>
+    <td class="text-center">4</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c10',4)" class="detail" id='c10'>详细</a></td>
+</tr>
+
+<tr id='pt10_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_broker_agree_refund</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt10_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt10_1'>通过</button>
+    <div id='div_pt10_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt10_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt10_1'>通过</button>
+    <div id='div_pt10_1' class="collapse in">
+    <pre>
+    
+pt10_1: 车商申请退款，经纪人同意退款 车商申请退款，经纪人同意退款
+TestCase 2: 车商申请退款，经纪人同意退款
+url: http://10.10.13.75:8080/usob/cgtrade/getBrokerOrderRefundList.json?queryRequest={'brokerId': 10001, 'orderNo': 'YJD20180913103251000001', 'sellerId': '47826'}&amp;signature=cec0a0a869cbbea0485389c219f34e74&amp;source=123456
+response content:  {'api': 'getOrderRefundInfoByOrderNo', 'code': 10000, 'data': [{'applyDesc': '刚刚好', 'createTime': '2018-09-13 10:33:53', 'operName': '王二狗开的小超市', 'operStepDesc': '车商申请退款', 'photoProof': ['http://cdn-file.cheguo.com/files/2018-09-13/201809131033508399081.jpg'], 'status': 2}, {'createTime': '2018-09-13 10:34:05', 'handleDesc': '经纪人同意退款', 'handleResult': '经纪人同意退款', 'operName': '吴学梁', 'operStepDesc': '经纪人同意退款'}], 'message': ''}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+data verify is beginning...
+data verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt10_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_customer_refund_to_broker</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt10_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt10_2'>通过</button>
+    <div id='div_pt10_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt10_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt10_2'>通过</button>
+    <div id='div_pt10_2' class="collapse in">
+    <pre>
+    
+pt10_2: 车商申请退款，客服申述将佣金转给经纪人 车商申请退款，客服申述将佣金转给经纪人
+TestCase 3: 车商申请退款，客服申述将佣金转给经纪人
+url: http://10.10.13.75:8080/usob/cgtrade/getBrokerOrderRefundList.json?queryRequest={'brokerId': 10001, 'orderNo': 'YJD20180913103655000002', 'sellerId': '47826'}&amp;signature=3afa570ca079e21f8652dc34bf75f59e&amp;source=123456
+response content:  {'api': 'getOrderRefundInfoByOrderNo', 'code': 10000, 'data': [{'applyDesc': '刚刚更换', 'createTime': '2018-09-13 10:39:22', 'operName': '王二狗开的小超市', 'operStepDesc': '车商申请退款', 'photoProof': ['http://cdn-file.cheguo.com/files/2018-09-13/201809131039029471706.jpg', 'http://cdn-file.cheguo.com/files/2018-09-13/201809131039029436391.jpg'], 'status': 5}, {'applyDesc': '滚滚滚', 'createTime': '2018-09-13 10:39:57', 'operName': '吴学梁', 'operStepDesc': '经纪人申请申诉', 'photoProof': ['https://cdn-file.cheguo.com/files/2018-09-13/201809131039561138834.jpg', 'https://cdn-file.cheguo.com/files/2018-09-13/201809131039527535457.jpg']}, {'createTime': '2018-09-13 10:40:45', 'handleDesc': '佣金转给经纪人', 'handleResult': '客服处理(佣金转给经纪人)', 'operName': '车国客服', 'operStepDesc': '客服处理(佣金转给经纪人)'}], 'message': ''}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+data verify is beginning...
+data verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt10_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_customer_refund_to_dealer</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt10_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt10_3'>通过</button>
+    <div id='div_pt10_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt10_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt10_3'>通过</button>
+    <div id='div_pt10_3' class="collapse in">
+    <pre>
+    
+pt10_3: 车商申请退款，客服申述将佣金转给经纪人 车商申请退款，客服申述将佣金转给经纪人
+TestCase 3: 车商申请退款，客服申述将佣金转给经纪人
+url: http://10.10.13.75:8080/usob/cgtrade/getBrokerOrderRefundList.json?queryRequest={'brokerId': 10001, 'orderNo': 'YJD20180913103655000002', 'sellerId': '47826'}&amp;signature=3afa570ca079e21f8652dc34bf75f59e&amp;source=123456
+response content:  {'api': 'getOrderRefundInfoByOrderNo', 'code': 10000, 'data': [{'applyDesc': '刚刚更换', 'createTime': '2018-09-13 10:39:22', 'operName': '王二狗开的小超市', 'operStepDesc': '车商申请退款', 'photoProof': ['http://cdn-file.cheguo.com/files/2018-09-13/201809131039029471706.jpg', 'http://cdn-file.cheguo.com/files/2018-09-13/201809131039029436391.jpg'], 'status': 5}, {'applyDesc': '滚滚滚', 'createTime': '2018-09-13 10:39:57', 'operName': '吴学梁', 'operStepDesc': '经纪人申请申诉', 'photoProof': ['https://cdn-file.cheguo.com/files/2018-09-13/201809131039561138834.jpg', 'https://cdn-file.cheguo.com/files/2018-09-13/201809131039527535457.jpg']}, {'createTime': '2018-09-13 10:40:45', 'handleDesc': '佣金转给经纪人', 'handleResult': '客服处理(佣金转给经纪人)', 'operName': '车国客服', 'operStepDesc': '客服处理(佣金转给经纪人)'}], 'message': ''}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+data verify is beginning...
+data verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt10_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_timed_task_refund</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt10_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt10_4'>通过</button>
+    <div id='div_pt10_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt10_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt10_4'>通过</button>
+    <div id='div_pt10_4' class="collapse in">
+    <pre>
+    
+pt10_4: 车商申请退款，经纪人未确认（定时任务执行退款） 车商申请退款，经纪人未确认（定时任务执行退款）
+TestCase 1: 车商申请退款，经纪人未确认（定时任务执行退款）
+url: http://10.10.13.75:8080/usob/cgtrade/getBrokerOrderRefundList.json?queryRequest={'brokerId': 10001, 'orderNo': 'YJD20180821102045000001', 'sellerId': '47826'}&amp;signature=56041efcbfe729b762634647d9637a37&amp;source=123456
+response content:  {'api': 'getOrderRefundInfoByOrderNo', 'code': 10000, 'data': [{'applyDesc': '哥哥更好', 'createTime': '2018-08-23 09:46:54', 'operName': '王二狗开的小超市', 'operStepDesc': '车商申请退款', 'photoProof': ['http://cdn-file.cheguo.com/files/2018-08-23/201808230946493643757.jpg'], 'status': 1}], 'message': ''}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+data verify is beginning...
+data verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Wechat_Applet.W_getCarSourceAllByEs.GetCarSourceAllByEs</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c11',1)" class="detail" id='c11'>详细</a></td>
+</tr>
+
+<tr id='pt11_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_get_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_1'>通过</button>
+    <div id='div_pt11_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_1'>通过</button>
+    <div id='div_pt11_1' class="collapse in">
+    <pre>
+    
+pt11_1: 查询车源列表成功 查询车源列表成功
+TestCase 1: 查询车源列表成功
+url: http://10.10.13.75:8080/carsrc/getCarSourceAllByEs.json?currentPage=0&amp;orderType=100&amp;pageSize=15&amp;queryInfo={'publishBrokerStatus': '1', 'orderUserId': 10001}&amp;signature=7dfe92996a6fdff7f806ba20894407ae&amp;source=123456
+response content:  {'message': '查询车源列表成功', 'data': [{'carSourceId': 6155, 'carId': 83683, 'remark': '', 'picFlag': 0, 'operater': '金梦娜', 'brokerage': 1200.0, 'gmtModify': '2018-09-18 10:29:23', 'orderUserId': 14033, 'sourceStatus': 1, 'priceValue': '2', 'msrp': 41.8, 'carTrimColor': '红色', 'publishBrokerStatus': '1', 'carVin': '', 'cars': 'Stelvio', 'carName': '2017款 阿尔法罗密欧Stelvio-2.0T-A/MT-200HP精英版', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/阿尔法罗密欧.jpg', 'sourceType': 4, 'gmtCreate': '2018-09-18 10:29:23', 'status': 2, 'areaCode': 'south', 'realAuth': 'no', 'priceType': 1, 'salesRegion': '杭州市', 'carCode': '381002002', 'companyName': '杭州直营1(勿动)', 'carSourceCode': 'CYN20180918000001', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-10-15 10:55:51', 'sourceFlag': 0, 'areaName': '南区', 'offlinePrice': 38.8, 'operate': 1, 'companyType': 2, 'salePrice': 39.8, 'companyId': 13968, 'hasPic': False, 'sourceKind': 1, 'carColor': '棕色', 'plateLimit': 0}, {'carSourceId': 6173, 'carId': 52202, 'picFlag': 0, 'brokerage': 500.0, 'gmtModify': '2018-09-25 09:50:14', 'orderUserId': 47883, 'sourceStatus': 1, 'priceValue': '3', 'msrp': 4000.0, 'carTrimColor': '色全', 'publishBrokerStatus': '1', 'cars': 'One-77', 'carName': '2010款 阿斯顿马丁One-77-7.3-A/MT', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg', 'sourceType': 1, 'gmtCreate': '2018-09-25 09:50:14', 'status': 2, 'areaCode': 'east', 'realAuth': 'no', 'priceType': 1, 'salesRegion': '杭州市', 'carCode': '382001002', 'companyName': '上海亲邻信息科技有限公司', 'carSourceCode': 'CYN20180925000008', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-10-11 10:14:43', 'sourceFlag': 0, 'areaName': '东区', 'offlinePrice': 3997.0, 'companyType': 5, 'salePrice': 3997.0, 'companyId': 100057, 'hasPic': False, 'sourceKind': 1, 'carColor': '色全', 'plateLimit': 0}, {'carSourceId': 5984, 'carId': 64059, 'remark': '', 'picFlag': 0, 'operater': '吴晏媛', 'brokerage': 500.0, 'gmtModify': '2018-08-28 11:39:17', 'orderUserId': 47884, 'sourceStatus': 1, 'priceValue': '3', 'msrp': 43.5, 'carTrimColor': '色全', 'publishBrokerStatus': '1', 'carVin': '', 'cars': '200', 'carName': '1999款 奥迪200-2.4-MT(国Ⅰ)', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'sourceType': 3, 'gmtCreate': '2018-08-28 11:39:17', 'status': 2, 'areaCode': 'east', 'realAuth': 'no', 'priceType': 1, 'salesRegion': '杭州市', 'carCode': '301001001', 'companyName': '青岛公交集团有限责任公司', 'carSourceCode': 'CYN20180828000010', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-10-10 16:54:30', 'sourceFlag': 0, 'areaName': '东区', 'offlinePrice': 40.5, 'operate': 1, 'companyType': 5, 'salePrice': 40.5, 'companyId': 100058, 'hasPic': False, 'sourceKind': 1, 'carColor': '色全', 'plateLimit': 0}, {'carSourceId': 26, 'carId': 66526, 'remark': '', 'picFlag': 0, 'operater': '笑笑', 'brokerage': 500.0, 'gmtModify': '2018-10-22 11:12:30', 'orderUserId': 13104, 'sourceStatus': 1, 'priceValue': '2', 'msrp': 32.0, 'carTrimColor': '色全', 'publishBrokerStatus': '1', 'carVin': '', 'cars': '奥迪100', 'carName': '1992款 奥迪100-2.0-MT(化)', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'sourceType': 1, 'gmtCreate': '2018-02-04 15:50:45', 'status': 2, 'areaCode': 'north', 'realAuth': 'no', 'priceType': 2, 'salesRegion': '全国', 'carCode': '301001002', 'companyName': '你是一只猪', 'carSourceCode': 'CYN20180204000004', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-09-21 11:53:12', 'validStatus': 5, 'sourceFlag': 0, 'areaName': '北区', 'offlinePrice': 30.0, 'operate': 30, 'companyType': 2, 'salePrice': 31.36, 'companyId': 14054, 'hasPic': False, 'sourceKind': 2, 'carColor': '白色', 'plateLimit': 0}, {'carSourceId': 6089, 'carId': 100338, 'picFlag': 0, 'operater': '狄敏米', 'brokerage': 501.0, 'gmtModify': '2018-08-30 21:12:11', 'orderUserId': 71325, 'sourceStatus': 1, 'priceValue': '5', 'msrp': 22.99, 'carTrimColor': '黑色', 'publishBrokerStatus': '1', 'cars': '别克', 'carName': '2017款 别克GL8-2.5-A/MT-25S舒适型(国Ⅴ)', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/别克.jpg', 'sourceType': 1, 'gmtCreate': '2018-08-30 21:12:11', 'status': 2, 'areaCode': 'south', 'realAuth': 'no', 'priceType': 1, 'salesRegion': '杭州市', 'carCode': '335001003', 'companyName': '王二狗开的小超市', 'carSourceCode': 'CYN20180830000029', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-09-21 11:48:48', 'sourceFlag': 0, 'areaName': '南区', 'offlinePrice': 19.99, 'operate': 1, 'companyType': 2, 'salePrice': 17.99, 'companyId': 100012, 'hasPic': False, 'sourceKind': 1, 'carColor': '黑色', 'plateLimit': 0}, {'carSourceId': 6090, 'carId': 65149, 'picFlag': 0, 'operater': '狄敏米', 'brokerage': 500.0, 'gmtModify': '2018-08-30 21:13:00', 'orderUserId': 71325, 'sourceStatus': 1, 'priceValue': '5', 'msrp': 32.99, 'carTrimColor': '棕色', 'publishBrokerStatus': '1', 'cars': '别克', 'carName': '2010款 林荫大道3.0-A/MT舒适型(国Ⅳ)', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/别克.jpg', 'sourceType': 2, 'gmtCreate': '2018-08-30 21:13:00', 'status': 2, 'areaCode': 'south', 'realAuth': 'no', 'priceType': 1, 'salesRegion': '杭州市', 'carCode': '335001002', 'companyName': '王二狗开的小超市', 'carSourceCode': 'CYN20180830000030', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-09-20 16:55:27', 'sourceFlag': 0, 'areaName': '南区', 'offlinePrice': 29.99, 'operate': 1, 'companyType': 2, 'salePrice': 27.99, 'companyId': 100012, 'hasPic': False, 'sourceKind': 1, 'carColor': '色全', 'plateLimit': 0}, {'carSourceId': 6160, 'carId': 52651, 'remark': '', 'picFlag': 0, 'operater': '滚滚滚', 'brokerage': 3000.0, 'gmtModify': '2018-09-18 15:54:23', 'orderUserId': 47845, 'sourceStatus': 1, 'priceValue': '3', 'msrp': 198.8, 'carTrimColor': '色全', 'publishBrokerStatus': '1', 'carVin': '', 'cars': 'V8 Vantage', 'carName': '2016款 阿斯顿马丁V8-4.7-A/MT-Vantage-Coupe', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg', 'sourceType': 1, 'gmtCreate': '2018-09-18 15:54:23', 'status': 2, 'areaCode': 'east', 'realAuth': 'no', 'priceType': 1, 'salesRegion': '杭州市', 'carCode': '382001003', 'companyName': '天阳控股集团有限公司', 'carSourceCode': 'CYN20180918000006', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-09-18 16:05:25', 'sourceFlag': 0, 'areaName': '东区', 'offlinePrice': 195.8, 'operate': 1, 'companyType': 5, 'salePrice': 195.8, 'companyId': 100028, 'hasPic': False, 'sourceKind': 3, 'carColor': '色全', 'plateLimit': 0}, {'carSourceId': 153, 'carId': 52875, 'picFlag': 0, 'operater': '笑笑', 'brokerage': 600.0, 'gmtModify': '2018-10-22 11:12:30', 'orderUserId': 13104, 'sourceStatus': 1, 'priceValue': '2', 'msrp': 6.48, 'carTrimColor': '棕色', 'publishBrokerStatus': '1', 'cars': '安驰', 'carName': '2014款 瑞驰K3-2.8-MT精英版长轴HFC4DA1-1C柴油(国Ⅳ)', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/安驰.jpg', 'sourceType': 4, 'gmtCreate': '2018-04-12 16:53:05', 'status': 2, 'areaCode': '500100', 'realAuth': 'no', 'priceType': 1, 'salesRegion': '安徽省、澳门特别行政区', 'carCode': '380001005', 'companyName': '你是一只猪', 'carSourceCode': 'CYN20180412000003', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-09-14 13:57:15', 'validStatus': 5, 'sourceFlag': 0, 'areaName': '重庆市', 'offlinePrice': 5.48, 'operate': 30, 'companyType': 2, 'salePrice': 4.48, 'companyId': 14054, 'hasPic': False, 'sourceKind': 2, 'carColor': '棕色', 'plateLimit': 0}, {'carSourceId': 6091, 'carId': 106170, 'picFlag': 0, 'operater': '狄敏米', 'brokerage': 5000.0, 'gmtModify': '2018-08-30 21:14:05', 'orderUserId': 71325, 'sourceStatus': 1, 'priceValue': '8', 'msrp': 145.0, 'carTrimColor': '棕色', 'publishBrokerStatus': '1', 'cars': '保时捷', 'carName': '2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg', 'sourceType': 2, 'gmtCreate': '2018-08-30 21:14:05', 'status': 2, 'areaCode': 'south', 'realAuth': 'no', 'priceType': 1, 'salesRegion': '杭州市', 'carCode': '395001004', 'companyName': '王二狗开的小超市', 'carSourceCode': 'CYN20180830000031', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-09-12 14:58:39', 'sourceFlag': 0, 'areaName': '南区', 'offlinePrice': 140.0, 'operate': 1, 'companyType': 2, 'salePrice': 137.0, 'companyId': 100012, 'hasPic': False, 'sourceKind': 1, 'carColor': '银色', 'plateLimit': 0}, {'carSourceId': 6092, 'carId': 61823, 'picFlag': 0, 'operater': '狄敏米', 'brokerage': 600.0, 'gmtModify': '2018-08-30 21:15:08', 'orderUserId': 71325, 'sourceStatus': 1, 'priceValue': '5', 'msrp': 498.8, 'carTrimColor': '棕色', 'publishBrokerStatus': '1', 'cars': '阿斯顿马丁', 'carName': '2015款 阿斯顿马丁Vanquish-6.0-A/MT-Coupe', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg', 'sourceType': 2, 'gmtCreate': '2018-08-30 21:15:08', 'status': 2, 'areaCode': 'south', 'realAuth': 'no', 'priceType': 1, 'salesRegion': '杭州市', 'carCode': '382001004', 'companyName': '王二狗开的小超市', 'carSourceCode': 'CYN20180830000032', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-08-31 10:59:22', 'sourceFlag': 0, 'areaName': '南区', 'offlinePrice': 493.8, 'operate': 1, 'companyType': 2, 'salePrice': 493.8, 'companyId': 100012, 'hasPic': False, 'sourceKind': 1, 'carColor': '黑色', 'plateLimit': 0}, {'carSourceId': 6078, 'carId': 37224, 'remark': '', 'picFlag': 0, 'operater': '刘天龙', 'brokerage': 601.0, 'gmtModify': '2018-08-30 16:49:24', 'orderUserId': 71321, 'sourceStatus': 1, 'priceValue': '2', 'msrp': 8.98, 'carTrimColor': '棕色', 'publishBrokerStatus': '1', 'carVin': '', 'cars': '飞越', 'carName': '2006款 飞越2.2-MT后驱实用型(国Ⅱ)', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/福迪.jpg', 'sourceType': 1, 'gmtCreate': '2018-08-30 16:49:24', 'status': 2, 'areaCode': 'west', 'realAuth': 'yes', 'priceType': 1, 'salesRegion': '杭州市', 'carCode': '374001001', 'companyName': '刘经理', 'carSourceCode': 'CYN20180830000012', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-08-30 16:51:25', 'sourceFlag': 0, 'areaName': '西区', 'offlinePrice': 7.98, 'operate': 1, 'companyType': 20, 'salePrice': 6.98, 'companyId': 100161, 'hasPic': False, 'sourceKind': 1, 'carColor': '黑色', 'plateLimit': 0}, {'carSourceId': 5864, 'carId': 90299, 'remark': '', 'picFlag': 0, 'operater': '王二狗', 'brokerage': 500.0, 'gmtModify': '2018-08-22 17:12:27', 'orderUserId': 47826, 'sourceStatus': 1, 'priceValue': '5', 'msrp': 28.8, 'carTrimColor': '色全', 'publishBrokerStatus': '1', 'carVin': '', 'cars': '宝马3系', 'carName': '2018款 宝马318i-1.5T-A/MT(国Ⅴ)', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/宝马.jpg', 'sourceType': 3, 'gmtCreate': '2018-08-14 16:44:45', 'status': 2, 'areaCode': 'east', 'realAuth': 'no', 'priceType': 1, 'salesRegion': '全国', 'carCode': '376001001', 'companyName': '王二狗开的小超市', 'carSourceCode': 'CYN20180814000013', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-08-21 14:32:03', 'sourceFlag': 0, 'areaName': '东区', 'offlinePrice': 25.2, 'operate': 1, 'companyType': 2, 'salePrice': 23.8, 'companyId': 100012, 'hasPic': False, 'sourceKind': 1, 'carColor': '色全', 'plateLimit': 0}, {'carSourceId': 5822, 'carId': 64059, 'remark': '', 'picFlag': 0, 'operater': '哈哈哈', 'brokerage': 500.0, 'gmtModify': '2018-07-30 14:17:46', 'orderUserId': 47837, 'sourceStatus': 1, 'priceValue': '2', 'msrp': 43.5, 'carTrimColor': '棕色', 'publishBrokerStatus': '1', 'carVin': '', 'cars': '200', 'carName': '1999款 奥迪200-2.4-MT(国Ⅰ)', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'sourceType': 2, 'gmtCreate': '2018-07-30 14:17:46', 'status': 2, 'areaCode': '110100', 'realAuth': 'no', 'priceType': 1, 'salesRegion': '全国', 'carCode': '301001001', 'companyName': '大连美通车行有限公司', 'carSourceCode': 'CYN20180730000003', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-08-17 14:20:48', 'sourceFlag': 0, 'areaName': '北京市', 'offlinePrice': 40.5, 'operate': 1, 'companyType': 5, 'salePrice': 41.5, 'companyId': 100021, 'hasPic': False, 'sourceKind': 1, 'carColor': '白色', 'plateLimit': 0}, {'carSourceId': 5819, 'carId': 90195, 'remark': '', 'picFlag': 0, 'operater': '王二狗', 'brokerage': 500.0, 'gmtModify': '2018-08-22 17:12:27', 'orderUserId': 47826, 'sourceStatus': 1, 'priceValue': '8', 'msrp': 29.28, 'carTrimColor': '色全', 'publishBrokerStatus': '1', 'carVin': '', 'cars': 'A4L', 'carName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'sourceType': 3, 'gmtCreate': '2018-07-26 19:11:17', 'status': 2, 'areaCode': 'south', 'realAuth': 'no', 'priceType': 1, 'salesRegion': '全国', 'carCode': '301001005', 'companyName': '王二狗开的小超市', 'carSourceCode': 'CYN20180726000002', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-08-14 11:02:40', 'validStatus': 5, 'sourceFlag': 0, 'areaName': '南区', 'offlinePrice': 22.28, 'operate': 1, 'companyType': 2, 'salePrice': 21.28, 'companyId': 100012, 'hasPic': False, 'sourceKind': 1, 'carColor': '色全', 'plateLimit': 0}, {'carSourceId': 5826, 'carId': 63699, 'picFlag': 0, 'operater': '阿笑', 'brokerage': 500.0, 'gmtModify': '2018-07-30 19:33:18', 'orderUserId': 47832, 'sourceStatus': 1, 'priceValue': '50', 'msrp': 168.0, 'carTrimColor': '蓝色', 'publishBrokerStatus': '1', 'cars': 'AC Schnitzer', 'carName': '2012款 AC-Schnitzer-S5-3.0T-A/MT猎鹰版', 'employeeAuth': 'no', 'overMsrp': 0, 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/AC Schnitzer.jpg', 'sourceType': 4, 'gmtCreate': '2018-07-30 19:33:18', 'status': 2, 'areaCode': '500100', 'realAuth': 'no', 'priceType': 4, 'salesRegion': '全国', 'carCode': '471001001', 'companyName': '分期改版37', 'carSourceCode': 'CYN20180730000007', 'is4sEmployeeAuth': 'no', 'modifyBrokerTime': '2018-07-30 19:33:36', 'sourceFlag': 0, 'areaName': '重庆市', 'offlinePrice': 108.0, 'operate': 1, 'companyType': 2, 'salePrice': 50.0, 'companyId': 100018, 'hasPic': False, 'sourceKind': 1, 'carColor': '棕色', 'plateLimit': 0}], 'api': 'getCarSourceAllByEs', 'code': 10000}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+data verify is beginning...
+data verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>Wechat_Applet.W_getIdentityInfo.GetIdentityInfo</td>
+    <td class="text-center">4</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">4</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c12',4)" class="detail" id='c12'>详细</a></td>
+</tr>
+
+<tr id='ft12_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_status_fail</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft12_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft12_1'>错误</button>
+    <div id='div_ft12_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft12_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft12_1'>错误</button>
+    <div id='div_ft12_1' class="collapse in">
+    <pre>
+    
+ft12_1: Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_getIdentityInfo.py", line 17, in setUp
+    self.apiname = self.filecontent.get_apiname()  # 获取apiname用于获得url
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 58, in get_apiname
+    self.get_json_contents()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 23, in get_json_contents
+    self._global_dic = json.load(fp_object)
+  File "D:\Python\Python36\lib\json\__init__.py", line 299, in load
+    parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "D:\Python\Python36\lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "D:\Python\Python36\lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "D:\Python\Python36\lib\json\decoder.py", line 355, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 75 column 9 (char 3682)
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft12_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_status_ing</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft12_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft12_2'>错误</button>
+    <div id='div_ft12_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft12_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft12_2'>错误</button>
+    <div id='div_ft12_2' class="collapse in">
+    <pre>
+    
+ft12_2: Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_getIdentityInfo.py", line 17, in setUp
+    self.apiname = self.filecontent.get_apiname()  # 获取apiname用于获得url
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 58, in get_apiname
+    self.get_json_contents()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 23, in get_json_contents
+    self._global_dic = json.load(fp_object)
+  File "D:\Python\Python36\lib\json\__init__.py", line 299, in load
+    parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "D:\Python\Python36\lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "D:\Python\Python36\lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "D:\Python\Python36\lib\json\decoder.py", line 355, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 75 column 9 (char 3682)
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft12_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_status_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft12_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft12_3'>错误</button>
+    <div id='div_ft12_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft12_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft12_3'>错误</button>
+    <div id='div_ft12_3' class="collapse in">
+    <pre>
+    
+ft12_3: Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_getIdentityInfo.py", line 17, in setUp
+    self.apiname = self.filecontent.get_apiname()  # 获取apiname用于获得url
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 58, in get_apiname
+    self.get_json_contents()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 23, in get_json_contents
+    self._global_dic = json.load(fp_object)
+  File "D:\Python\Python36\lib\json\__init__.py", line 299, in load
+    parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "D:\Python\Python36\lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "D:\Python\Python36\lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "D:\Python\Python36\lib\json\decoder.py", line 355, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 75 column 9 (char 3682)
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft12_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_status_unauthorized</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft12_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft12_4'>错误</button>
+    <div id='div_ft12_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft12_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft12_4'>错误</button>
+    <div id='div_ft12_4' class="collapse in">
+    <pre>
+    
+ft12_4: Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_getIdentityInfo.py", line 17, in setUp
+    self.apiname = self.filecontent.get_apiname()  # 获取apiname用于获得url
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 58, in get_apiname
+    self.get_json_contents()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 23, in get_json_contents
+    self._global_dic = json.load(fp_object)
+  File "D:\Python\Python36\lib\json\__init__.py", line 299, in load
+    parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "D:\Python\Python36\lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "D:\Python\Python36\lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "D:\Python\Python36\lib\json\decoder.py", line 355, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 75 column 9 (char 3682)
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Wechat_Applet.W_getSearchLogList.GetSearchLogList</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c13',1)" class="detail" id='c13'>详细</a></td>
+</tr>
+
+<tr id='pt13_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_get_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt13_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt13_1'>通过</button>
+    <div id='div_pt13_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt13_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt13_1'>通过</button>
+    <div id='div_pt13_1' class="collapse in">
+    <pre>
+    
+pt13_1: 获取车源搜索记录 获取车源搜索记录
+TestCase 1: 获取车源搜索记录
+url: http://10.10.13.75:8080/carsrc/getSearchLogList.json?signature=259717eecb27c98abc2933d382e9a5b5&amp;source=123456&amp;userType=2&amp;userid=10001
+response content:  {'message': '查询搜索记录成功', 'data': ['宝马', '奥迪'], 'api': 'getSearchLogList', 'code': 10000}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+数据查询成功
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Wechat_Applet.W_getVirtualOrderList.GetVirtualOrderList</td>
+    <td class="text-center">2</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c14',2)" class="detail" id='c14'>详细</a></td>
+</tr>
+
+<tr id='pt14_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_get_virtualorder</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt14_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt14_1'>通过</button>
+    <div id='div_pt14_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt14_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt14_1'>通过</button>
+    <div id='div_pt14_1' class="collapse in">
+    <pre>
+    
+pt14_1: 数据删除成功.
+当虚拟订单池中有数据，获取虚拟订单信息 当虚拟订单池中有数据，获取虚拟订单信息
+TestCase 2: 当虚拟订单池中有数据，获取虚拟订单信息
+sql_data:  [{'id': 1, 'order_no': None, 'broker_name': '王二狗', 'create_time': '2018-07-20', 'modify_time': '2018-07-23', 'commission_amount': 500, 'source': '1'}, {'id': 2, 'order_no': None, 'broker_name': '张三狗', 'create_time': '2018-07-20', 'modify_time': '2018-07-23', 'commission_amount': 506, 'source': '1'}, {'id': 3, 'order_no': None, 'broker_name': '吴大狗', 'create_time': '2018-07-20', 'modify_time': '2018-07-23', 'commission_amount': 800, 'source': '1'}, {'id': 4, 'order_no': None, 'broker_name': '须五狗', 'create_time': '2018-07-20', 'modify_time': '2018-07-23', 'commission_amount': 2000, 'source': '1'}]
+
+INSERT INTO trans.trade_announcement_order (id, order_no, broker_name, create_time, modify_time, commission_amount, source) VALUES 
+('1', 'None', '王二狗', '2018-07-20', '2018-07-23', '500', '1'),
+('2', 'None', '张三狗', '2018-07-20', '2018-07-23', '506', '1'),
+('3', 'None', '吴大狗', '2018-07-20', '2018-07-23', '800', '1'),
+('4', 'None', '须五狗', '2018-07-20', '2018-07-23', '2000', '1');
+数据插入成功
+url: http://10.10.13.75:8080/usob/carsrc/getVirtualOrderList.json?signature=d6a4597f1def3e12fac8891adce67abc&amp;source=123456
+response content:  {'api': 'getVirtualOrderList', 'code': 10000, 'data': [{'brokeName': '王二狗', 'commissionAmount': '500.00', 'createTime': '2018-07-20', 'id': 1, 'modifyTime': '2018-07-23', 'orderNo': 'None'}, {'brokeName': '张三狗', 'commissionAmount': '506.00', 'createTime': '2018-07-20', 'id': 2, 'modifyTime': '2018-07-23', 'orderNo': 'None'}, {'brokeName': '吴大狗', 'commissionAmount': '800.00', 'createTime': '2018-07-20', 'id': 3, 'modifyTime': '2018-07-23', 'orderNo': 'None'}, {'brokeName': '须五狗', 'commissionAmount': '2000.00', 'createTime': '2018-07-20', 'id': 4, 'modifyTime': '2018-07-23', 'orderNo': 'None'}], 'message': ''}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+data verify is beginning...
+data verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt14_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_virtualorder_isNull</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt14_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt14_2'>通过</button>
+    <div id='div_pt14_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt14_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt14_2'>通过</button>
+    <div id='div_pt14_2' class="collapse in">
+    <pre>
+    
+pt14_2: 数据删除成功.
+当虚拟订单池为空，即虚拟订单数据库为空 当虚拟订单池为空，即虚拟订单数据库为空
+TestCase 1: 当虚拟订单池为空，即虚拟订单数据库为空
+url: http://10.10.13.75:8080/usob/carsrc/getVirtualOrderList.json?signature=d6a4597f1def3e12fac8891adce67abc&amp;source=123456
+response content:  {'api': 'getVirtualOrderList', 'code': 10000, 'data': {'currentpage': 1, 'dataList': [], 'end': 0, 'pagesize': 0, 'start': 0, 'totalItem': 0, 'totalPages': 0}, 'message': '数据为空'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+data verify is beginning...
+data verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>Wechat_Applet.W_orderEvaluate.OrderEvaluate</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c15',1)" class="detail" id='c15'>详细</a></td>
+</tr>
+
+<tr id='ft15_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_evaluate_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft15_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft15_1'>失败</button>
+    <div id='div_ft15_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft15_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft15_1'>失败</button>
+    <div id='div_ft15_1' class="collapse in">
+    <pre>
+    
+ft15_1: 小程序端经纪人佣金订单评价成功 小程序端经纪人佣金订单评价成功
+TestCase 1: 小程序端经纪人佣金订单评价成功
+数据修改成功
+url: http://10.10.13.75:8080/usob/cgtrade/orderEvaluate.json?orderInfo={'companyId': '47826', 'companyName': '王二狗开的小超市', 'creatorName': '吴学梁', 'evaluateDesc': '哈哈哈哈', 'orderNo': 'YJD20180913103655000002', 'orderType': 3, 'starLevel': 4, 'userId': 10001, 'whoEvaluate': 0}&amp;signature=d94e425e2eadbdeed7544d0be16b5bdf&amp;source=123456
+response content:  {'request': '/usob/cgtrade/orderEvaluate.json', 'code': '10003', 'message': 'signature verification failed.'}
+code verify is beginning...
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_orderEvaluate.py", line 63, in test_evaluate_success
+    self.verify.verify_code(expectresult=expectresult, result=json_result)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\Verify.py", line 44, in verify_code
+    msg="verify_code: The response code is {}.".format(result['code']))
+AssertionError: 10000 != 10003 : verify_code: The response code is 10003.
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>Wechat_Applet.W_queryBrokerOrderDetail.QueryBrokerOrderDetail</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c16',1)" class="detail" id='c16'>详细</a></td>
+</tr>
+
+<tr id='ft16_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_begin_trade</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft16_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft16_1'>失败</button>
+    <div id='div_ft16_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft16_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft16_1'>失败</button>
+    <div id='div_ft16_1' class="collapse in">
+    <pre>
+    
+ft16_1: 订单详情--经纪人发起交易 订单详情--经纪人发起交易
+TestCase 1: 订单详情--经纪人发起交易
+数据查询成功
+数据删除成功.
+数据插入成功
+url: http://10.10.13.75:8080/usob/cgtrade/queryBrokerOrderDetail.json?queryRequest={'brokerId': 10001, 'orderNo': 'YJD20180917165629000001'}&amp;signature=1bf0109550641ca5ee1199889d163be9&amp;source=123456
+response content:  {'api': 'getOrderInfoByOrderNo', 'code': 10000, 'data': {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg', 'brokerAmount': 5000.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 106170, 'carBaseName': '2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口', 'carColor': '银色', 'carInteriorColor': '棕色', 'carModelCode': '395001004', 'carSourceCode': 'CYN20180830000031', 'carSourceType': 2, 'carUnitPrice': 140.0, 'creatorName': '吴学梁', 'dealPrice': 140.0, 'evaluateStatus': 0, 'guidePrice': 145.0, 'id': 398, 'licencePlateAreaCode': '110100', 'licencePlateAreaName': '北京市', 'modifierName': '吴学梁', 'offlinePrice': 140.0, 'orderNo': 'YJD20180917165629000001', 'orderType': 3, 'planArrivalDate': '2018-09-17', 'productDate': '3个月内', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 0, 'transactionNum': '1'}, 'message': ''}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+data verify is beginning...
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_queryBrokerOrderDetail.py", line 103, in test_begin_trade
+    self.verify.verify_data(expectresult=expectresult, result=json_result)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\Verify.py", line 73, in verify_data
+    self.assertEqual(len(expectresult['data']), len(result['data']))
+AssertionError: 37 != 36
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Wechat_Applet.W_queryBrokerOrderPageList.QueryBrokerOrderPageList</td>
+    <td class="text-center">6</td>
+    <td class="text-center">6</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c17',6)" class="detail" id='c17'>详细</a></td>
+</tr>
+
+<tr id='pt17_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_all_list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt17_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt17_1'>通过</button>
+    <div id='div_pt17_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt17_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt17_1'>通过</button>
+    <div id='div_pt17_1' class="collapse in">
+    <pre>
+    
+pt17_1: 全部订单列表 全部订单列表
+TestCase 6: 全部订单列表
+url: http://10.10.13.75:8080/usob/cgtrade/queryBrokerOrderPageList.json?queryRequest={'brokerId': 10001, 'currentpage': 0, 'pagesize': 15, 'status': -1}&amp;signature=1a3fc423e7f6bb9418a184e2a40a0cc6&amp;source=123456
+response content:  {'api': 'queryForPage', 'code': 10000, 'data': {'currentpage': 1, 'dataList': [{'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/宝马.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90299, 'carBaseName': '2018款 宝马318i-1.5T-A/MT(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '376001001', 'carSourceCode': 'CYN20180814000013', 'carSourceType': 2, 'carUnitPrice': 25.2, 'createTime': '2018-09-13 10:36', 'creatorName': '吴学梁', 'dealPrice': 25.2, 'deliverCarDate': '2018-09-13', 'evaluateStatus': 0, 'guidePrice': 28.8, 'id': 261, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '吴学梁', 'modifyTime': '10:37', 'offlinePrice': 25.2, 'orderNo': 'YJD20180913103655000002', 'orderType': 3, 'planArrivalDate': '2018-09-13', 'refundStatus': 5, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 3, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/别克.jpg', 'brokerAmount': 550.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 65149, 'carBaseName': '2010款 林荫大道3.0-A/MT舒适型(国Ⅳ)', 'carColor': '色全', 'carInteriorColor': '棕色', 'carModelCode': '335001002', 'carSourceCode': 'CYN20180830000030', 'carSourceType': 2, 'carUnitPrice': 29.99, 'createTime': '2018-09-18 16:15', 'creatorName': '吴学梁', 'dealPrice': 29.99, 'deliverCarDate': '2018-09-18', 'evaluateStatus': 0, 'guidePrice': 32.99, 'id': 397, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '吴学梁', 'modifyTime': '10:37', 'offlinePrice': 29.99, 'orderNo': 'YJD20180918161509000003', 'orderType': 3, 'planArrivalDate': '2018-09-18', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 3, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg', 'brokerAmount': 600.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 61823, 'carBaseName': '2015款 阿斯顿马丁Vanquish-6.0-A/MT-Coupe', 'carColor': '黑色', 'carInteriorColor': '棕色', 'carModelCode': '382001004', 'carSourceCode': 'CYN20180830000032', 'carSourceType': 2, 'carUnitPrice': 493.8, 'createTime': '2018-09-18 11:23', 'creatorName': '吴学梁', 'dealPrice': 493.8, 'deliverCarDate': '2018-09-18', 'evaluateStatus': 0, 'guidePrice': 498.8, 'id': 343, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-09-22 18:00', 'offlinePrice': 493.8, 'orderNo': 'YJD20180918112341000003', 'orderType': 3, 'planArrivalDate': '2018-09-18', 'refundStatus': 3, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 3, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg', 'brokerAmount': 600.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 61823, 'carBaseName': '2015款 阿斯顿马丁Vanquish-6.0-A/MT-Coupe', 'carColor': '黑色', 'carInteriorColor': '棕色', 'carModelCode': '382001004', 'carSourceCode': 'CYN20180830000032', 'carSourceType': 2, 'carUnitPrice': 493.8, 'createTime': '2018-09-18 11:23', 'creatorName': '吴学梁', 'dealPrice': 493.8, 'deliverCarDate': '2018-09-18', 'evaluateStatus': 0, 'guidePrice': 498.8, 'id': 330, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-09-22 17:00', 'offlinePrice': 493.8, 'orderNo': 'YJD20180918112341000002', 'orderType': 3, 'planArrivalDate': '2018-09-18', 'refundStatus': 3, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 3, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg', 'brokerAmount': 6600.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 61823, 'carBaseName': '2015款 阿斯顿马丁Vanquish-6.0-A/MT-Coupe', 'carColor': '黑色', 'carInteriorColor': '棕色', 'carModelCode': '382001004', 'carSourceCode': 'CYN20180830000032', 'carSourceType': 2, 'carUnitPrice': 593.8, 'createTime': '2018-09-19 11:23', 'creatorName': '吴学梁', 'dealPrice': 593.8, 'deliverCarDate': '2018-09-19', 'evaluateStatus': 0, 'guidePrice': 598.8, 'id': 332, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-09-22 16:00', 'offlinePrice': 493.8, 'orderNo': 'YJD20180918112341000013', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 1, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 3, 'timeRemaining': -2486227568, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg', 'brokerAmount': 5000.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 106170, 'carBaseName': '2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口', 'carColor': '银色', 'carInteriorColor': '棕色', 'carModelCode': '395001004', 'carSourceCode': 'CYN20180830000031', 'carSourceType': 2, 'carUnitPrice': 140.0, 'createTime': '2018-09-18 09:51', 'creatorName': '吴学梁', 'dealPrice': 140.0, 'evaluateStatus': 0, 'guidePrice': 145.0, 'id': 285, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-09-22 00:00', 'offlinePrice': 140.0, 'orderNo': 'YJD20180918095151000001', 'orderType': 3, 'planArrivalDate': '2018-09-18', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg', 'brokerAmount': 600.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 61823, 'carBaseName': '2015款 阿斯顿马丁Vanquish-6.0-A/MT-Coupe', 'carColor': '黑色', 'carInteriorColor': '棕色', 'carModelCode': '382001004', 'carSourceCode': 'CYN20180830000032', 'carSourceType': 2, 'carUnitPrice': 493.8, 'createTime': '2018-09-21 14:27', 'creatorName': '吴学梁', 'dealPrice': 493.8, 'evaluateStatus': 0, 'guidePrice': 498.8, 'id': 383, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-09-22 00:00', 'offlinePrice': 493.8, 'orderNo': 'YJD20180921142753000001', 'orderType': 3, 'planArrivalDate': '2018-09-21', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-09-21 14:47', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 384, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-09-22 00:00', 'offlinePrice': 22.28, 'orderNo': 'YJD20180921144728000002', 'orderType': 3, 'planArrivalDate': '2018-09-21', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/别克.jpg', 'brokerAmount': 550.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 65149, 'carBaseName': '2010款 林荫大道3.0-A/MT舒适型(国Ⅳ)', 'carColor': '色全', 'carInteriorColor': '棕色', 'carModelCode': '335001002', 'carSourceCode': 'CYN20180830000030', 'carSourceType': 2, 'carUnitPrice': 29.99, 'createTime': '2018-09-19 14:20', 'creatorName': '吴学梁', 'dealPrice': 29.99, 'deliverCarDate': '2018-09-21', 'evaluateStatus': 0, 'guidePrice': 32.99, 'id': 322, 'licencePlateAreaCode': '110100', 'licencePlateAreaName': '北京市', 'modifierName': '吴学梁', 'modifyTime': '2018-09-21 15:42', 'offlinePrice': 29.99, 'orderNo': 'YJD20180919142033000002', 'orderType': 3, 'planArrivalDate': '2018-09-21', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 3, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/别克.jpg', 'brokerAmount': 550.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 65149, 'carBaseName': '2010款 林荫大道3.0-A/MT舒适型(国Ⅳ)', 'carColor': '色全', 'carInteriorColor': '棕色', 'carModelCode': '335001002', 'carSourceCode': 'CYN20180830000030', 'carSourceType': 2, 'carUnitPrice': 29.99, 'createTime': '2018-09-19 14:17', 'creatorName': '吴学梁', 'dealPrice': 29.99, 'evaluateStatus': 0, 'guidePrice': 32.99, 'id': 321, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-09-20 00:00', 'offlinePrice': 29.99, 'orderNo': 'YJD20180919141749000001', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-09-19 18:06', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 336, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '吴学梁', 'modifyTime': '2018-09-19 18:08', 'offlinePrice': 22.28, 'orderNo': 'YJD20180919180642000004', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 2, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-09-19 18:00', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 342, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '王二狗', 'modifyTime': '2018-09-19 18:01', 'offlinePrice': 22.28, 'orderNo': 'YJD20180919180020000003', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 1, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 1, 'timeRemaining': -2738169569, 'transactionNum': '1'}, {'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-09-19 18:00', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 380, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '王二狗', 'modifyTime': '2018-09-19 18:01', 'orderNo': 'YJD20180920140820888888', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 1, 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 1, 'timeRemaining': -2738169570, 'transactionNum': '1'}, {'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-09-19 18:00', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 382, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '王二狗', 'modifyTime': '2018-09-19 18:01', 'orderNo': 'YJD20180920141131888889', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 1, 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 1, 'timeRemaining': -2738169570, 'transactionNum': '1'}, {'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-09-19 18:00', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 395, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '王二狗', 'modifyTime': '2018-09-19 18:01', 'orderNo': 'YJD20181024103605888888', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 1, 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 1, 'timeRemaining': -2738169570, 'transactionNum': '1'}], 'end': 15, 'pagesize': 15, 'start': 1, 'totalItem': 37, 'totalPages': 3}, 'message': ''}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt17_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_broker_to_confirm</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt17_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt17_2'>通过</button>
+    <div id='div_pt17_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt17_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt17_2'>通过</button>
+    <div id='div_pt17_2' class="collapse in">
+    <pre>
+    
+pt17_2: 待经纪人确认订单列表 待经纪人确认订单列表
+TestCase 2: 待经纪人确认订单列表
+数据查询成功
+数据删除成功.
+数据插入成功
+url: http://10.10.13.75:8080/usob/cgtrade/queryBrokerOrderPageList.json?queryRequest={'brokerId': 10001, 'currentpage': 0, 'pagesize': 15, 'status': 1}&amp;signature=c93306f5cf3cdcfe4bf5331b982ecae6&amp;source=123456
+response content:  {'api': 'queryForPage', 'code': 10000, 'data': {'currentpage': 1, 'dataList': [{'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-09-19 18:00', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 342, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '王二狗', 'modifyTime': '2018-09-19 18:01', 'offlinePrice': 22.28, 'orderNo': 'YJD20180919180020000003', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 1, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 1, 'timeRemaining': -2738169805, 'transactionNum': '1'}, {'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-09-19 18:00', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 380, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '王二狗', 'modifyTime': '2018-09-19 18:01', 'orderNo': 'YJD20180920140820888888', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 1, 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 1, 'timeRemaining': -2738169805, 'transactionNum': '1'}, {'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-09-19 18:00', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 382, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '王二狗', 'modifyTime': '2018-09-19 18:01', 'orderNo': 'YJD20180920141131888889', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 1, 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 1, 'timeRemaining': -2738169806, 'transactionNum': '1'}, {'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-09-19 18:00', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 395, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '王二狗', 'modifyTime': '2018-09-19 18:01', 'orderNo': 'YJD20181024103605888888', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 1, 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 1, 'timeRemaining': -2738169806, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg', 'brokerAmount': 600.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 61823, 'carBaseName': '2015款 阿斯顿马丁Vanquish-6.0-A/MT-Coupe', 'carColor': '黑色', 'carInteriorColor': '棕色', 'carModelCode': '382001004', 'carSourceCode': 'CYN20180830000032', 'carSourceType': 2, 'carUnitPrice': 493.8, 'createTime': '2018-09-18 11:23', 'creatorName': '吴学梁', 'dealPrice': 493.8, 'evaluateStatus': 0, 'guidePrice': 498.8, 'id': 399, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '吴学梁', 'modifyTime': '2018-09-18 11:23', 'offlinePrice': 493.8, 'orderNo': 'YJD20180918112341000002', 'orderType': 3, 'planArrivalDate': '2018-09-18', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 1, 'timeRemaining': -2803034806, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 106170, 'carBaseName': '2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口', 'carColor': '银色', 'carInteriorColor': '棕色', 'carModelCode': '395001004', 'carSourceCode': 'CYN20180830000031', 'carSourceType': 2, 'carUnitPrice': 140.0, 'createTime': '2018-09-17 16:56', 'creatorName': '吴学梁', 'dealPrice': 140.0, 'evaluateStatus': 0, 'guidePrice': 145.0, 'id': 263, 'licencePlateAreaCode': '110100', 'licencePlateAreaName': '北京市', 'modifierName': '吴学梁', 'modifyTime': '2018-09-17 17:32', 'offlinePrice': 140.0, 'orderNo': 'YJD20180917165629000002', 'orderType': 3, 'planArrivalDate': '2018-09-17', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 1, 'timeRemaining': -2889434806, 'transactionNum': '1'}], 'end': 6, 'pagesize': 15, 'start': 1, 'totalItem': 6, 'totalPages': 1}, 'message': ''}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt17_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_customer_to_confirm</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt17_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt17_3'>通过</button>
+    <div id='div_pt17_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt17_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt17_3'>通过</button>
+    <div id='div_pt17_3' class="collapse in">
+    <pre>
+    
+pt17_3: 待车商确认订单列表 待车商确认订单列表
+TestCase 3: 待车商确认订单列表
+数据查询成功
+数据删除成功.
+数据插入成功
+url: http://10.10.13.75:8080/usob/cgtrade/queryBrokerOrderPageList.json?queryRequest={'brokerId': 10001, 'currentpage': 0, 'pagesize': 15, 'status': 2}&amp;signature=b51427e7d4fa7a7a15000f4a7bb78408&amp;source=123456
+response content:  {'api': 'queryForPage', 'code': 10000, 'data': {'currentpage': 1, 'dataList': [{'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg', 'brokerAmount': 800.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 61823, 'carBaseName': '2015款 阿斯顿马丁Vanquish-6.0-A/MT-Coupe', 'carColor': '黑色', 'carInteriorColor': '棕色', 'carModelCode': '382001004', 'carSourceCode': 'CYN20180830000032', 'carSourceType': 2, 'carUnitPrice': 493.8, 'createTime': '2018-09-18 11:23', 'creatorName': '吴学梁', 'dealPrice': 493.8, 'deliverCarDate': '2018-09-18', 'evaluateStatus': 0, 'guidePrice': 498.8, 'id': 400, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '吴学梁', 'modifyTime': '2018-09-18 11:37', 'offlinePrice': 493.8, 'orderNo': 'YJD20180918112341000003', 'orderType': 3, 'planArrivalDate': '2018-09-18', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 2, 'timeRemaining': -2847587007, 'transactionNum': '1'}], 'end': 1, 'pagesize': 15, 'start': 1, 'totalItem': 1, 'totalPages': 1}, 'message': ''}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt17_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_paid_fail</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt17_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt17_4'>通过</button>
+    <div id='div_pt17_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt17_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt17_4'>通过</button>
+    <div id='div_pt17_4' class="collapse in">
+    <pre>
+    
+pt17_4: 交易失败订单列表 交易失败订单列表
+TestCase 5: 交易失败订单列表
+url: http://10.10.13.75:8080/usob/cgtrade/queryBrokerOrderPageList.json?queryRequest={'brokerId': 10001, 'currentpage': 0, 'pagesize': 15, 'status': 4}&amp;signature=a561cdf4da85ee04bc7ee5d1dc68e334&amp;source=123456
+response content:  {'api': 'queryForPage', 'code': 10000, 'data': {'currentpage': 1, 'dataList': [{'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg', 'brokerAmount': 5000.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 106170, 'carBaseName': '2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口', 'carColor': '银色', 'carInteriorColor': '棕色', 'carModelCode': '395001004', 'carSourceCode': 'CYN20180830000031', 'carSourceType': 2, 'carUnitPrice': 140.0, 'createTime': '2018-09-18 09:51', 'creatorName': '吴学梁', 'dealPrice': 140.0, 'evaluateStatus': 0, 'guidePrice': 145.0, 'id': 285, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-09-22 00:00', 'offlinePrice': 140.0, 'orderNo': 'YJD20180918095151000001', 'orderType': 3, 'planArrivalDate': '2018-09-18', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg', 'brokerAmount': 600.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 61823, 'carBaseName': '2015款 阿斯顿马丁Vanquish-6.0-A/MT-Coupe', 'carColor': '黑色', 'carInteriorColor': '棕色', 'carModelCode': '382001004', 'carSourceCode': 'CYN20180830000032', 'carSourceType': 2, 'carUnitPrice': 493.8, 'createTime': '2018-09-21 14:27', 'creatorName': '吴学梁', 'dealPrice': 493.8, 'evaluateStatus': 0, 'guidePrice': 498.8, 'id': 383, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-09-22 00:00', 'offlinePrice': 493.8, 'orderNo': 'YJD20180921142753000001', 'orderType': 3, 'planArrivalDate': '2018-09-21', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-09-21 14:47', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 384, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-09-22 00:00', 'offlinePrice': 22.28, 'orderNo': 'YJD20180921144728000002', 'orderType': 3, 'planArrivalDate': '2018-09-21', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/别克.jpg', 'brokerAmount': 550.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 65149, 'carBaseName': '2010款 林荫大道3.0-A/MT舒适型(国Ⅳ)', 'carColor': '色全', 'carInteriorColor': '棕色', 'carModelCode': '335001002', 'carSourceCode': 'CYN20180830000030', 'carSourceType': 2, 'carUnitPrice': 29.99, 'createTime': '2018-09-19 14:17', 'creatorName': '吴学梁', 'dealPrice': 29.99, 'evaluateStatus': 0, 'guidePrice': 32.99, 'id': 321, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-09-20 00:00', 'offlinePrice': 29.99, 'orderNo': 'YJD20180919141749000001', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-09-19 18:06', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 336, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '吴学梁', 'modifyTime': '2018-09-19 18:08', 'offlinePrice': 22.28, 'orderNo': 'YJD20180919180642000004', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 2, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg', 'brokerAmount': 5000.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 106170, 'carBaseName': '2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口', 'carColor': '银色', 'carInteriorColor': '棕色', 'carModelCode': '395001004', 'carSourceCode': 'CYN20180830000031', 'carSourceType': 2, 'carUnitPrice': 140.0, 'createTime': '2018-09-17 18:10', 'creatorName': '吴学梁', 'dealPrice': 140.0, 'evaluateStatus': 0, 'guidePrice': 145.0, 'id': 264, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-09-18 00:00', 'offlinePrice': 140.0, 'orderNo': 'YJD20180917181052000002', 'orderType': 3, 'planArrivalDate': '2018-09-17', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/宝马.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90299, 'carBaseName': '2018款 宝马318i-1.5T-A/MT(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '376001001', 'carSourceCode': 'CYN20180814000013', 'carSourceType': 2, 'carUnitPrice': 25.2, 'createTime': '2018-09-13 10:32', 'creatorName': '吴学梁', 'dealPrice': 25.2, 'evaluateStatus': 0, 'guidePrice': 28.8, 'id': 260, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '吴学梁', 'modifyTime': '2018-09-13 10:34', 'offlinePrice': 25.2, 'orderNo': 'YJD20180913103251000001', 'orderType': 3, 'planArrivalDate': '2018-09-13', 'refundStatus': 2, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/宝马.jpg', 'brokerAmount': 5000.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 87725, 'carBaseName': '2018款 宝马X1-sDrive18Li-1.5T-A/MT尊享型前驱(国Ⅴ)', 'carColor': '棕色', 'carInteriorColor': '红色', 'carModelCode': '376001003', 'carSourceCode': 'CYN20180820000004', 'carSourceType': 2, 'carUnitPrice': 28.6, 'createTime': '2018-08-22 09:18', 'creatorName': '吴学梁', 'dealPrice': 28.6, 'evaluateStatus': 0, 'guidePrice': 30.6, 'id': 244, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-08-25 09:00', 'offlinePrice': 28.6, 'orderNo': 'YJD20180822091831000002', 'orderType': 3, 'planArrivalDate': '2018-08-22', 'refundStatus': 4, 'remark': '', 'sellerCompanyId': 13968, 'sellerCompanyName': '杭州直营1(勿动)', 'sellerCompanyType': '1', 'sellerId': 14033, 'sellerName': '金梦娜', 'sellerPhoneNum': '15271061373', 'status': 4, 'transactionNum': '1'}, {'brandLogo': '/carlogo/奔腾.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 104228, 'carBaseName': '2018款 奔腾B50-1.4T-A/MT-20周年纪念版(国Ⅴ)', 'carColor': '黑色', 'carInteriorColor': '黑色', 'carModelCode': '343001002', 'carSourceType': 1, 'carUnitPrice': 9.58, 'createTime': '2018-08-22 09:47', 'creatorName': '吴学梁', 'dealPrice': 9.58, 'evaluateStatus': 0, 'guidePrice': 10.58, 'id': 245, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-08-25 09:00', 'offlinePrice': 9.58, 'orderNo': 'YJD20180822094740000003', 'orderType': 3, 'planArrivalDate': '2018-08-22', 'refundStatus': 4, 'remark': '', 'sellerCompanyId': 13968, 'sellerCompanyName': '杭州直营1(勿动)', 'sellerCompanyType': '1', 'sellerId': 14033, 'sellerName': '金梦娜', 'sellerPhoneNum': '15271061373', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/宝马.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90299, 'carBaseName': '2018款 宝马318i-1.5T-A/MT(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '376001001', 'carSourceCode': 'CYN20180814000013', 'carSourceType': 2, 'carUnitPrice': 25.2, 'createTime': '2018-08-21 10:20', 'creatorName': '吴学梁', 'dealPrice': 25.2, 'evaluateStatus': 0, 'guidePrice': 28.8, 'id': 240, 'licencePlateAreaCode': '340600', 'licencePlateAreaName': '淮北市', 'modifierName': '系统定时', 'modifyTime': '2018-08-25 00:00', 'offlinePrice': 25.2, 'orderNo': 'YJD20180821102045000001', 'orderType': 3, 'planArrivalDate': '2018-08-21', 'refundStatus': 1, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'timeRemaining': -4963029065, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/宝马.jpg', 'brokerAmount': 5000.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 87725, 'carBaseName': '2018款 宝马X1-sDrive18Li-1.5T-A/MT尊享型前驱(国Ⅴ)', 'carColor': '棕色', 'carInteriorColor': '红色', 'carModelCode': '376001003', 'carSourceCode': 'CYN20180820000004', 'carSourceType': 2, 'carUnitPrice': 28.6, 'createTime': '2018-08-22 09:18', 'creatorName': '吴学梁', 'dealPrice': 28.6, 'evaluateStatus': 0, 'guidePrice': 30.6, 'id': 243, 'licencePlateAreaCode': '500100', 'licencePlateAreaName': '重庆市', 'modifierName': '系统定时', 'modifyTime': '2018-08-23 00:00', 'offlinePrice': 28.6, 'orderNo': 'YJD20180822091817000001', 'orderType': 3, 'planArrivalDate': '2018-08-22', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 13968, 'sellerCompanyName': '杭州直营1(勿动)', 'sellerCompanyType': '1', 'sellerId': 14033, 'sellerName': '金梦娜', 'sellerPhoneNum': '15271061373', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-08-14 15:00', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 214, 'licencePlateAreaCode': '340100', 'licencePlateAreaName': '合肥市', 'modifierName': '系统定时', 'modifyTime': '2018-08-17 18:00', 'offlinePrice': 22.28, 'orderNo': 'YJD20180814150029000002', 'orderType': 3, 'planArrivalDate': '2018-08-14', 'refundStatus': 4, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 64059, 'carBaseName': '1999款 奥迪200-2.4-MT(国Ⅰ)', 'carColor': '黑色', 'carInteriorColor': '棕色', 'carModelCode': '301001001', 'carSourceCode': 'CYN20180730000001', 'carSourceType': 2, 'carUnitPrice': 31.5, 'createTime': '2018-07-30 18:02', 'creatorName': '吴学梁', 'dealPrice': 31.5, 'evaluateStatus': 0, 'guidePrice': 43.5, 'id': 188, 'licencePlateAreaCode': '340200', 'licencePlateAreaName': '芜湖市', 'modifierName': '系统定时', 'modifyTime': '2018-08-16 10:28', 'offlinePrice': 31.5, 'orderNo': 'YJD20180730180200000002', 'orderType': 3, 'planArrivalDate': '2018-07-30', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100024, 'sellerCompanyName': '中正信造价咨询有限公司', 'sellerCompanyType': '1', 'sellerId': 47840, 'sellerName': '安逸塞', 'sellerPhoneNum': '13212341234', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'brokerAmount': 5005.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 66526, 'carBaseName': '1992款 奥迪100-2.0-MT(化)', 'carColor': '白色', 'carInteriorColor': '色全', 'carModelCode': '301001002', 'carSourceCode': 'CYN20180204000004', 'carSourceType': 2, 'carUnitPrice': 30.0, 'createTime': '2018-08-09 10:48', 'creatorName': '吴学梁', 'dealPrice': 30.0, 'evaluateStatus': 0, 'guidePrice': 32.0, 'id': 208, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-08-16 10:28', 'offlinePrice': 30.0, 'orderNo': 'YJD20180809104821000001', 'orderType': 3, 'planArrivalDate': '2018-08-09', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 14054, 'sellerCompanyName': '你是一只猪', 'sellerCompanyType': '2', 'sellerId': 13104, 'sellerName': '笑笑', 'sellerPhoneNum': '15700179865', 'status': 4, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90195, 'carBaseName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001005', 'carSourceCode': 'CYN20180726000002', 'carSourceType': 2, 'carUnitPrice': 22.28, 'createTime': '2018-08-14 14:57', 'creatorName': '吴学梁', 'dealPrice': 22.28, 'evaluateStatus': 0, 'guidePrice': 29.28, 'id': 213, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-08-16 10:28', 'offlinePrice': 22.28, 'orderNo': 'YJD20180814145753000001', 'orderType': 3, 'planArrivalDate': '2018-08-14', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 4, 'transactionNum': '1'}], 'end': 15, 'pagesize': 15, 'start': 1, 'totalItem': 19, 'totalPages': 2}, 'message': ''}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt17_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_paid_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt17_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt17_5'>通过</button>
+    <div id='div_pt17_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt17_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt17_5'>通过</button>
+    <div id='div_pt17_5' class="collapse in">
+    <pre>
+    
+pt17_5: 交易成功订单列表 交易成功订单列表
+TestCase 4: 交易成功订单列表
+url: http://10.10.13.75:8080/usob/cgtrade/queryBrokerOrderPageList.json?queryRequest={'brokerId': 10001, 'currentpage': 0, 'pagesize': 15, 'status': 3}&amp;signature=a06c16af0de7d6fd0e4b864be899bded&amp;source=123456
+response content:  {'api': 'queryForPage', 'code': 10000, 'data': {'currentpage': 1, 'dataList': [{'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/宝马.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90299, 'carBaseName': '2018款 宝马318i-1.5T-A/MT(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '376001001', 'carSourceCode': 'CYN20180814000013', 'carSourceType': 2, 'carUnitPrice': 25.2, 'createTime': '2018-09-13 10:36', 'creatorName': '吴学梁', 'dealPrice': 25.2, 'deliverCarDate': '2018-09-13', 'evaluateStatus': 0, 'guidePrice': 28.8, 'id': 261, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '吴学梁', 'modifyTime': '10:37', 'offlinePrice': 25.2, 'orderNo': 'YJD20180913103655000002', 'orderType': 3, 'planArrivalDate': '2018-09-13', 'refundStatus': 5, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 3, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/别克.jpg', 'brokerAmount': 550.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 65149, 'carBaseName': '2010款 林荫大道3.0-A/MT舒适型(国Ⅳ)', 'carColor': '色全', 'carInteriorColor': '棕色', 'carModelCode': '335001002', 'carSourceCode': 'CYN20180830000030', 'carSourceType': 2, 'carUnitPrice': 29.99, 'createTime': '2018-09-18 16:15', 'creatorName': '吴学梁', 'dealPrice': 29.99, 'deliverCarDate': '2018-09-18', 'evaluateStatus': 0, 'guidePrice': 32.99, 'id': 397, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '吴学梁', 'modifyTime': '10:37', 'offlinePrice': 29.99, 'orderNo': 'YJD20180918161509000003', 'orderType': 3, 'planArrivalDate': '2018-09-18', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 3, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg', 'brokerAmount': 6600.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 61823, 'carBaseName': '2015款 阿斯顿马丁Vanquish-6.0-A/MT-Coupe', 'carColor': '黑色', 'carInteriorColor': '棕色', 'carModelCode': '382001004', 'carSourceCode': 'CYN20180830000032', 'carSourceType': 2, 'carUnitPrice': 593.8, 'createTime': '2018-09-19 11:23', 'creatorName': '吴学梁', 'dealPrice': 593.8, 'deliverCarDate': '2018-09-19', 'evaluateStatus': 0, 'guidePrice': 598.8, 'id': 332, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-09-22 16:00', 'offlinePrice': 493.8, 'orderNo': 'YJD20180918112341000013', 'orderType': 3, 'planArrivalDate': '2018-09-19', 'refundStatus': 1, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 3, 'timeRemaining': -2486228137, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/别克.jpg', 'brokerAmount': 550.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 65149, 'carBaseName': '2010款 林荫大道3.0-A/MT舒适型(国Ⅳ)', 'carColor': '色全', 'carInteriorColor': '棕色', 'carModelCode': '335001002', 'carSourceCode': 'CYN20180830000030', 'carSourceType': 2, 'carUnitPrice': 29.99, 'createTime': '2018-09-19 14:20', 'creatorName': '吴学梁', 'dealPrice': 29.99, 'deliverCarDate': '2018-09-21', 'evaluateStatus': 0, 'guidePrice': 32.99, 'id': 322, 'licencePlateAreaCode': '110100', 'licencePlateAreaName': '北京市', 'modifierName': '吴学梁', 'modifyTime': '2018-09-21 15:42', 'offlinePrice': 29.99, 'orderNo': 'YJD20180919142033000002', 'orderType': 3, 'planArrivalDate': '2018-09-21', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 3, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/宝马.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 90299, 'carBaseName': '2018款 宝马318i-1.5T-A/MT(国Ⅴ)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '376001001', 'carSourceCode': 'CYN20180814000013', 'carSourceType': 2, 'carUnitPrice': 25.2, 'createTime': '2018-08-21 10:21', 'creatorName': '吴学梁', 'dealPrice': 25.2, 'deliverCarDate': '2018-08-21', 'evaluateStatus': 2, 'guidePrice': 28.8, 'id': 241, 'licencePlateAreaCode': '820100', 'licencePlateAreaName': '澳门', 'modifierName': '系统定时', 'modifyTime': '2018-08-24 17:09', 'offlinePrice': 25.2, 'orderNo': 'YJD20180821102106000002', 'orderType': 3, 'planArrivalDate': '2018-08-21', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 3, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奔驰.jpg', 'brokerAmount': 10801.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 99832, 'carBaseName': '2018款 奔驰C180L-1.6T-A/MT动感型运动版(国Ⅴ)', 'carColor': '白色', 'carInteriorColor': '色全', 'carModelCode': '369001001', 'carSourceCode': 'CYN20180814000014', 'carSourceType': 2, 'carUnitPrice': 24.88, 'createTime': '2018-08-21 10:22', 'creatorName': '吴学梁', 'dealPrice': 24.88, 'deliverCarDate': '2018-08-21', 'evaluateStatus': 0, 'guidePrice': 31.28, 'id': 242, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '系统定时', 'modifyTime': '2018-08-24 10:00', 'offlinePrice': 24.88, 'orderNo': 'YJD20180821102229000003', 'orderType': 3, 'planArrivalDate': '2018-08-21', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 3, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'brokerAmount': 666.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 61622, 'carBaseName': '1992款 奥迪100-1.8-MT(化)', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '301001002', 'carSourceCode': 'CYN20180409000003', 'carSourceType': 2, 'carUnitPrice': 28.0, 'createTime': '2018-08-09 14:49', 'creatorName': '吴学梁', 'dealPrice': 28.0, 'deliverCarDate': '2018-08-09', 'evaluateStatus': 3, 'guidePrice': 30.0, 'id': 211, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '吴学梁', 'modifyTime': '2018-08-09 14:56', 'offlinePrice': 28.0, 'orderNo': 'YJD20180809144955000004', 'orderType': 3, 'planArrivalDate': '2018-08-09', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 13968, 'sellerCompanyName': '杭州直营1(勿动)', 'sellerCompanyType': '1', 'sellerId': 14033, 'sellerName': '金梦娜', 'sellerPhoneNum': '15271061373', 'status': 3, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/安驰.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 52875, 'carBaseName': '2014款 瑞驰K3-2.8-MT精英版长轴HFC4DA1-1C柴油(国Ⅳ)', 'carColor': '棕色', 'carInteriorColor': '棕色', 'carModelCode': '380001005', 'carSourceCode': 'CYN20180412000003', 'carSourceType': 2, 'carUnitPrice': 4.48, 'createTime': '2018-07-23 17:25', 'creatorName': '吴学梁', 'dealPrice': 4.48, 'deliverCarDate': '2018-07-23', 'evaluateStatus': 3, 'guidePrice': 5.48, 'id': 68, 'licencePlateAreaCode': '500100', 'licencePlateAreaName': '重庆市', 'modifierName': '吴学梁', 'modifyTime': '2018-07-23 19:17', 'orderNo': 'YJD20180723172502000020', 'orderType': 3, 'planArrivalDate': '2018-07-25', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 14054, 'sellerCompanyName': '你是一只猪', 'sellerCompanyType': '2', 'sellerId': 13104, 'sellerName': '笑笑', 'sellerPhoneNum': '15700179865', 'status': 3, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg', 'brokerAmount': 501.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 105135, 'carBaseName': '2018款 保时捷911-GT3-RS-4.0-A/MT后驱双离合PDK', 'carColor': '色全', 'carInteriorColor': '色全', 'carModelCode': '395001003', 'carSourceCode': 'CYN20180718000002', 'carSourceType': 2, 'carUnitPrice': 250.0, 'createTime': '2018-07-23 17:23', 'creatorName': '吴学梁', 'dealPrice': 250.0, 'deliverCarDate': '2018-07-23', 'evaluateStatus': 3, 'guidePrice': 250.0, 'id': 67, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '吴学梁', 'modifyTime': '2018-07-23 17:26', 'orderNo': 'YJD20180723172357000019', 'orderType': 3, 'planArrivalDate': '2018-07-27', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 2495, 'sellerCompanyName': '营山金典车业有限公司', 'sellerCompanyType': '1', 'sellerId': 13005, 'sellerName': '王建峰', 'sellerPhoneNum': '18188733301', 'status': 3, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/本田.jpg', 'brokerAmount': 500.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 100023, 'carBaseName': '2016款 思域1.0T-MT舒适版180TURBO(国Ⅴ)', 'carColor': '棕色', 'carInteriorColor': '黑色', 'carModelCode': '331001001', 'carSourceCode': 'CYN20180625000019', 'carSourceType': 2, 'carUnitPrice': 10.0, 'createTime': '2018-07-23 16:50', 'creatorName': '吴学梁', 'dealPrice': 10.0, 'deliverCarDate': '2018-07-24', 'evaluateStatus': 1, 'guidePrice': 9.59, 'id': 66, 'licencePlateAreaCode': '110100', 'licencePlateAreaName': '北京市', 'modifierName': '吴学梁', 'modifyTime': '2018-07-23 16:54', 'orderNo': 'YJD20180723165037000018', 'orderType': 3, 'planArrivalDate': '2018-07-23', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 2495, 'sellerCompanyName': '营山金典车业有限公司', 'sellerCompanyType': '1', 'sellerId': 13005, 'sellerName': '王建峰', 'sellerPhoneNum': '18188733301', 'status': 3, 'transactionNum': '1'}], 'end': 10, 'pagesize': 15, 'start': 1, 'totalItem': 10, 'totalPages': 1}, 'message': ''}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt17_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_to_pay</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt17_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt17_6'>通过</button>
+    <div id='div_pt17_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt17_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt17_6'>通过</button>
+    <div id='div_pt17_6' class="collapse in">
+    <pre>
+    
+pt17_6: 待车商支付订单列表 待车商支付订单列表
+TestCase 1: 待车商支付订单列表
+数据查询成功
+数据删除成功.
+数据插入成功
+url: http://10.10.13.75:8080/usob/cgtrade/queryBrokerOrderPageList.json?queryRequest={'status': 0, 'brokerId': 10001, 'currentpage': 0, 'pagesize': 15}&amp;signature=5ed84f915fe34798cdf09275b0e252a2&amp;source=123456
+response content:  {'api': 'queryForPage', 'code': 10000, 'data': {'currentpage': 1, 'dataList': [{'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg', 'brokerAmount': 5000.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 106170, 'carBaseName': '2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口', 'carColor': '银色', 'carInteriorColor': '棕色', 'carModelCode': '395001004', 'carSourceCode': 'CYN20180830000031', 'carSourceType': 2, 'carUnitPrice': 140.0, 'createTime': '2018-09-18 09:51', 'creatorName': '吴学梁', 'dealPrice': 140.0, 'evaluateStatus': 0, 'guidePrice': 145.0, 'id': 401, 'licencePlateAreaCode': '330100', 'licencePlateAreaName': '杭州市', 'modifierName': '吴学梁', 'modifyTime': '2018-09-18 09:51', 'offlinePrice': 140.0, 'orderNo': 'YJD20180918095151000001', 'orderType': 3, 'planArrivalDate': '2018-09-18', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 0, 'timeRemaining': -3062235338, 'transactionNum': '1'}, {'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg', 'brokerAmount': 5000.0, 'brokerId': 10001, 'brokerName': '吴学梁', 'brokerPhoneNum': '18867520068', 'carBaseId': 106170, 'carBaseName': '2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口', 'carColor': '银色', 'carInteriorColor': '棕色', 'carModelCode': '395001004', 'carSourceCode': 'CYN20180830000031', 'carSourceType': 2, 'carUnitPrice': 140.0, 'createTime': '2018-09-17 16:56', 'creatorName': '吴学梁', 'dealPrice': 140.0, 'evaluateStatus': 0, 'guidePrice': 145.0, 'id': 398, 'licencePlateAreaCode': '110100', 'licencePlateAreaName': '北京市', 'modifierName': '吴学梁', 'modifyTime': '2018-09-17 16:56', 'offlinePrice': 140.0, 'orderNo': 'YJD20180917165629000001', 'orderType': 3, 'planArrivalDate': '2018-09-17', 'refundStatus': 0, 'remark': '', 'sellerCompanyId': 100012, 'sellerCompanyName': '王二狗开的小超市', 'sellerCompanyType': '1', 'sellerId': 47826, 'sellerName': '王二狗', 'sellerPhoneNum': '18867520068', 'status': 0, 'timeRemaining': -3148635339, 'transactionNum': '1'}], 'end': 2, 'pagesize': 15, 'start': 1, 'totalItem': 2, 'totalPages': 1}, 'message': ''}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Wechat_Applet.W_queryBrokerOrderVoucher.QueryBrokerOrderVoucher</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c18',1)" class="detail" id='c18'>详细</a></td>
+</tr>
+
+<tr id='pt18_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_confirmation</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt18_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt18_1'>通过</button>
+    <div id='div_pt18_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt18_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt18_1'>通过</button>
+    <div id='div_pt18_1' class="collapse in">
+    <pre>
+    
+pt18_1: 确认成交详情 确认成交详情
+TestCase 1: 确认成交详情
+url: http://10.10.13.75:8080/usob/cgtrade/queryBrokerOrderVoucher.json?queryRequest={'brokerId': '10001', 'orderNo': 'YJD20180821102229000003'}&amp;signature=e35be4d0883141301da5d8ba19bdfd55&amp;source=123456
+response content:  {'api': 'getOrderVoucherInfoByOrderNo', 'code': 10000, 'data': {'arrivalVoucher': [], 'brokerAmount': 10801.0, 'brokerId': 10001, 'buyCarVoucher': ['http://cdn-file.cheguo.com/files/2018-08-21/201808211023172063086.jpg'], 'carBaseName': '2018款 奔驰C180L-1.6T-A/MT动感型运动版(国Ⅴ)', 'dealPrice': 24.88, 'deliverCarDate': '2018-08-21', 'orderNo': 'YJD20180821102229000003', 'orderType': 3, 'sellerId': 47826}, 'message': ''}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Wechat_Applet.W_saveBrokerUserFormId.SaveBrokerUserFormId</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c19',1)" class="detail" id='c19'>详细</a></td>
+</tr>
+
+<tr id='pt19_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_get_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt19_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt19_1'>通过</button>
+    <div id='div_pt19_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt19_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt19_1'>通过</button>
+    <div id='div_pt19_1' class="collapse in">
+    <pre>
+    
+pt19_1: form_id保存成功 form_id保存成功
+TestCase 1: form_id保存成功
+数据查询成功
+数据删除成功.
+url: http://10.10.13.75:8080/dealer/saveBrokerUserFormId.json?brokerId=10001&amp;formId=3c55795a3ab1701e1aab54a188e1e111&amp;signature=d7683069b476c6ea4f21b8fb9f3a5d2a&amp;source=123456
+response content:  {'code': 10000, 'api': 'saveBrokerUserFormId', 'message': 'success'}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+数据查询成功
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Wechat_Applet.W_saveCustomerServiceHandle.SaveCustomerServiceHandle</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c20',1)" class="detail" id='c20'>详细</a></td>
+</tr>
+
+<tr id='pt20_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_get_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt20_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt20_1'>通过</button>
+    <div id='div_pt20_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt20_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt20_1'>通过</button>
+    <div id='div_pt20_1' class="collapse in">
+    <pre>
+    
+pt20_1: TestCase 1: 经纪人客服申诉成功
+数据查询成功
+数据删除成功.
+数据插入成功
+数据查询成功
+数据删除失败 (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DELETE FROM trans.trade_order_oper_log WHERE order_no='YJD20180918112341000002' ' at line 1")
+url: http://10.10.13.75:8080/usob/cgtrade/saveCustomerServiceHandle.json?orderInfo={'appealType': 'agent', 'applyDesc': 'good', 'orderNo': 'YJD20180918112341000003', 'orderType': 3, 'photoProof': 'http://cdn-file.cheguo.com/files/2018-09-19/201809191619445685497.jpg', 'whoApply': 1}&amp;signature=8c6e4e8f8bb5489d502b5cad7987ee1e&amp;source=123456
+response content:  {'api': 'saveCustomerServiceHandle', 'code': 10000, 'message': 'success'}
+code verify is beginning...
+message verify is beginning...
+数据查询成功
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>Wechat_Applet.W_sendValidataCode.SendValidataCode</td>
+    <td class="text-center">2</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c21',2)" class="detail" id='c21'>详细</a></td>
+</tr>
+
+<tr id='pt21_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_repeat_fail</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt21_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt21_1'>通过</button>
+    <div id='div_pt21_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt21_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt21_1'>通过</button>
+    <div id='div_pt21_1' class="collapse in">
+    <pre>
+    
+pt21_1: TestCase 1: 验证码已发送，成功发送验证码
+/dealer/sendvalidatecode.json
+url: http://10.10.13.75:8080/dealer/sendvalidatecode.json?invokeType=20&amp;phone=18867520068&amp;signature=589f9e341eca8079f33e80adb3b7b3b3&amp;source=123456
+response content:  {'code': 10000, 'api': 'sendValidateCode', 'message': '验证码已发送'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+TestCase 2: 60s内仅能获取一次验证码
+/dealer/sendvalidatecode.json
+url: http://10.10.13.75:8080/dealer/sendvalidatecode.json?invokeType=20&amp;phone=18867520068&amp;signature=589f9e341eca8079f33e80adb3b7b3b3&amp;source=123456
+response content:  {'code': 20000, 'message': '60s内仅能获取一次验证码，请稍后再试'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft21_2' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft21_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft21_2'>失败</button>
+    <div id='div_ft21_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft21_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft21_2'>失败</button>
+    <div id='div_ft21_2' class="collapse in">
+    <pre>
+    
+ft21_2: 验证码已发送，成功发送验证码 验证码已发送，成功发送验证码
+TestCase 1: 验证码已发送，成功发送验证码
+数据删除成功.
+/dealer/sendvalidatecode.json
+url: http://10.10.13.75:8080/dealer/sendvalidatecode.json?invokeType=20&amp;phone=18867520068&amp;signature=589f9e341eca8079f33e80adb3b7b3b3&amp;source=123456
+response content:  {'code': 10000, 'api': 'sendValidateCode', 'message': '验证码已发送'}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+数据查询成功
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_sendValidataCode.py", line 85, in test_send_success
+    self.verify_received_mysql(serial=key-1)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_sendValidataCode.py", line 49, in verify_received_mysql
+    self.assertIsNotNone(SqlOperation().select_data(sql))
+AssertionError: unexpectedly None
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>Wechat_Applet.W_submitBrokerOrder.SubmitBrokerOrder</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c22',1)" class="detail" id='c22'>详细</a></td>
+</tr>
+
+<tr id='ft22_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_get_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_1'>错误</button>
+    <div id='div_ft22_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_1'>错误</button>
+    <div id='div_ft22_1' class="collapse in">
+    <pre>
+    
+ft22_1: Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_submitBrokerOrder.py", line 50, in test_get_success
+    raise ValueError("用例匹配失败：TestCase {}'s instruction is not Equal to CaseNum.".format(key))
+ValueError: 用例匹配失败：TestCase 1's instruction is not Equal to CaseNum.
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>Wechat_Applet.W_unBindCard.BrokerGetCarSourceDetail</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c23',1)" class="detail" id='c23'>详细</a></td>
+</tr>
+
+<tr id='ft23_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_unbind_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft23_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft23_1'>错误</button>
+    <div id='div_ft23_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft23_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft23_1'>错误</button>
+    <div id='div_ft23_1' class="collapse in">
+    <pre>
+    
+ft23_1: Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Wechat_Applet\W_unBindCard.py", line 16, in setUp
+    self.apiname = self.filecontent.get_apiname()  # 获取apiname用于获得url
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 58, in get_apiname
+    self.get_json_contents()
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\FileContent.py", line 23, in get_json_contents
+    self._global_dic = json.load(fp_object)
+  File "D:\Python\Python36\lib\json\__init__.py", line 299, in load
+    parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "D:\Python\Python36\lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "D:\Python\Python36\lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "D:\Python\Python36\lib\json\decoder.py", line 355, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 22 column 7 (char 445)
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>BClient.B_canPublishBrokerCarsrcList.CanPublishBrokerCarsrcList</td>
+    <td class="text-center">2</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c24',2)" class="detail" id='c24'>详细</a></td>
+</tr>
+
+<tr id='pt24_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_search_release</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt24_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt24_1'>通过</button>
+    <div id='div_pt24_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt24_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt24_1'>通过</button>
+    <div id='div_pt24_1' class="collapse in">
+    <pre>
+    
+pt24_1: 已发布 已发布
+TestCase 2: 已发布
+url: http://10.10.13.75:8080/usob/carsrc/canPublishBrokerCarsrcList.json?requestParam={'companyId': 100012, 'currentPage': 0, 'pageSize': '15', 'publishBrokerStatus': '1', 'userId': 13104}&amp;signature=e63188123fe5715128662ae9e32985c8&amp;source=123456
+b'{"api":"canPublishBrokerCarsrcList","code":10000,"data":{"currentpage":0,"dataList":[{"areaName":"\xe5\x8d\x97\xe5\x8c\xba","brandLogo":"https://cheguo.oss.aliyuncs.com/carlogo/\xe5\x88\xab\xe5\x85\x8b.jpg","brokerage":501.00,"carColor":"\xe9\xbb\x91\xe8\x89\xb2","carName":"2017\xe6\xac\xbe \xe5\x88\xab\xe5\x85\x8bGL8-2.5-A/MT-25S\xe8\x88\x92\xe9\x80\x82\xe5\x9e\x8b(\xe5\x9b\xbd\xe2\x85\xa4)","carSourceCode":"CYN20180830000029","carSourceId":6089,"carTrimColor":"\xe9\xbb\x91\xe8\x89\xb2","gmtModify":"2018-08-30 21:12:11","hasPic":false,"msrp":22.99,"offlinePrice":19.99,"offlinePriceType":1,"offlinePriceValue":"3","offlineSale":"yes","picFlag":0,"publishBrokerStatus":"1","salePrice":17.99,"sourceStatus":1,"sourceType":1},{"areaName":"\xe5\x8d\x97\xe5\x8c\xba","brandLogo":"https://cheguo.oss.aliyuncs.com/carlogo/\xe5\x88\xab\xe5\x85\x8b.jpg","brokerage":500.00,"carColor":"\xe8\x89\xb2\xe5\x85\xa8","carName":"2010\xe6\xac\xbe \xe6\x9e\x97\xe8\x8d\xab\xe5\xa4\xa7\xe9\x81\x933.0-A/MT\xe8\x88\x92\xe9\x80\x82\xe5\x9e\x8b(\xe5\x9b\xbd\xe2\x85\xa3)","carSourceCode":"CYN20180830000030","carSourceId":6090,"carTrimColor":"\xe6\xa3\x95\xe8\x89\xb2","gmtModify":"2018-08-30 21:13:00","hasPic":false,"msrp":32.99,"offlinePrice":29.99,"offlinePriceType":1,"offlinePriceValue":"3","offlineSale":"yes","picFlag":0,"publishBrokerStatus":"1","salePrice":27.99,"sourceStatus":1,"sourceType":2},{"areaName":"\xe5\x8d\x97\xe5\x8c\xba","brandLogo":"https://cheguo.oss.aliyuncs.com/carlogo/\xe4\xbf\x9d\xe6\x97\xb6\xe6\x8d\xb7.jpg","brokerage":5000.00,"carColor":"\xe9\x93\xb6\xe8\x89\xb2","carName":"2018\xe6\xac\xbe \xe4\xbf\x9d\xe6\x97\xb6\xe6\x8d\xb7Panamera-4-3.0T-A/MT\xe5\x9b\x9b\xe9\xa9\xb1\xe5\x8f\x8c\xe7\xa6\xbb\xe5\x90\x88PDK\xe5\x8a\xa0\xe8\xa7\x84\xe7\x89\x88\xe5\xb9\xb3\xe8\xa1\x8c\xe8\xbf\x9b\xe5\x8f\xa3","carSourceCode":"CYN20180830000031","carSourceId":6091,"carTrimColor":"\xe6\xa3\x95\xe8\x89\xb2","gmtModify":"2018-08-30 21:14:05","hasPic":false,"msrp":145.00,"offlinePrice":140.00,"offlinePriceType":1,"offlinePriceValue":"5","offlineSale":"yes","picFlag":0,"publishBrokerStatus":"1","salePrice":137.00,"sourceStatus":1,"sourceType":2},{"areaName":"\xe5\x8d\x97\xe5\x8c\xba","brandLogo":"https://cheguo.oss.aliyuncs.com/carlogo/\xe9\x98\xbf\xe6\x96\xaf\xe9\xa1\xbf\xe9\xa9\xac\xe4\xb8\x81.jpg","brokerage":600.00,"carColor":"\xe9\xbb\x91\xe8\x89\xb2","carName":"2015\xe6\xac\xbe \xe9\x98\xbf\xe6\x96\xaf\xe9\xa1\xbf\xe9\xa9\xac\xe4\xb8\x81Vanquish-6.0-A/MT-Coupe","carSourceCode":"CYN20180830000032","carSourceId":6092,"carTrimColor":"\xe6\xa3\x95\xe8\x89\xb2","gmtModify":"2018-08-30 21:15:08","hasPic":false,"msrp":498.80,"offlinePrice":493.80,"offlinePriceType":1,"offlinePriceValue":"5","offlineSale":"yes","picFlag":0,"publishBrokerStatus":"1","salePrice":493.80,"sourceStatus":1,"sourceType":2},{"areaName":"\xe4\xb8\x9c\xe5\x8c\xba","brandLogo":"https://cheguo.oss.aliyuncs.com/carlogo/\xe5\xae\x9d\xe9\xa9\xac.jpg","brokerage":500.00,"carColor":"\xe8\x89\xb2\xe5\x85\xa8","carName":"2018\xe6\xac\xbe \xe5\xae\x9d\xe9\xa9\xac318i-1.5T-A/MT(\xe5\x9b\xbd\xe2\x85\xa4)","carSourceCode":"CYN20180814000013","carSourceId":5864,"carTrimColor":"\xe8\x89\xb2\xe5\x85\xa8","gmtModify":"2018-08-22 17:12:27","hasPic":false,"msrp":28.80,"offlinePrice":25.20,"offlinePriceType":1,"offlinePriceValue":"3.6","offlineSale":"yes","picFlag":0,"publishBrokerStatus":"1","salePrice":23.80,"sourceStatus":1,"sourceType":3},{"areaName":"\xe5\x8d\x97\xe5\x8c\xba","brandLogo":"https://cheguo.oss.aliyuncs.com/carlogo/\xe5\xa5\xa5\xe8\xbf\xaa.jpg","brokerage":500.00,"carColor":"\xe8\x89\xb2\xe5\x85\xa8","carName":"2018\xe6\xac\xbe \xe5\xa5\xa5\xe8\xbf\xaaA4L-1.4T-A/MT-30TFSI-30\xe5\x91\xa8\xe5\xb9\xb4\xe8\xbf\x9b\xe5\x8f\x96\xe5\x9e\x8bDSG\xe5\x8f\x8c\xe7\xa6\xbb\xe5\x90\x88(\xe5\x9b\xbd\xe2\x85\xa4)","carSourceCode":"CYN20180726000002","carSourceId":5819,"carTrimColor":"\xe8\x89\xb2\xe5\x85\xa8","gmtModify":"2018-08-22 17:12:27","hasPic":false,"msrp":29.28,"offlinePrice":22.28,"offlinePriceType":1,"offlinePriceValue":"7","offlineSale":"yes","picFlag":0,"publishBrokerStatus":"1","salePrice":21.28,"sourceStatus":1,"sourceType":3}],"pagesize":15,"totalItem":6,"totalPages":1},"message":""}'
+response content:  {'api': 'canPublishBrokerCarsrcList', 'code': 10000, 'data': {'currentpage': 0, 'dataList': [{'areaName': '南区', 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/别克.jpg', 'brokerage': 501.0, 'carColor': '黑色', 'carName': '2017款 别克GL8-2.5-A/MT-25S舒适型(国Ⅴ)', 'carSourceCode': 'CYN20180830000029', 'carSourceId': 6089, 'carTrimColor': '黑色', 'gmtModify': '2018-08-30 21:12:11', 'hasPic': False, 'msrp': 22.99, 'offlinePrice': 19.99, 'offlinePriceType': 1, 'offlinePriceValue': '3', 'offlineSale': 'yes', 'picFlag': 0, 'publishBrokerStatus': '1', 'salePrice': 17.99, 'sourceStatus': 1, 'sourceType': 1}, {'areaName': '南区', 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/别克.jpg', 'brokerage': 500.0, 'carColor': '色全', 'carName': '2010款 林荫大道3.0-A/MT舒适型(国Ⅳ)', 'carSourceCode': 'CYN20180830000030', 'carSourceId': 6090, 'carTrimColor': '棕色', 'gmtModify': '2018-08-30 21:13:00', 'hasPic': False, 'msrp': 32.99, 'offlinePrice': 29.99, 'offlinePriceType': 1, 'offlinePriceValue': '3', 'offlineSale': 'yes', 'picFlag': 0, 'publishBrokerStatus': '1', 'salePrice': 27.99, 'sourceStatus': 1, 'sourceType': 2}, {'areaName': '南区', 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/保时捷.jpg', 'brokerage': 5000.0, 'carColor': '银色', 'carName': '2018款 保时捷Panamera-4-3.0T-A/MT四驱双离合PDK加规版平行进口', 'carSourceCode': 'CYN20180830000031', 'carSourceId': 6091, 'carTrimColor': '棕色', 'gmtModify': '2018-08-30 21:14:05', 'hasPic': False, 'msrp': 145.0, 'offlinePrice': 140.0, 'offlinePriceType': 1, 'offlinePriceValue': '5', 'offlineSale': 'yes', 'picFlag': 0, 'publishBrokerStatus': '1', 'salePrice': 137.0, 'sourceStatus': 1, 'sourceType': 2}, {'areaName': '南区', 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/阿斯顿马丁.jpg', 'brokerage': 600.0, 'carColor': '黑色', 'carName': '2015款 阿斯顿马丁Vanquish-6.0-A/MT-Coupe', 'carSourceCode': 'CYN20180830000032', 'carSourceId': 6092, 'carTrimColor': '棕色', 'gmtModify': '2018-08-30 21:15:08', 'hasPic': False, 'msrp': 498.8, 'offlinePrice': 493.8, 'offlinePriceType': 1, 'offlinePriceValue': '5', 'offlineSale': 'yes', 'picFlag': 0, 'publishBrokerStatus': '1', 'salePrice': 493.8, 'sourceStatus': 1, 'sourceType': 2}, {'areaName': '东区', 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/宝马.jpg', 'brokerage': 500.0, 'carColor': '色全', 'carName': '2018款 宝马318i-1.5T-A/MT(国Ⅴ)', 'carSourceCode': 'CYN20180814000013', 'carSourceId': 5864, 'carTrimColor': '色全', 'gmtModify': '2018-08-22 17:12:27', 'hasPic': False, 'msrp': 28.8, 'offlinePrice': 25.2, 'offlinePriceType': 1, 'offlinePriceValue': '3.6', 'offlineSale': 'yes', 'picFlag': 0, 'publishBrokerStatus': '1', 'salePrice': 23.8, 'sourceStatus': 1, 'sourceType': 3}, {'areaName': '南区', 'brandLogo': 'https://cheguo.oss.aliyuncs.com/carlogo/奥迪.jpg', 'brokerage': 500.0, 'carColor': '色全', 'carName': '2018款 奥迪A4L-1.4T-A/MT-30TFSI-30周年进取型DSG双离合(国Ⅴ)', 'carSourceCode': 'CYN20180726000002', 'carSourceId': 5819, 'carTrimColor': '色全', 'gmtModify': '2018-08-22 17:12:27', 'hasPic': False, 'msrp': 29.28, 'offlinePrice': 22.28, 'offlinePriceType': 1, 'offlinePriceValue': '7', 'offlineSale': 'yes', 'picFlag': 0, 'publishBrokerStatus': '1', 'salePrice': 21.28, 'sourceStatus': 1, 'sourceType': 3}], 'pagesize': 15, 'totalItem': 6, 'totalPages': 1}, 'message': ''}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt24_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_search_unrelease</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt24_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt24_2'>通过</button>
+    <div id='div_pt24_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt24_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt24_2'>通过</button>
+    <div id='div_pt24_2' class="collapse in">
+    <pre>
+    
+pt24_2: 未发布 未发布
+TestCase 1: 未发布
+url: http://10.10.13.75:8080/usob/carsrc/canPublishBrokerCarsrcList.json?requestParam={'companyId': 100012, 'currentPage': 0, 'pageSize': '15', 'publishBrokerStatus': '2', 'userId': 47826}&amp;signature=c692779db9887e31b024891e59f72aff&amp;source=123456
+b'{"api":"canPublishBrokerCarsrcList","code":10000,"data":{"currentpage":0,"dataList":[],"pagesize":15,"totalItem":0,"totalPages":0},"message":""}'
+response content:  {'api': 'canPublishBrokerCarsrcList', 'code': 10000, 'data': {'currentpage': 0, 'dataList': [], 'pagesize': 15, 'totalItem': 0, 'totalPages': 0}, 'message': ''}
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>BClient.B_getQuoteDetail.GetQuoteDetail</td>
+    <td class="text-center">4</td>
+    <td class="text-center">4</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c25',4)" class="detail" id='c25'>详细</a></td>
+</tr>
+
+<tr id='pt25_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_offer_expired</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt25_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt25_1'>通过</button>
+    <div id='div_pt25_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt25_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt25_1'>通过</button>
+    <div id='div_pt25_1' class="collapse in">
+    <pre>
+    
+pt25_1: 报价已过期状态查询成功 报价已过期状态查询成功
+TestCase 2: 报价已过期状态查询成功
+数据修改成功
+数据修改成功
+url: http://10.10.13.75:8080/dealer/carmodel/getQuoteDetail.json?quoteId=1&amp;signature=591af4c8f58e5ffea6a771098c4b0729&amp;source=123456
+response content:  {'code': 10000, 'data': {'expirydate': 3, 'sellCity': '全国', 'carName': '2018款 标致408-1.6T-A/MT改款350THP至尊版(国Ⅴ)', 'salePrice': '16.97', 'searchCarName': '吴学梁', 'quoteWay': 'downMoney', 'mtime': '2018-09-20 16:58:06', 'userId': 47826, 'colors': '色全/色全', 'quoteId': 1, 'cars': '标致408', 'invalidSecond': -2400350, 'quoteTime': '10:39', 'areaName': '南区', 'msrp': '18.97', 'quoteAmount': 1, 'commission': '500', 'expireDate': 'Sun Sep 23 16:58:06 CST 2018', 'quoteBaseList': [{'quoteDate': '10:39', 'quoteName': '王二狗'}], 'registCity': '杭州市', 'tel': '18867520068', 'quoteValue': '2', 'status': 2}, 'api': 'getQuoteDetail', 'message': '查询成功'}
+code verify is beginning...
+message verify is beginning...
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt25_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_offer_failure</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt25_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt25_2'>通过</button>
+    <div id='div_pt25_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt25_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt25_2'>通过</button>
+    <div id='div_pt25_2' class="collapse in">
+    <pre>
+    
+pt25_2: 报价已失效状态查询成功 报价已失效状态查询成功
+TestCase 4: 报价已失效状态查询成功
+数据修改成功
+数据修改成功
+url: http://10.10.13.75:8080/dealer/carmodel/getQuoteDetail.json?quoteId=1&amp;signature=591af4c8f58e5ffea6a771098c4b0729&amp;source=123456
+response content:  {'code': 10000, 'data': {'expirydate': 3, 'sellCity': '全国', 'carName': '2018款 标致408-1.6T-A/MT改款350THP至尊版(国Ⅴ)', 'salePrice': '16.97', 'searchCarName': '吴学梁', 'quoteWay': 'downMoney', 'mtime': '2018-09-20 16:58:06', 'userId': 47826, 'colors': '色全/色全', 'quoteId': 1, 'cars': '标致408', 'invalidSecond': -2400350, 'quoteTime': '10:39', 'areaName': '南区', 'msrp': '18.97', 'quoteAmount': 1, 'commission': '500', 'expireDate': 'Sun Sep 23 16:58:06 CST 2018', 'quoteBaseList': [{'quoteDate': '10:39', 'quoteName': '王二狗'}], 'registCity': '杭州市', 'tel': '18867520068', 'quoteValue': '2', 'status': 4}, 'api': 'getQuoteDetail', 'message': '查询成功'}
+code verify is beginning...
+message verify is beginning...
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt25_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_offer_withdraw</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt25_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt25_3'>通过</button>
+    <div id='div_pt25_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt25_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt25_3'>通过</button>
+    <div id='div_pt25_3' class="collapse in">
+    <pre>
+    
+pt25_3: 报价已撤回状态查询成功 报价已撤回状态查询成功
+TestCase 3: 报价已撤回状态查询成功
+数据修改成功
+数据修改成功
+url: http://10.10.13.75:8080/dealer/carmodel/getQuoteDetail.json?quoteId=1&amp;signature=591af4c8f58e5ffea6a771098c4b0729&amp;source=123456
+response content:  {'code': 10000, 'data': {'expirydate': 3, 'sellCity': '全国', 'carName': '2018款 标致408-1.6T-A/MT改款350THP至尊版(国Ⅴ)', 'salePrice': '16.97', 'searchCarName': '吴学梁', 'quoteWay': 'downMoney', 'mtime': '2018-09-20 16:58:06', 'userId': 47826, 'colors': '色全/色全', 'quoteId': 1, 'cars': '标致408', 'invalidSecond': -2400350, 'quoteTime': '10:39', 'areaName': '南区', 'msrp': '18.97', 'quoteAmount': 1, 'commission': '500', 'expireDate': 'Sun Sep 23 16:58:06 CST 2018', 'quoteBaseList': [{'quoteDate': '10:39', 'quoteName': '王二狗'}], 'registCity': '杭州市', 'tel': '18867520068', 'quoteValue': '2', 'status': 3}, 'api': 'getQuoteDetail', 'message': '查询成功'}
+code verify is beginning...
+message verify is beginning...
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt25_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_offering</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt25_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt25_4'>通过</button>
+    <div id='div_pt25_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt25_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt25_4'>通过</button>
+    <div id='div_pt25_4' class="collapse in">
+    <pre>
+    
+pt25_4: 报价中状态查询成功 报价中状态查询成功
+TestCase 1: 报价中状态查询成功
+数据修改成功
+数据修改成功
+url: http://10.10.13.75:8080/dealer/carmodel/getQuoteDetail.json?quoteId=1&amp;signature=591af4c8f58e5ffea6a771098c4b0729&amp;source=123456
+response content:  {'code': 10000, 'data': {'expirydate': 3, 'sellCity': '全国', 'carName': '2018款 标致408-1.6T-A/MT改款350THP至尊版(国Ⅴ)', 'salePrice': '16.97', 'searchCarName': '吴学梁', 'quoteWay': 'downMoney', 'mtime': '2018-09-20 16:58:06', 'userId': 47826, 'colors': '色全/色全', 'quoteId': 1, 'cars': '标致408', 'invalidSecond': -2400350, 'quoteTime': '10:39', 'areaName': '南区', 'msrp': '18.97', 'quoteAmount': 1, 'commission': '500', 'expireDate': 'Sun Sep 23 16:58:06 CST 2018', 'quoteBaseList': [{'quoteDate': '10:39', 'quoteName': '王二狗'}], 'registCity': '杭州市', 'tel': '18867520068', 'quoteValue': '2', 'status': 1}, 'api': 'getQuoteDetail', 'message': '查询成功'}
+code verify is beginning...
+message verify is beginning...
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>BClient.B_publishBroker.MyTestCase</td>
+    <td class="text-center">3</td>
+    <td class="text-center">3</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c26',3)" class="detail" id='c26'>详细</a></td>
+</tr>
+
+<tr id='pt26_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_cancel_publish</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt26_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt26_1'>通过</button>
+    <div id='div_pt26_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt26_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt26_1'>通过</button>
+    <div id='div_pt26_1' class="collapse in">
+    <pre>
+    
+pt26_1: 取消发布成功 取消发布成功
+TestCase 3: 取消发布成功
+url: http://10.10.13.75:8080/usob/carsrc/publishBroker.json?requestParam={'type': '2', 'carSourceId': 1, 'brokerage': 500}&amp;signature=f0e0ba25fc8bb0150bebf4bdd4f0915e&amp;source=123456
+response content:  {'api': 'carsrcPublishBroker', 'code': 10000, 'data': '成功', 'message': ''}
+code verify is beginning...
+message verify is beginning...
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt26_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_modify_commission</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt26_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt26_2'>通过</button>
+    <div id='div_pt26_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt26_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt26_2'>通过</button>
+    <div id='div_pt26_2' class="collapse in">
+    <pre>
+    
+pt26_2: 修改佣金成功 修改佣金成功
+TestCase 2: 修改佣金成功
+url: http://10.10.13.75:8080/usob/carsrc/publishBroker.json?requestParam={'type': '3', 'carSourceId': 1, 'brokerage': 600}&amp;signature=3dd7028981dcc01dabed07f9cfc2a7b4&amp;source=123456
+response content:  {'api': 'carsrcPublishBroker', 'code': 10000, 'data': '成功', 'message': ''}
+code verify is beginning...
+message verify is beginning...
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt26_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_publish_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt26_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt26_3'>通过</button>
+    <div id='div_pt26_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt26_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt26_3'>通过</button>
+    <div id='div_pt26_3' class="collapse in">
+    <pre>
+    
+pt26_3: 发布成功 发布成功
+TestCase 1: 发布成功
+url: http://10.10.13.75:8080/usob/carsrc/publishBroker.json?requestParam={'type': '1', 'carSourceId': 1, 'brokerage': 500}&amp;signature=fdd95d06416bd01a6e5fb20a506b4267&amp;source=123456
+response content:  {'api': 'carsrcPublishBroker', 'code': 10000, 'data': '成功', 'message': ''}
+code verify is beginning...
+message verify is beginning...
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Public_Api.P_getAllBank.BrokerGetCarSourceDetail</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c27',1)" class="detail" id='c27'>详细</a></td>
+</tr>
+
+<tr id='pt27_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_get_bank_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt27_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt27_1'>通过</button>
+    <div id='div_pt27_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt27_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt27_1'>通过</button>
+    <div id='div_pt27_1' class="collapse in">
+    <pre>
+    
+pt27_1: 成功获取支持的银行卡列表 成功获取支持的银行卡列表
+TestCase 1: 成功获取支持的银行卡列表
+url: http://10.10.13.75:8080/usob/cgpay/getAllBank.json?signature=d6a4597f1def3e12fac8891adce67abc&amp;source=123456
+response content:  {'api': 'getAllBank', 'code': 10000, 'data': [{'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ICBC.jpg', 'bankName': '工商银行', 'bankType': 'ICB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/ABC.jpg', 'bankName': '农业银行', 'bankType': 'ABC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/BOC.jpg', 'bankName': '中国银行', 'bankType': 'BOC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CCB.jpg', 'bankName': '建设银行', 'bankType': 'CCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/HXB.jpg', 'bankName': '华夏银行', 'bankType': 'HXB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PSBC.jpg', 'bankName': '储蓄银行', 'bankType': 'PSBC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CIB.jpg', 'bankName': '兴业银行', 'bankType': 'CIB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/SPDB.jpg', 'bankName': '浦发银行', 'bankType': 'PFCB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMBC.jpg', 'bankName': '民生银行', 'bankType': 'CMC'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CITIC.jpg', 'bankName': '中信银行', 'bankType': 'CCT'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/PAB.jpg', 'bankName': '平安银行', 'bankType': 'PDB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/COMM.jpg', 'bankName': '交通银行', 'bankType': 'BCM'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CMB.jpg', 'bankName': '招商银行', 'bankType': 'CMB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CEB.jpg', 'bankName': '光大银行', 'bankType': 'CEB'}, {'bankLogo': 'https://cheguo.oss.aliyuncs.com/banklogo/app/CZB.jpg', 'bankName': '浙商银行', 'bankType': 'CZB'}], 'message': '获取数据成功'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+data verify is beginning...
+data verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>Public_Api.P_updateQuote.UpdateQuote</td>
+    <td class="text-center">3</td>
+    <td class="text-center">2</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c28',3)" class="detail" id='c28'>详细</a></td>
+</tr>
+
+<tr id='pt28_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_change_commission</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt28_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt28_1'>通过</button>
+    <div id='div_pt28_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt28_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt28_1'>通过</button>
+    <div id='div_pt28_1' class="collapse in">
+    <pre>
+    
+pt28_1: 重新报价成功，修改佣金金额 重新报价成功，修改佣金金额
+TestCase 2: 重新报价成功，修改佣金金额
+url: http://10.10.13.75:8080/dealer/carmodel/updateQuote.json?request={'areaCode': 'south', 'areaName': 'aa', 'commission': '600', 'quoteId': 287, 'quoteValue': '5', 'quoteWay': 'downMoney', 'salePrice': '13.97', 'validDays': 3}&amp;signature=23b977158adacb339dff0b3464bfbb8c&amp;source=123456
+response content:  {'code': 10000, 'api': 'updateQuote', 'message': '报价成功'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt28_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_modify_inf</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt28_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt28_2'>通过</button>
+    <div id='div_pt28_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt28_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt28_2'>通过</button>
+    <div id='div_pt28_2' class="collapse in">
+    <pre>
+    
+pt28_2: 重新报价成功，修改其他信息 重新报价成功，修改其他信息
+TestCase 3: 重新报价成功，修改其他信息
+url: http://10.10.13.75:8080/dealer/carmodel/updateQuote.json?request={'areaCode': 'north', 'areaName': 'bb', 'commission': '600', 'quoteId': 287, 'quoteValue': '8', 'quoteWay': 'downMoney', 'salePrice': '10.97', 'validDays': 7, 'remark': 'fine'}&amp;signature=beded6ec9535d25fefd570bb34707b59&amp;source=123456
+b'{"code":10000,"api":"updateQuote","message":"\xe6\x8a\xa5\xe4\xbb\xb7\xe6\x88\x90\xe5\x8a\x9f"}'
+response content:  {'code': 10000, 'api': 'updateQuote', 'message': '报价成功'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+code verify is success.
+message verify is beginning...
+message verify is success.
+ALL END!!
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft28_3' class='none'>
+    <td class='failCase'><div class='testcase'>test_updatequote_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft28_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft28_3'>失败</button>
+    <div id='div_ft28_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft28_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft28_3'>失败</button>
+    <div id='div_ft28_3' class="collapse in">
+    <pre>
+    
+ft28_3: 重新报价成功，不修改报价详情 重新报价成功，不修改报价详情
+TestCase 1: 重新报价成功，不修改报价详情
+url: http://10.10.13.75:8080/dealer/carmodel/updateQuote.json?request={'areaCode': 'south', 'areaName': '南区', 'commission': '500', 'quoteId': 1, 'quoteValue': '2', 'quoteWay': 'downMoney', 'remark': 'auto_test.getQuoteDetail，勿动', 'salePrice': '16.97', 'validDays': 5}&amp;signature=f8b8eb77a450aea6db0575369a6209f4&amp;source=123456
+b'{"request" : "/dealer/carmodel/updateQuote.json","code" : "10003","message" : "signature verification failed."}'
+response content:  {'request': '/dealer/carmodel/updateQuote.json', 'code': '10003', 'message': 'signature verification failed.'}
+api verify is beginning...
+api verify is success.
+code verify is beginning...
+Traceback (most recent call last):
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\autoTest\Public_Api\P_updateQuote.py", line 53, in test_updatequote_success
+    self.verify.verify_code(expectresult=expectresult, result=json_result)
+  File "D:\Python-workplace\cheguo_auto\cheguo_auto\Public\Verify.py", line 44, in verify_code
+    msg="verify_code: The response code is {}.".format(result['code']))
+AssertionError: 10000 != 10003 : verify_code: The response code is 10003.
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>59</td>
+    <td>40</td>
+    <td>9</td>
+    <td>10</td>
+    <td>通过率：67.80%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+</body>
+</html>

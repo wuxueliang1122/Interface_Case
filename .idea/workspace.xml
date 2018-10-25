@@ -4,9 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/autoTest/Wechat_Applet/W_deleteSearchLog.py" line="64" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="931411f2-d74c-4977-b921-c56e8032f34c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="931411f2-d74c-4977-b921-c56e8032f34c" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +37,7 @@
     <session id="-2084785284">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
