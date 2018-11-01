@@ -4,7 +4,13 @@
     <bookmark url="file://$PROJECT_DIR$/autoTest/Wechat_Applet/W_deleteSearchLog.py" line="64" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="931411f2-d74c-4977-b921-c56e8032f34c" name="Default" comment="" />
+    <list default="true" id="931411f2-d74c-4977-b921-c56e8032f34c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Document/test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/autoTest/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/autoTest/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autoTest/记录" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runTestCase.py" beforeDir="false" afterPath="$PROJECT_DIR$/runTestCase.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,6 +18,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/Interface_case$runTestCase.coverage" NAME="runTestCase Coverage Results" MODIFIED="1541076332905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Interface_case$test.coverage" NAME="test Coverage Results" MODIFIED="1541076583167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/cheguo_auto$test.coverage" NAME="test Coverage Results" MODIFIED="1540201875853" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
@@ -74,22 +82,69 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-155869915">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="4" />
+          <entry key="记录" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="140" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="140" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FavoritesManager">
     <favorites_list name="cheguo_auto" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="20">
-                <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-              </first_editor>
-              <second_editor />
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Public/FileContent.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="660">
+              <caret line="33" column="15" lean-forward="true" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
+              <folding>
+                <element signature="e#16#27#0" expanded="true" />
+              </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/runTestCase.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="291">
+              <caret line="28" column="37" lean-forward="true" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+              <folding>
+                <element signature="e#16#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -113,7 +168,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Document/Wechat_Applet/submitBrokerOrder" />
         <option value="$PROJECT_DIR$/Document/Wechat_Applet/getCarSourceAllByEs" />
         <option value="$PROJECT_DIR$/Document/Wechat_Applet/getIdentityInfo" />
         <option value="$PROJECT_DIR$/Document/Wechat_Applet/test.json" />
@@ -152,18 +206,19 @@
         <option value="$PROJECT_DIR$/Document/B_Client/canPublishBrokerCarsrcList.json" />
         <option value="$PROJECT_DIR$/autoTest/BClient/B_getQuoteDetail.py" />
         <option value="$PROJECT_DIR$/Document/B_Client/publishBroker.json" />
-        <option value="$PROJECT_DIR$/Public/FileContent.py" />
         <option value="$PROJECT_DIR$/Public/MapUtil.py" />
         <option value="$PROJECT_DIR$/autoTest/main_process.py" />
         <option value="$PROJECT_DIR$/Document/Wechat_Applet/orderEvaluate.json" />
         <option value="$PROJECT_DIR$/Document/Public_Api/updateQuote.json" />
-        <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/Document/B_Client/getQuoteDetail.json" />
         <option value="$PROJECT_DIR$/autoTest/BClient/B_canPublishBrokerCarsrcList.py" />
         <option value="$PROJECT_DIR$/autoTest/BClient/B_publishBroker.py" />
         <option value="$PROJECT_DIR$/Public/Request.py" />
-        <option value="$PROJECT_DIR$/runTestCase.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/Public/FileContent.py" />
+        <option value="$PROJECT_DIR$/autoTest/__init__.py" />
+        <option value="$PROJECT_DIR$/runTestCase.py" />
+        <option value="$PROJECT_DIR$/test.py" />
       </list>
     </option>
   </component>
@@ -173,7 +228,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="y" value="23" />
     <option name="width" value="1680" />
     <option name="height" value="1027" />
@@ -219,35 +274,12 @@
               <item name="Interface_case" type="b2602c69:ProjectViewProjectNode" />
               <item name="Interface_case" type="462c0819:PsiDirectoryNode" />
               <item name="autoTest" type="462c0819:PsiDirectoryNode" />
-              <item name="Agent_Manage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Interface_case" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Interface_case" type="462c0819:PsiDirectoryNode" />
-              <item name="autoTest" type="462c0819:PsiDirectoryNode" />
-              <item name="BClient" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Interface_case" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Interface_case" type="462c0819:PsiDirectoryNode" />
-              <item name="autoTest" type="462c0819:PsiDirectoryNode" />
               <item name="Public_Api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Interface_case" type="b2602c69:ProjectViewProjectNode" />
               <item name="Interface_case" type="462c0819:PsiDirectoryNode" />
               <item name="Document" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Interface_case" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Interface_case" type="462c0819:PsiDirectoryNode" />
-              <item name="Document" type="462c0819:PsiDirectoryNode" />
-              <item name="Wechat_Applet" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Interface_case" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Interface_case" type="462c0819:PsiDirectoryNode" />
-              <item name="Public" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -503,15 +535,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20818071" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21163167" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.23101604" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49676898" weight="0.20204082" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49676898" visible="true" weight="0.30547947" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3315734" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -557,13 +589,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/autoTest/Wechat_Applet/W_getBankCardList.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="12" column="91" selection-start-line="12" selection-start-column="91" selection-end-line="12" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/autoTest/Wechat_Applet/W_getBrokerOrderRefundList.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -732,7 +757,6 @@
     <entry file="file://$PROJECT_DIR$/Document/Public_Api/getAllBank.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py" />
     <entry file="file://$PROJECT_DIR$/Document/B_Client/getQuoteDetail.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="848">
@@ -824,32 +848,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/runTestCase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="18" column="11" lean-forward="true" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
-          <folding>
-            <element signature="e#16#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Public/FileContent.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="694">
-          <caret line="38" column="16" lean-forward="true" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/req.txt">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/autoTest/记录">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Public/CmpStructrue.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -871,11 +871,48 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="20">
-            <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            <caret line="1" selection-start-line="1" selection-end-line="1" />
           </first_editor>
           <second_editor />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/autoTest/记录">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/autoTest/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="14" selection-start-column="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/FileContent.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="33" column="15" lean-forward="true" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
+          <folding>
+            <element signature="e#16#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runTestCase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="28" column="37" lean-forward="true" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+          <folding>
+            <element signature="e#16#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

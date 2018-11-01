@@ -4,9 +4,10 @@ import unittest
 import time
 import HTMLTestRunner
 import os
+import sys
 
 base_dir = os.getcwd()
-listcase = base_dir + "Interface_case\\autoTest"
+listcase = base_dir + "Interface_case/autoTest"
 
 
 class RunTestCase:
@@ -23,7 +24,7 @@ class RunTestCase:
         for pattern in patterns:
             discover = unittest.defaultTestLoader.discover(listcase,
                                                            pattern=pattern,
-                                                           top_level_dir=None)
+                                                           top_level_dir=base_dir)
 
             for testcase in discover:
                 testunits.addTest(testcase)
@@ -31,10 +32,11 @@ class RunTestCase:
 
 
 if __name__ == '__main__':
-
+    sys.path.append(os.path.dirname(os.getcwd()))
     now_time = time.strftime("%Y%m%d%H%M%S", time.localtime(time.time()))
 
-    filename = listcase + now_time + ".html"
+    filename = base_dir + "/TestReports/" + now_time + ".html"
+    print(filename)
     with open(filename, 'wb') as fp:
 
         runner = HTMLTestRunner.HTMLTestRunner(
